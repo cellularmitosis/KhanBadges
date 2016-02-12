@@ -113,3 +113,12 @@ There are two immediately obvious ways we can approach the UI of the "Master" sc
 
 We will whip up a demo which can do both, and let our UX designer decide which is best.
 
+### Stumbling blocks
+
+* Dragging images into the Asset catalog directly from Chrome
+
+So it turns out that if you grag a PNG directly from your web browser (Chrome) into Xcode, it appears to work, but `UIImage(named:)` will return nil.
+
+If you right-click on the image in the Assets catalog, choose "Show in Finder", then drag the file back into the Assets catalog, **that** image will load just fine.
+
+Argh!!!  I wasted half an hour on this one.
