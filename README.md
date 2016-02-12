@@ -70,6 +70,7 @@ Create a Minimum Viable Product.  This should be something just good enough to u
   * Use what Apple gives you "for free".
   * No fancy effects (image fading, etc).
   * Favor storyboards over code.
+  * Just target one device width.
 * Keep the code cheap.
   * [MassiveViewController.](https://wififorce.files.wordpress.com/2009/04/badcable16.jpg?w=1200&h=)
   * [No](https://www.youtube.com/watch?v=WpkDN78P884&t=40m5s) [unit tests](http://i.imgur.com/Mcwm5.jpg).
