@@ -88,6 +88,7 @@ OK, for reals now.
   * Performance and reliability
     * Obey the API's `Cache-Control` headers.
     * JSON structure should be verified (Value types, [motherfucker!](http://programming-motherfucker.com/)).
+    * Subscription services (corral duplicate network requests)
   * Code quality
     * [Abstractions for healthy bones!](https://www.youtube.com/watch?v=WpkDN78P884)
     * [Immutable data types for shiny hair!](https://www.youtube.com/watch?v=7AqXBuJOJkY)
