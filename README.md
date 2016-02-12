@@ -101,3 +101,14 @@ Check your priviledge.
 
 * [Respect](http://stackoverflow.com/questions/20510094/how-to-use-a-custom-font-with-dynamic-text-sizes-in-ios7) the user's "Larger Text" accessibility setting.
 * [accssibilityLabel](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAccessibility_Protocol/index.html#//apple_ref/occ/instp/NSObject/accessibilityLabel)s where appropriate.
+
+# Implementing Step 1
+
+## The "Master" screen
+
+There are two immediately obvious ways we can approach the UI of the "Master" screen.
+* **A**: grid of icons (no text).
+* **B**: table of icons with titles.
+
+We will whip up a demo which can do both, and let our UX designer decide which is best.
+
