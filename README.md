@@ -115,7 +115,7 @@ We will whip up a demo which can do both, and let our UX designer decide which i
 
 ### Stumbling blocks
 
-* Dragging images into the Asset catalog directly from Chrome
+* Dragging images into the Asset catalog directly from Chrome.  [Ugh](http://stackoverflow.com/a/14737744).
 
 So it turns out that if you grag a PNG directly from your web browser (Chrome) into Xcode, it appears to work, but `UIImage(named:)` will return nil.
 
