@@ -122,3 +122,5 @@ So it turns out that if you grag a PNG directly from your web browser (Chrome) i
 If you right-click on the image in the Assets catalog, choose "Show in Finder", then drag the file back into the Assets catalog, **that** image will load just fine.
 
 Argh!!!  I wasted half an hour on this one.
+
+* [Blargh](http://stackoverflow.com/a/9898238).
