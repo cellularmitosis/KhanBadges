@@ -28,4 +28,16 @@ class GridController: UICollectionViewController
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 246
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let cell = sender as! GridCell
+        let detailVC = segue.destinationViewController as! DetailViewController
+        let _ = detailVC.view
+        
+        detailVC.imageView.image = cell.imageView?.image
+        
+        let indexPath = self.collectionView!.indexPathForCell(cell)!
+        detailVC.titleLabel.text = titles[indexPath.row % titles.count]
+        detailVC.descriptionLabel.text = descriptions[indexPath.row % descriptions.count]
+    }
 }
