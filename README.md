@@ -92,6 +92,7 @@ OK, for reals now.
     * [Abstractions for healthy bones!](https://www.youtube.com/watch?v=WpkDN78P884)
     * [Immutable data types for shiny hair!](https://www.youtube.com/watch?v=7AqXBuJOJkY)
     * [Functional code where possible.](https://www.destroyallsoftware.com/talks/boundaries)
+  * But wait, what minimum iOS version are you targeting?
  
 
 ## Step 4: Accessible Product
