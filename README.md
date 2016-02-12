@@ -82,6 +82,7 @@ OK, for reals now.
 * Invest in the UI.
   * Fade in images which load from the network.
   * Provide useful "loading" indicators.
+  * Handle 320, 375 and 414 widths appropriately.
 * Invest in the UX.
   * Does everything tappable have a down-state? 
   * Handle the Sad-path (deal with errors in a user-friendly way)
