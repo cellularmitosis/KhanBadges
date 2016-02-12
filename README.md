@@ -137,6 +137,8 @@ $ cat badges.json  | grep '"description":' | awk '{ print length, $0 }' | sort -
 
 Were this a real project, we would also have to consider other languages as well.  The German translation typically ends up being the longest string you need to cater for.
 
+This raises a question for the UI designer: Wrap to a second line, or shrink the font until it fits on a single line?
+
 ### Stumbling blocks
 
 * Dragging images into the Asset catalog directly from Chrome.  [Ugh](http://stackoverflow.com/a/14737744).
