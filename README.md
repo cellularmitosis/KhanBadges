@@ -64,7 +64,7 @@ Create a Minimum Viable Product.  This should be something just good enough to u
 * No hard-coded data.  Fetch everything needed from the API.
   * However, keep it cheap.
     * Dumb dictionaries.
-    * No JSON verification.
+    * No JSON validation.
     * No caching.
 * Keep the UI cheap. 
   * Use what Apple gives you "for free".
