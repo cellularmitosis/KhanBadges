@@ -62,36 +62,36 @@ Notes:
 Create a Minimum Viable Product.  This should be something just good enough to use in an A/B test for 5% of your userbase.  This step should verify that the API is workable.
 
 * No hard-coded data.  Fetch everything needed from the API.
- * However, keep it cheap.
-  * Dumb dictionaries.
-  * No JSON verification.
-  * No caching.
+  * However, keep it cheap.
+    * Dumb dictionaries.
+    * No JSON verification.
+    * No caching.
 * Keep the UI cheap. 
- * Use what Apple gives you "for free".
- * No fancy effects (image fading, etc).
- * Favor storyboards over code.
+  * Use what Apple gives you "for free".
+  * No fancy effects (image fading, etc).
+  * Favor storyboards over code.
 * Keep the code cheap.
- * [MassiveViewController.](https://wififorce.files.wordpress.com/2009/04/badcable16.jpg?w=1200&h=)
- * [No unit tests.](http://i.imgur.com/Mcwm5.jpg)
+  * [MassiveViewController.](https://wififorce.files.wordpress.com/2009/04/badcable16.jpg?w=1200&h=)
+  * [No unit tests.](http://i.imgur.com/Mcwm5.jpg)
 
 ## Step 3: Refined Product
 
 OK, for reals now.
 
 * Invest in the UI.
- * Fade in images which load from the network.
- * Provide useful "loading" indicators.
+  * Fade in images which load from the network.
+  * Provide useful "loading" indicators.
 * Invest in the UX.
- * Does everything tappable have a down-state? 
- * Handle the Sad-path (deal with errors in a user-friendly way)
+  * Does everything tappable have a down-state? 
+  * Handle the Sad-path (deal with errors in a user-friendly way)
 * Invest in the code.
- * Performance and reliability
-  * Obey the API's `Cache-Control` headers.
-  * JSON structure should be verified (Value types, [motherfucker!](http://programming-motherfucker.com/)).
- * Code quality
-  * [Abstractions for healthy bones!](https://www.youtube.com/watch?v=WpkDN78P884)
-  * [Immutable data types for shiny hair!](https://www.youtube.com/watch?v=7AqXBuJOJkY)
-  * [Functional code where possible.](https://www.destroyallsoftware.com/talks/boundaries)
+  * Performance and reliability
+    * Obey the API's `Cache-Control` headers.
+    * JSON structure should be verified (Value types, [motherfucker!](http://programming-motherfucker.com/)).
+  * Code quality
+    * [Abstractions for healthy bones!](https://www.youtube.com/watch?v=WpkDN78P884)
+    * [Immutable data types for shiny hair!](https://www.youtube.com/watch?v=7AqXBuJOJkY)
+    * [Functional code where possible.](https://www.destroyallsoftware.com/talks/boundaries)
  
 
 ## Step 4: Accessible Product
