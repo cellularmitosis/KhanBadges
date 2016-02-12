@@ -137,7 +137,7 @@ $ cat badges.json  | grep '"description":' | awk '{ print length, $0 }' | sort -
 
 Were this a real project, we would also have to consider other languages as well.  The German translation typically ends up being the longest string you need to cater for.
 
-This raises a question for the UI designer: Wrap to a second line, or shrink the font until it fits on a single line?
+**Question for the UI designer**: Wrap to a second line, or shrink the font until it fits on a single line?
 
 ### Stumbling blocks
 
@@ -150,3 +150,27 @@ If you right-click on the image in the Assets catalog, choose "Show in Finder", 
 Argh!!!  I wasted half an hour on this one.
 
 * [Blargh](http://stackoverflow.com/a/9898238).
+
+## Detail screen
+
+Here I chose to go with a simple Title/Image/Description vertical layout.
+
+**Question for the UX designer**: Present detail VC modally or via nav stack?
+
+Here again, we have to account for the longest line length possible.
+
+```
+$ cat badges.json | grep translated_safe_extended_description | awk '{ print length, $0 }' | sort -n | tail -n 1
+159         "translated_safe_extended_description": "Achieve mastery in all skills in Probability and statistics: Random variables and probability distributions",
+```
+
+## Results of Step 1
+
+The list and grid options:
+
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-12%20at%2012.02.04%20AM.png?token=AANopIfw_tL0wps4KW_f5Tqa79QotoYMks5WxrH4wA%3D%3D) ![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-12%20at%2012.02.07%20AM.png?token=AANopOJc9ZXyjuEjB14g03wWz8pQH-K6ks5WxrH7wA%3D%3D)
+
+and the detail screen:
+
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-12%20at%2012.02.21%20AM.png?token=AANopGQl01AT9-kPTqA-6uOGcCaFEwR-ks5WxrH-wA%3D%3D)
+
