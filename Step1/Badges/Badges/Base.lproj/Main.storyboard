@@ -64,25 +64,40 @@
         <!--Grid-->
         <scene sceneID="WrU-7j-9H3">
             <objects>
-                <collectionViewController id="fLi-SH-YkT" sceneMemberID="viewController">
+                <collectionViewController id="fLi-SH-YkT" customClass="GridController" customModule="Badges" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="8ys-bg-Mab">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gsr-cE-35V">
-                            <size key="itemSize" width="50" height="50"/>
+                            <size key="itemSize" width="80" height="80"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="r8y-3P-30w">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GridCell" id="r8y-3P-30w" customClass="GridCell" customModule="Badges" customModuleProvider="target">
+                                <rect key="frame" x="10" y="10" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cH0-l3-GkS">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        </imageView>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="cH0-l3-GkS" firstAttribute="top" secondItem="r8y-3P-30w" secondAttribute="top" id="2Fj-13-riA"/>
+                                    <constraint firstAttribute="bottom" secondItem="cH0-l3-GkS" secondAttribute="bottom" id="HZr-mM-XSa"/>
+                                    <constraint firstAttribute="trailing" secondItem="cH0-l3-GkS" secondAttribute="trailing" id="OTX-aj-oWh"/>
+                                    <constraint firstItem="cH0-l3-GkS" firstAttribute="leading" secondItem="r8y-3P-30w" secondAttribute="leading" id="zHs-Fd-bpx"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="cH0-l3-GkS" id="Bc4-Jo-JH2"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
