@@ -94,7 +94,7 @@ OK, for reals now.
   * Code quality
     * [Abstractions for healthy bones!](https://www.youtube.com/watch?v=WpkDN78P884)
     * [Immutable data types for shiny hair!](https://www.youtube.com/watch?v=7AqXBuJOJkY)
-    * [Functional code where possible.](https://www.destroyallsoftware.com/talks/boundaries)
+    * [Functional code for strong teeth!](https://www.destroyallsoftware.com/talks/boundaries)
   * But wait, what minimum iOS version are you targeting?
  
 
