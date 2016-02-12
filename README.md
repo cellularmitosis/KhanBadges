@@ -89,7 +89,7 @@ OK, for reals now.
 * Invest in the code.
   * Performance and reliability
     * Obey the API's `Cache-Control` headers.
-    * JSON structure should be verified (Value types, [motherfucker!](http://programming-motherfucker.com/)).
+    * JSON structure should be validated (Value types, [motherfucker!](http://programming-motherfucker.com/)).
     * Subscription services (corral duplicate network requests)
   * Code quality
     * [Abstractions for healthy bones!](https://www.youtube.com/watch?v=WpkDN78P884)
