@@ -133,6 +133,8 @@ $ cat badges.json  | grep '"description":' | awk '{ print length, $0 }' | sort -
 
 (Thanks to [neillb](http://stackoverflow.com/a/5917762)).
 
+Were this a real project, we would also have to consider other languages as well.  The German translation typically ends up being the longest string you need to cater for.
+
 ### Stumbling blocks
 
 * Dragging images into the Asset catalog directly from Chrome.  [Ugh](http://stackoverflow.com/a/14737744).
