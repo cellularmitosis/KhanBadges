@@ -107,8 +107,8 @@ Check your priviledge.
 ## The "Master" screen
 
 There are two immediately obvious ways we can approach the UI of the "Master" screen.
-* **A**: grid of icons (no text).
-* **B**: table of icons with titles.
+* **List**: A table of icons with titles.
+* **Grid**: A grid of icons (no text).
 
 We will whip up a demo which can do both, and let our UX designer decide which is best.
 
