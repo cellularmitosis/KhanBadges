@@ -113,6 +113,26 @@ There are two immediately obvious ways we can approach the UI of the "Master" sc
 
 We will whip up a demo which can do both, and let our UX designer decide which is best.
 
+### Line length
+
+How long can the badge titles be?  We need to make sure our design can account for the longest one.
+
+```
+$ cat badges.json  | grep '"description":' | awk '{ print length, $0 }' | sort -n | tail -n 10
+85         "description": "7th grade (U.S.): Expressions, equations, and inequalities", 
+85         "description": "Algebra II: Rational expressions, equations, and functions", 
+86         "description": "Algebra I: Expressions with rational exponents and radicals", 
+87         "description": "7th grade (U.S.): Negative numbers: addition and subtraction", 
+87         "description": "Algebra II: Polynomial expressions, equations, and functions", 
+87         "description": "Probability and statistics: Independent and dependent events", 
+90         "description": "7th grade (U.S.): Negative numbers: multiplication and division", 
+91         "description": "Integral calculus: Sequences, series, and function approximation", 
+96         "description": "Trigonometry: The unit circle definition of sine, cosine, and tangent", 
+101         "description": "Probability and statistics: Random variables and probability distributions", 
+```
+
+(Thanks to [neillb](http://stackoverflow.com/a/5917762)).
+
 ### Stumbling blocks
 
 * Dragging images into the Asset catalog directly from Chrome.  [Ugh](http://stackoverflow.com/a/14737744).
