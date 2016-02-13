@@ -206,10 +206,7 @@ Product thinks this is enough egagement to justify giving Dev the resources they
 
 Now that we need to target all screen sizes from the 4s up through the 6+, we need to revisit the layout of our detail view.
 
-Here's where we are at right now (these screenshots have been normalized to the same width):
+Here's where we are at right now:
 
-![4s](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/v1%20240/Badges_v1_4s.png?token=AANopGz7If7PTx-Ko9NNXB5UkbNgQC2_ks5WyKoKwA%3D%3D)
-![5](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/v1%20240/Badges_v1_5.png?token=AANopNZWUqyDvdZywZRQCB3O8WzaqlwSks5WyKoNwA%3D%3D)
-![6](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/v1%20240/Badges_v1_6%2B.png?token=AANopKd3p8fhQxkYUxDGkZervRS-ghlnks5WyKoQwA%3D%3D)
-![6+](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/v1%20240/Badges_v1_6.png?token=AANopOPUOo1MdmAdGGR1zkwHss5ccQ8Eks5WyKoSwA%3D%3D)
-        
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/v1%20240/Screen%20Shot%202016-02-13%20at%2012.11.50%20PM.png?token=AANopDwgzzPWPKPY-DqJMHHtDKLG91Dmks5WyKzqwA%3D%3D)
+
