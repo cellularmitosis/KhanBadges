@@ -9,6 +9,7 @@
 import UIKit
 
 var json: [AnyObject]?
+var icons = [UIImage?]()
 
 class ListController: UITableViewController
 {
@@ -19,6 +20,7 @@ class ListController: UITableViewController
         
         let urlString = "https://www.khanacademy.org/api/v1/badges"
         let url = NSURL(string: urlString)!
+        debugPrint("fetching \(urlString)")
         let task = NSURLSession.sharedSession().dataTaskWithURL(url) { [weak self] (data, response, error) -> Void in
             guard let data = data else { return }
 
@@ -29,6 +31,12 @@ class ListController: UITableViewController
                 json = json?.filter({ (element) -> Bool in
                     return element["badge_category"] as! Int == 5
                 })
+                
+                while icons.count < json?.count
+                {
+                    icons.append(nil)
+                }
+                
                 weakSelf.tableView.reloadData()
             })
         }
@@ -38,14 +46,48 @@ class ListController: UITableViewController
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ListCell")!
 
-        let imageName = String(format: "Image-%i", indexPath.row % 19)
-        cell.imageView?.image = UIImage(named: imageName)!
-
         let dict: [String: AnyObject] = json![indexPath.row] as! [String: AnyObject]
+        
         let text: String = dict["description"] as! String
         cell.textLabel?.text = text
+
+        if let icon = icons[indexPath.row]
+        {
+            cell.imageView?.image = icon
+        }
+        else
+        {
+            let iconUrlStrings: [String:String] = dict["icons"] as! [String:String]
+            let urlString = iconUrlStrings["large"]!
+            let url = NSURL(string: urlString)!
+            debugPrint("fetching \(urlString)")
+            let task = NSURLSession.sharedSession().dataTaskWithURL(url) { [weak self] (data, response, error) -> Void in
+                guard let data = data else { return }
+                
+                dispatch_async(dispatch_get_main_queue(), { [weak self] () -> Void in
+                    guard let weakSelf = self else { return }
+                    
+                    let image = UIImage(data: data)
+                    icons[indexPath.row] = image
+                    weakSelf.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+                })
+            }
+            task.resume()
+        }
         
         return cell
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        icons = [UIImage?]()
+        while icons.count < json?.count
+        {
+            icons.append(nil)
+        }
+        
+        tableView.reloadData()
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
