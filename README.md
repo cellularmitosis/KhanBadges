@@ -196,6 +196,8 @@ For the A/B test, we will record how many times user access the Challenge Patch 
 
 ## Results of Step 2
 
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/step2.gif?token=AANopMo9yITQ2BpgJ8JYSEUwFYElsaSSks5WyOpJwA%3D%3D)
+
 The data from the A/B test shows that 45% of users accessed the new feature at least once ("ListController.viewDidLoad"), and that on average each user looked at the details of 8 patches ("DetailsViewController.viewDidLoad").
 
 Product thinks this is enough egagement to justify giving Dev the resources they need to in order to ["Do it right"](http://memesvault.com/wp-content/uploads/Meme-Faces-Challenge-Accepted-03.png).
