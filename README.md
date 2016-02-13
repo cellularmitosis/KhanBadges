@@ -170,6 +170,8 @@ $ cat badges.json | grep translated_safe_extended_description | awk '{ print len
 159         "translated_safe_extended_description": "Achieve mastery in all skills in Probability and statistics: Random variables and probability distributions",
 ```
 
+We will just target the iPhone 6 screen size for layout purposes.
+
 ## Results of Step 1
 
 The list and grid options:
@@ -180,7 +182,29 @@ and the detail screen:
 
 ![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-12%20at%2012.02.21%20AM.png?token=AANopGQl01AT9-kPTqA-6uOGcCaFEwR-ks5WxrH-wA%3D%3D)
 
+**The UX designer has decided to go with the "List" option**, and would like to present the detail view **modally**, as that would later allow for the detail view to become a "gallery" where the user could swipe right or left to view the details of other patches.
+
 # Implementing Step 2
 
-**The UX designer has decided to go with the "List" option**, and would like to present the detail view **modally**, as that would later allow for the detail view to become a "gallery" where the user could swipe right or left to view the details of other patches.
+* To keep things simple, we will just fetch the largest image size for each patch and use that image throughout.
+* Again, we will only layout for the iPhone 6 screen size.  Our A/B test will need to target iPhone 6 users specifically.
+* The JSON and all images are stored in memory, which is flushed upon didRecieveMemoryWarning.  This is "good enough" for a small scale A/B test.
+
+## Analytics
+
+For the A/B test, we will record how many times user access the Challenge Patch list view (event name: "ListController.viewDidLoad") and how many times users view the details of patches (event name: "DetailViewController.viewDidLoad").
+
+## Results of Step 2
+
+The data from the A/B test shows that 45% of users accessed the new feature at least once ("ListController.viewDidLoad"), and that on average each user looked at the details of 8 patches ("DetailsViewController.viewDidLoad").
+
+Product thinks this is enough egagement to justify giving Dev the resources they need to in order to ["Do it right"](http://memesvault.com/wp-content/uploads/Meme-Faces-Challenge-Accepted-03.png).
+
+# Implementing Step 3
+
+## Detail layout: Targeting multiple screen sizes
+
+Now that we need to target all screen sizes from the 4s up through the 6+, we need to revisit the layout of our detail view.
+
+Here's where we are at right now:
 
