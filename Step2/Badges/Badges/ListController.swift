@@ -13,6 +13,11 @@ var icons = [UIImage?]()
 
 class ListController: UITableViewController
 {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        FakeAnalytics.recordEvent("ListController.viewDidLoad")
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         

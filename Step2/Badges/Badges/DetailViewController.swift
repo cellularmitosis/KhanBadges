@@ -14,6 +14,11 @@ class DetailViewController: UIViewController
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        FakeAnalytics.recordEvent("DetailViewController.viewDidLoad")
+    }
+    
     @IBAction func dismiss(sender: AnyObject?)
     {
         self.parentViewController!.dismissViewControllerAnimated(true, completion: nil)
