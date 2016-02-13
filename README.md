@@ -202,14 +202,6 @@ Product thinks this is enough egagement to justify giving Dev the resources they
 
 # Implementing Step 3
 
-## Detail layout: Targeting multiple screen sizes
-
-Now that we need to target all screen sizes from the 4s up through the 6+, we need to revisit the layout of our detail view.
-
-Here's what the result of **Step 2** looks like on various phones:
-
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/v1%20240/Screen%20Shot%202016-02-13%20at%2012.11.50%20PM.png?token=AANopDwgzzPWPKPY-DqJMHHtDKLG91Dmks5WyKzqwA%3D%3D)
-
 ## Image asset sizing
 
 The Khan API makes badge images available in four sizes:
@@ -240,4 +232,31 @@ I would recomment that Khan consider using an [image resizing proxy](https://git
     * compact: addition-subtraction-60x60.png
     * email: **master-challenge-blue-70x70.png**
     * large: addition-subtraction-250x250.png
+
+
+## Detail layout: Targeting multiple screen sizes
+
+Now that we need to target all screen sizes from the 4s up through the 6+, we need to revisit the layout of our detail view.
+
+Here's what the result of **Step 2** looks like on various phones:
+
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/v1%20240/Screen%20Shot%202016-02-13%20at%2012.11.50%20PM.png?token=AANopDwgzzPWPKPY-DqJMHHtDKLG91Dmks5WyKzqwA%3D%3D)
+
+We need a layout strategy which will look reasonable on all supported screen sizes.
+
+### Layout strategy A
+
+Here's a vertical layout strategy which should produce reasonable results.  Consider this Autolayout diagram:
+
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-13%20at%203.52.54%20PM.png?token=AANopC_Rgl78hipA3wv9vsrSPN_TQ1gnks5WyOJOwA%3D%3D)
+
+(Here, the cyan square represents the title label, gray represents the patch image, and magenta represents the description label)
+
+If we used fixed vertical spacing between the patch image and the text labels (24pt), then set a minimum spacing from the text labels to the screen edges (8pt), and finally, slightly reduce the patch images height priority (750), we get the following behavior as the title grows:
+
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/cyan.gif?token=AANopFddICK4L5ir_iQ5cI7QhduYBJdpks5WyONGwA%3D%3D)
+
+and similar behavior when the description grows:
+
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/magenta.gif?token=AANopE5ziJZh4Gztvy9zT68Em52yyrZsks5WyONrwA%3D%3D)
 
