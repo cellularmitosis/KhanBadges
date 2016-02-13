@@ -46,6 +46,13 @@ $ curl http://www.khanacademy.org/api/v1/badges?format=pretty 2>/dev/null | grep
      246
 ```
 
+152 of the badges are Challenge Patches:
+
+```
+$ cat badges.json | grep '"badge_category": 5' | wc -l
+     152
+```
+
 # The Plan
 
 ## Step 1: Rough (Offline) Prototype for UX
