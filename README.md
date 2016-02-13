@@ -210,3 +210,34 @@ Here's what the result of **Step 2** looks like on various phones:
 
 ![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/v1%20240/Screen%20Shot%202016-02-13%20at%2012.11.50%20PM.png?token=AANopDwgzzPWPKPY-DqJMHHtDKLG91Dmks5WyKzqwA%3D%3D)
 
+## Image asset sizing
+
+The Khan API makes badge images available in four sizes:
+* small: 40x40
+* compact: 60x60
+* email: 70x70
+* large: 512x512
+
+Here's how that translates into "points":
+
+|         |  px | pt (2x Retina) | pt (3x Retina) |
+|---------|:---:|:--------------:|:--------------:|
+| small   |  40 |       20       |      13.3      |
+| compact |  60 |       30       |       20       |
+| email   |  70 |       45       |      23.3      |
+| large   | 512 |       256      |      170.7     |
+
+As you can see, the reduces sizes are too small to be useful on Retina screens.  This means that for now we will continue using the "large" size for everything.
+
+### Opportunity to improve Khan's image asset workflow
+
+I would recomment that Khan consider using an [image resizing proxy](https://github.com/willnorris/imageproxy).  This has multiple benefits:
+* The UI designer only needs to produce art at a single (large) resolution.
+* Clients always get the optimal resolution for their layout.
+* Mistakes associated with resizing images by hand are eliminated
+  * An example of one such mistake in the Khan API is the "email" size of the "Arithmetic: Addition and subtraction" badge:
+    * small: addition-subtraction-40x40.png
+    * compact: addition-subtraction-60x60.png
+    * email: master-challenge-blue-70x70.png
+    * large: addition-subtraction-250x250.png
+
