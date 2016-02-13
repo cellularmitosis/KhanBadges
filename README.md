@@ -206,7 +206,7 @@ Product thinks this is enough egagement to justify giving Dev the resources they
 
 Now that we need to target all screen sizes from the 4s up through the 6+, we need to revisit the layout of our detail view.
 
-Here's where we are at right now:
+Here's what the result of **Step 2** looks like on various phones:
 
 ![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/v1%20240/Screen%20Shot%202016-02-13%20at%2012.11.50%20PM.png?token=AANopDwgzzPWPKPY-DqJMHHtDKLG91Dmks5WyKzqwA%3D%3D)
 
