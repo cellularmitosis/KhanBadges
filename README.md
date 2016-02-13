@@ -266,6 +266,6 @@ and similar behavior when the description grows:
 
 Visually, it would be nice to have the patch image occupy the same relative screen proportion across all phones.  Let's go with the golden ratio:
 
-* iPhone 5 (320pt): 198pt
-* iPhone 6 (375pt): 232pt
-* iPhont 6+ (414pt): 256pt
+* iPhone 5 (320pt screen width): 198pt patch width
+* iPhone 6 (375pt screen width): 232pt patch width
+* iPhont 6+ (414pt screen width): 256pt patch width
