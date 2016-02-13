@@ -181,3 +181,7 @@ and the detail screen:
 
 ![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-12%20at%2012.02.21%20AM.png?token=AANopGQl01AT9-kPTqA-6uOGcCaFEwR-ks5WxrH-wA%3D%3D)
 
+# Implementing Step 2
+
+**The UX designer has decided to go with the "List" option**, and would like to present the detail view **modally**, as that would later allow for the detail view to become a "gallery" where the user could swipe right or left to view the details of other patches.
+
