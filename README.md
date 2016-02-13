@@ -262,3 +262,10 @@ and similar behavior when the description grows:
 
 ![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/magenta.gif?token=AANopE5ziJZh4Gztvy9zT68Em52yyrZsks5WyONrwA%3D%3D)
 
+### Patch image size
+
+Visually, it would be nice to have the patch image occupy the same relative screen proportion across all phones.  Let's go with the golden ratio:
+
+* iPhone 5 (320pt): 198pt
+* iPhone 6 (375pt): 232pt
+* iPhont 6+ (414pt): 256pt
