@@ -227,7 +227,7 @@ Here's how that translates into "points":
 | email   |  70 |       45       |      23.3      |
 | large   | 512 |       256      |      170.7     |
 
-As you can see, the reduces sizes are too small to be useful on Retina screens.  This means that for now we will continue using the "large" size for everything.
+As you can see, the reduces sizes are too small to be useful on Retina screens.  This means that for now **we will continue using the "large" size for everything**.
 
 ### Opportunity to improve Khan's image asset workflow
 
