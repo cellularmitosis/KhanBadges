@@ -107,8 +107,7 @@ OK, for reals now.
 
 ## Step 4: Accessible Product
 
-Check your priviledge.
-
+* All strings localized
 * [Respect](http://stackoverflow.com/questions/20510094/how-to-use-a-custom-font-with-dynamic-text-sizes-in-ios7) the user's "Larger Text" accessibility setting.
 * [accssibilityLabel](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAccessibility_Protocol/index.html#//apple_ref/occ/instp/NSObject/accessibilityLabel)s where appropriate.
 
