@@ -26,6 +26,9 @@ class ListController: UITableViewController
                 guard let weakSelf = self else { return }
 
                 json = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as! [AnyObject]
+                json = json?.filter({ (element) -> Bool in
+                    return element["badge_category"] as! Int == 5
+                })
                 weakSelf.tableView.reloadData()
             })
         }
