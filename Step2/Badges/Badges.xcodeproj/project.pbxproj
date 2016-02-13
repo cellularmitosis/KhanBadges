@@ -11,7 +11,6 @@
 		2BCF3CD21C6D7D21003BBABF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BCF3CD01C6D7D21003BBABF /* Main.storyboard */; };
 		2BCF3CD41C6D7D21003BBABF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BCF3CD31C6D7D21003BBABF /* Assets.xcassets */; };
 		2BCF3CD71C6D7D21003BBABF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BCF3CD51C6D7D21003BBABF /* LaunchScreen.storyboard */; };
-		2BCF3CE11C6D7FE9003BBABF /* GridController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF3CE01C6D7FE9003BBABF /* GridController.swift */; };
 		2BCF3CE51C6D8A44003BBABF /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF3CE41C6D8A44003BBABF /* ListController.swift */; };
 		2BCF3CE71C6DA770003BBABF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF3CE61C6DA770003BBABF /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -23,7 +22,6 @@
 		2BCF3CD31C6D7D21003BBABF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2BCF3CD61C6D7D21003BBABF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BCF3CD81C6D7D21003BBABF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2BCF3CE01C6D7FE9003BBABF /* GridController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridController.swift; sourceTree = "<group>"; };
 		2BCF3CE41C6D8A44003BBABF /* ListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 		2BCF3CE61C6DA770003BBABF /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,7 +79,6 @@
 		2BCF3CE31C6D7FF8003BBABF /* Grid */ = {
 			isa = PBXGroup;
 			children = (
-				2BCF3CE01C6D7FE9003BBABF /* GridController.swift */,
 			);
 			name = Grid;
 			sourceTree = "<group>";
@@ -157,7 +154,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BCF3CE11C6D7FE9003BBABF /* GridController.swift in Sources */,
 				2BCF3CCD1C6D7D21003BBABF /* AppDelegate.swift in Sources */,
 				2BCF3CE51C6D8A44003BBABF /* ListController.swift in Sources */,
 				2BCF3CE71C6DA770003BBABF /* DetailViewController.swift in Sources */,

@@ -52,7 +52,8 @@ class ListController: UITableViewController
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let cell = sender as! UITableViewCell
-        let detailVC = segue.destinationViewController as! DetailViewController
+        let navC = segue.destinationViewController as! UINavigationController
+        let detailVC = navC.topViewController as! DetailViewController
         let _ = detailVC.view
         
         detailVC.titleLabel.text = cell.textLabel?.text
