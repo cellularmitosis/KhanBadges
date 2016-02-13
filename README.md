@@ -234,10 +234,10 @@ As you can see, the reduces sizes are too small to be useful on Retina screens. 
 I would recomment that Khan consider using an [image resizing proxy](https://github.com/willnorris/imageproxy).  This has multiple benefits:
 * The UI designer only needs to produce art at a single (large) resolution.
 * Clients always get the optimal resolution for their layout.
-* Mistakes associated with resizing images by hand are eliminated
+* Mistakes associated with doing this by hand are eliminated
   * An example of one such mistake in the Khan API is the "email" size of the "Arithmetic: Addition and subtraction" badge:
     * small: addition-subtraction-40x40.png
     * compact: addition-subtraction-60x60.png
-    * email: master-challenge-blue-70x70.png
+    * email: **master-challenge-blue-70x70.png**
     * large: addition-subtraction-250x250.png
 
