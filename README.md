@@ -288,3 +288,14 @@ Here's the final result: a much more consistent look across all phone sizes:
 ![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-13%20at%2011.59.15%20PM.png?token=AANopG9sN2iDJtMQJoKe687bv96T7wqiks5WyVPlwA%3D%3D)
 
 Notice how the navigation bar gets smaller as phone size increases, but the labels, patch image, and spacing appear to stay the same.
+
+## Architecture
+
+### Subscription services all the way down
+
+Let's try a "reactive" style of coding, where objects subscribe to resources and then react to whatever results come there way.  This is a great way to reduce the amount of imperative complexity in your code.
+
+It turns out this programming challenge is well suited to attempting this, because the network requirements are simple:
+* No authentication is needed
+* Everything is a GET request
+
