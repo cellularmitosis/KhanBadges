@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         cyanHeightConstraint.cycleConstraint(minConstant: 60, maxConstant: 120)
-        magentaHeightConstraint.cycleConstraint(minConstant: 120, maxConstant: 180)
+//        magentaHeightConstraint.cycleConstraint(minConstant: 120, maxConstant: 180)
     }
 }
 
