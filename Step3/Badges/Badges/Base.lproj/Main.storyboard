@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nUv-vF-byx">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--List-->
+        <scene sceneID="KE2-Rl-4Tf">
+            <objects>
+                <navigationController id="nUv-vF-byx" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="List" id="cJ2-Ke-9L9"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ldp-a0-S84">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="MOG-Eg-nLi" kind="relationship" relationship="rootViewController" id="yQa-TJ-d9V"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wtb-xN-Fvr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="158" y="-373"/>
+        </scene>
+        <!--Challenge Patches-->
+        <scene sceneID="TEC-hE-bqF">
+            <objects>
+                <tableViewController id="MOG-Eg-nLi" customClass="ListController" customModule="Badges" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="Zde-L1-5yH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListCell" textLabel="DCi-oD-QFY" style="IBUITableViewCellStyleDefault" id="zMH-f9-yyC">
+                                <rect key="frame" x="0.0" y="92" width="600" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zMH-f9-yyC" id="94H-iT-eDt">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DCi-oD-QFY">
+                                            <rect key="frame" x="15" y="0.0" width="570" height="79"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="aIK-XR-YEb" kind="presentation" id="D0K-OP-PXk"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MOG-Eg-nLi" id="fHs-6c-Eq8"/>
+                            <outlet property="delegate" destination="MOG-Eg-nLi" id="cmL-Qu-vLu"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="List" id="kb0-4v-Org"/>
+                    <navigationItem key="navigationItem" title="Challenge Patches" id="0PA-pl-FFe"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="inS-DC-s5k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="922" y="-373"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="TPy-XK-fzq">
+            <objects>
+                <navigationController id="aIK-XR-YEb" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ydH-bi-ItQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="1B6-HG-Gv5" kind="relationship" relationship="rootViewController" id="VDG-JJ-IZZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6OA-Sr-e9M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1653" y="-373"/>
+        </scene>
+        <!--Challenge Patch-->
+        <scene sceneID="O97-QQ-KGK">
+            <objects>
+                <viewController id="1B6-HG-Gv5" customClass="DetailViewController" customModule="Badges" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="H7W-SD-O3j"/>
+                        <viewControllerLayoutGuide type="bottom" id="AMS-0O-bT7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hmD-CJ-FnT">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axT-gC-HYs">
+                                <rect key="frame" x="16" y="427" width="568" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Npb-wv-1SD">
+                                <rect key="frame" x="180" y="151" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Npb-wv-1SD" secondAttribute="height" multiplier="1:1" id="Qgi-Uu-ZNX"/>
+                                    <constraint firstAttribute="width" constant="240" id="XiD-C1-KZI"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbe-ci-CeO">
+                                <rect key="frame" x="16" y="100" width="568" height="27"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cbe-ci-CeO" firstAttribute="top" secondItem="H7W-SD-O3j" secondAttribute="bottom" constant="36" id="Jbn-eH-EVM"/>
+                            <constraint firstItem="axT-gC-HYs" firstAttribute="top" secondItem="Npb-wv-1SD" secondAttribute="bottom" constant="36" id="JxR-wh-dox"/>
+                            <constraint firstItem="Npb-wv-1SD" firstAttribute="top" secondItem="cbe-ci-CeO" secondAttribute="bottom" constant="24" id="c9l-Ua-yus"/>
+                            <constraint firstItem="axT-gC-HYs" firstAttribute="leading" secondItem="hmD-CJ-FnT" secondAttribute="leading" constant="16" id="cC3-vE-Lfo"/>
+                            <constraint firstItem="Npb-wv-1SD" firstAttribute="centerX" secondItem="hmD-CJ-FnT" secondAttribute="centerX" id="eew-40-Udb"/>
+                            <constraint firstItem="cbe-ci-CeO" firstAttribute="leading" secondItem="hmD-CJ-FnT" secondAttribute="leading" constant="16" id="g4y-8x-Rkw"/>
+                            <constraint firstAttribute="trailing" secondItem="cbe-ci-CeO" secondAttribute="trailing" constant="16" id="gIH-SQ-bxG"/>
+                            <constraint firstAttribute="trailing" secondItem="axT-gC-HYs" secondAttribute="trailing" constant="16" id="swA-TP-GGO"/>
+                            <constraint firstItem="AMS-0O-bT7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="axT-gC-HYs" secondAttribute="bottom" constant="1" id="vpu-i7-B9R"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Challenge Patch" id="bJk-D2-a4V">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="NAd-N6-9qW">
+                            <connections>
+                                <action selector="dismiss:" destination="1B6-HG-Gv5" id="7YP-WY-9PZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="axT-gC-HYs" id="jAd-D2-ZYs"/>
+                        <outlet property="imageView" destination="Npb-wv-1SD" id="r3U-Ar-w6U"/>
+                        <outlet property="titleLabel" destination="cbe-ci-CeO" id="TRQ-hk-eM3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CC6-lO-jwC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2351" y="-373"/>
+        </scene>
+    </scenes>
+</document>
