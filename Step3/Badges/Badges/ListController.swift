@@ -44,15 +44,21 @@ class ListController: UITableViewController
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ListCell")!
-
+        cell.textLabel?.text = ""
+        cell.imageView?.image = UIImage(named: "question_mark.png")
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
         let dict: [String: AnyObject] = json![indexPath.row] as! [String: AnyObject]
         
         let text: String = dict["description"] as! String
         cell.textLabel?.text = text
-
+        
         let iconUrlStrings: [String:String] = dict["icons"] as! [String:String]
         let urlString = iconUrlStrings["large"]!
-
+        
         if let icon = ImageService.sharedInstance.cachedImage(urlString: urlString)
         {
             cell.imageView?.image = icon
@@ -61,19 +67,13 @@ class ListController: UITableViewController
         {
             ImageService.sharedInstance.fetch(urlString: urlString, completion: { [weak self] (result) -> () in
                 guard let weakSelf = self else { return }
-
-                if case let .Success(image) = result
+                
+                if case .Success(_) = result
                 {
-                    if let cell = tableView.cellForRowAtIndexPath(indexPath)
-                    {
-                        cell.imageView?.image = image
-                    }
                     weakSelf.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
                 }
             })
         }
-        
-        return cell
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,7 +93,15 @@ class ListController: UITableViewController
         let dict: [String: AnyObject] = json![indexPath.row] as! [String: AnyObject]
         let description: String = dict["translated_safe_extended_description"] as! String
 
-        let service = DetailViewController.DataModelService(title: title, description: description)
+        let iconUrlStrings: [String:String] = dict["icons"] as! [String:String]
+        let urlString = iconUrlStrings["large"]!
+
+        let service = DetailViewController.DataModelService(
+            title: title,
+            description: description,
+            imageUrlString: urlString,
+            imageService: ImageService.sharedInstance)
+        
         detailVC.dataService = service
     }
 }

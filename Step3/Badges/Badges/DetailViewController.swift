@@ -272,11 +272,30 @@ extension DetailViewController
     
     class DataModelService
     {
-        init(title: String, description: String)
+        init(title: String, description: String, imageUrlString: String, imageService: ImageService)
         {
             self.title = title
             self.description = description
             self.image = DataModel.defaultModel().image
+            self.imageUrlString = imageUrlString
+            self.imageService = imageService
+            
+            if let cachedImage = imageService.cachedImage(urlString: imageUrlString)
+            {
+                self.image = cachedImage
+            }
+            else
+            {
+                imageService.fetch(urlString: imageUrlString, completion: { [weak self] (result) -> () in
+                    guard let weakSelf = self else { return }
+                    
+                    if case .Success(let fetchedImage) = result
+                    {
+                        weakSelf.image = fetchedImage
+                        weakSelf.closure?(weakSelf.latestModel)
+                    }
+                })
+            }
         }
         
         func subscribe(dataDidBecomeAvailableClosure: DataModelClosure)
@@ -294,7 +313,10 @@ extension DetailViewController
         
         private var title: String
         private var description: String
+        
         private var image: UIImage
+        private let imageUrlString: String
+        private let imageService: ImageService
         
         private var latestModel: DataModel {
             get {
@@ -305,6 +327,7 @@ extension DetailViewController
                 )
             }
         }
+
     }
 }
 
