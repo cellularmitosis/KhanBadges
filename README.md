@@ -264,9 +264,9 @@ and similar behavior when the description grows:
 
 With a little additional AutoLayout tweaking, we can apply this to UILabels and a UIImageView:
 
-!()[https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/title2.gif?token=AANopKrJbusHPPKOLSM2CLZTX0ZCfk4bks5WyRbcwA%3D%3D]
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/title2.gif?token=AANopKrJbusHPPKOLSM2CLZTX0ZCfk4bks5WyRbcwA%3D%3D)
 
-!()[https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/description2.gif?token=AANopMEYnYXT5aj6Y_reCCMbhzrFv8ffks5WyRbZwA%3D%3D]
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/description2.gif?token=AANopMEYnYXT5aj6Y_reCCMbhzrFv8ffks5WyRbZwA%3D%3D)
 
 
 ### Patch image size
