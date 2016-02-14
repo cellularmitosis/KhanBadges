@@ -73,20 +73,6 @@ class DetailViewController: UIViewController
     }
 }
 
-func deviceWidth() -> CGFloat
-{
-    // Note: this will return e.g. 320 regardless of what orientation the phone is currently held.
-    return UIScreen.mainScreen().bounds.size.width
-}
-
-extension CGFloat
-{
-    func scaled(factor: CGFloat) -> CGFloat
-    {
-        return round(self * factor)
-    }
-}
-
 extension DetailViewController
 {
     struct DataModel
@@ -163,7 +149,7 @@ extension DetailViewController
         
         func scaledForCurrentDevice() -> LayoutModel
         {
-            let factor = deviceWidth() / designedForWidth
+            let factor = UIScreen.width() / designedForWidth
             return self.scaled(factor)
         }
         
@@ -205,15 +191,6 @@ extension DetailViewController
     }
 }
 
-extension UIFont
-{
-    func scaled(factor: CGFloat) -> UIFont
-    {
-        let newPointSize = pointSize * factor
-        return fontWithSize(newPointSize)
-    }
-}
-
 extension DetailViewController
 {
     struct StyleModel
@@ -240,7 +217,7 @@ extension DetailViewController
         
         func scaledForCurrentDevice() -> StyleModel
         {
-            let factor = deviceWidth() / designedForWidth
+            let factor = UIScreen.width() / designedForWidth
             return self.scaled(factor)
         }
         
