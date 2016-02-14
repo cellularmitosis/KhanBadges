@@ -40,10 +40,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func applicationDidReceiveMemoryWarning(application: UIApplication) {
+        ImageService.sharedInstance.didReceiveMemoryWarning()
+    }
 }
 
 class ImageService
 {
+    static let sharedInstance = ImageService()
+    
     typealias ImageServiceResult = Result<UIImage, ImageService.Error>
     typealias ImageServiceClosure = (result: ImageServiceResult)->()
     
@@ -61,6 +67,11 @@ class ImageService
         }
     }
 
+    func cachedImage(urlString urlString: String) -> UIImage?
+    {
+        return cache[urlString]
+    }
+    
     func didReceiveMemoryWarning()
     {
         assert(NSThread.isMainThread())

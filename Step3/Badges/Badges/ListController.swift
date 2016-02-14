@@ -9,7 +9,6 @@
 import UIKit
 
 var json: [AnyObject]?
-var icons = [UIImage?]()
 
 class ListController: UITableViewController
 {
@@ -37,11 +36,6 @@ class ListController: UITableViewController
                     return element["badge_category"] as! Int == 5
                 })
                 
-                while icons.count < json?.count
-                {
-                    icons.append(nil)
-                }
-                
                 weakSelf.tableView.reloadData()
             })
         }
@@ -56,45 +50,32 @@ class ListController: UITableViewController
         let text: String = dict["description"] as! String
         cell.textLabel?.text = text
 
-        if let icon = icons[indexPath.row]
+        let iconUrlStrings: [String:String] = dict["icons"] as! [String:String]
+        let urlString = iconUrlStrings["large"]!
+
+        if let icon = ImageService.sharedInstance.cachedImage(urlString: urlString)
         {
             cell.imageView?.image = icon
         }
         else
         {
-            let iconUrlStrings: [String:String] = dict["icons"] as! [String:String]
-            let urlString = iconUrlStrings["large"]!
-            let url = NSURL(string: urlString)!
-            debugPrint("fetching \(urlString)")
-            let task = NSURLSession.sharedSession().dataTaskWithURL(url) { [weak self] (data, response, error) -> Void in
-                guard let data = data else { return }
-                
-                dispatch_async(dispatch_get_main_queue(), { [weak self] () -> Void in
-                    guard let weakSelf = self else { return }
-                    
-                    let image = UIImage(data: data)
-                    icons[indexPath.row] = image
+            ImageService.sharedInstance.fetch(urlString: urlString, completion: { [weak self] (result) -> () in
+                guard let weakSelf = self else { return }
+
+                if case let .Success(image) = result
+                {
+                    if let cell = tableView.cellForRowAtIndexPath(indexPath)
+                    {
+                        cell.imageView?.image = image
+                    }
                     weakSelf.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-                })
-            }
-            task.resume()
+                }
+            })
         }
         
         return cell
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-        icons = [UIImage?]()
-        while icons.count < json?.count
-        {
-            icons.append(nil)
-        }
-        
-        tableView.reloadData()
-    }
-
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = json?.count ?? 0
         return count
