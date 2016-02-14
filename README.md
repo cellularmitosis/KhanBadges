@@ -244,9 +244,13 @@ Here's what the result of **Step 2** looks like on various phones:
 
 ![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/v1%20240/Screen%20Shot%202016-02-13%20at%2012.11.50%20PM.png?token=AANopDwgzzPWPKPY-DqJMHHtDKLG91Dmks5WyKzqwA%3D%3D)
 
-We need a layout strategy which will look reasonable on all supported screen sizes.
+Notice how the fonts and patch image appear to get smaller as the phone size increases?  (This is made apparent by normalizing the screenshots to the same width).
 
-### Layout strategy A
+We need to solve two problems:
+* Devise an AutoLayout strategy which will intelligently fudge the layout to accomodate unusually long titles and descriptions.
+* Device a layout technique which allow fonts and images to appear proportionally similar across all device sizes.
+
+### Handling long titles and descriptions
 
 Here's a vertical layout strategy which should produce reasonable results.  Consider this Autolayout diagram:
 
@@ -276,3 +280,11 @@ Visually, it would be nice to have the patch image occupy the same relative scre
 * iPhone 5 (320pt screen width): 198pt patch width
 * iPhone 6 (375pt screen width): 232pt patch width
 * iPhont 6+ (414pt screen width): 256pt patch width
+
+### Achieving proportionally similar layouts across all device sizes
+
+Here's the final result: a much more consistent look across all phone sizes:
+
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-13%20at%2011.59.15%20PM.png?token=AANopG9sN2iDJtMQJoKe687bv96T7wqiks5WyVPlwA%3D%3D)
+
+Notice how the navigation bar gets smaller as phone size increases, but the labels, patch image, and spacing appear to stay the same.
