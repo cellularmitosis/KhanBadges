@@ -57,7 +57,14 @@ class ImageService
     {
         assert(NSThread.isMainThread())
         
-        if _requestIsAlreadyInFlight(urlString)
+        if let image = cachedImage(urlString: urlString)
+        {
+            // by contract the fetch() interface shall be asynchronous in all cases
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                completion(result: ImageServiceResult.Success(image))
+            })
+        }
+        else if _requestIsAlreadyInFlight(urlString)
         {
             _appendClosureToInFlightRequests(urlString, completion: completion)
         }
