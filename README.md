@@ -196,6 +196,8 @@ For the A/B test, we will record how many times user access the Challenge Patch 
 
 ## Results of Step 2
 
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/step2.gif?token=AANopMo9yITQ2BpgJ8JYSEUwFYElsaSSks5WyOpJwA%3D%3D)
+
 The data from the A/B test shows that 45% of users accessed the new feature at least once ("ListController.viewDidLoad"), and that on average each user looked at the details of 8 patches ("DetailsViewController.viewDidLoad").
 
 Product thinks this is enough egagement to justify giving Dev the resources they need to in order to ["Do it right"](http://memesvault.com/wp-content/uploads/Meme-Faces-Challenge-Accepted-03.png).
@@ -260,3 +262,10 @@ and similar behavior when the description grows:
 
 ![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/magenta.gif?token=AANopE5ziJZh4Gztvy9zT68Em52yyrZsks5WyONrwA%3D%3D)
 
+### Patch image size
+
+Visually, it would be nice to have the patch image occupy the same relative screen proportion across all phones.  Let's go with the golden ratio:
+
+* iPhone 5 (320pt screen width): 198pt patch width
+* iPhone 6 (375pt screen width): 232pt patch width
+* iPhont 6+ (414pt screen width): 256pt patch width
