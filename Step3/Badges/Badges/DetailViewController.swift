@@ -25,23 +25,12 @@ class DetailViewController: UIViewController
     @IBOutlet var horizontalPaddingConstraints: [NSLayoutConstraint]!
     @IBOutlet var verticalGutterConstraints: [NSLayoutConstraint]!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        titleLabel.text = "Probability and statistics: Random variables and probability distributions"
-        descriptionLabel.text = "Achieve mastery in all skills in Probability and statistics: Random variables and probability distributions"
-        
-        imageView.image = UIImage(named: "Image-0")
-        
-        applyStyleModel(styleModel)
-        applyLayoutModel(layoutModel)
+    var dataModel: DataModel = DataModel.defaultModel() {
+        didSet {
+            applyDataModelIfViewLoaded(dataModel)
+        }
     }
     
-    @IBAction func dismiss(sender: AnyObject?)
-    {
-        self.parentViewController!.dismissViewControllerAnimated(true, completion: nil)
-    }
-
     var layoutModel: LayoutModel = LayoutModel.defaultModel() {
         didSet {
             applyLayoutModelIfViewLoaded(layoutModel)
@@ -52,6 +41,19 @@ class DetailViewController: UIViewController
         didSet {
             applyStyleModelIfViewLoaded(styleModel)
         }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        applyDataModel(dataModel)
+        applyStyleModel(styleModel)
+        applyLayoutModel(layoutModel)
+    }
+    
+    @IBAction func dismiss(sender: AnyObject?)
+    {
+        self.parentViewController!.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 
@@ -66,6 +68,42 @@ extension CGFloat
     func scaled(factor: CGFloat) -> CGFloat
     {
         return round(self * factor)
+    }
+}
+
+extension DetailViewController
+{
+    struct DataModel
+    {
+        let title: String
+        let description: String
+        let image: UIImage
+        
+        static func defaultModel() -> DataModel
+        {
+            return DataModel(
+                title: "",
+                description: "",
+                image: UIImage(named: "question_mark.png")!
+            )
+        }
+    }
+    
+    func applyDataModelIfViewLoaded(model: DataModel)
+    {
+        if isViewLoaded()
+        {
+            applyDataModel(model)
+        }
+    }
+    
+    func applyDataModel(model: DataModel)
+    {
+        titleLabel.text = model.title
+        descriptionLabel.text = model.description
+        imageView.image = model.image
+        
+        self.view.layoutIfNeeded()
     }
 }
 
@@ -147,7 +185,7 @@ extension DetailViewController
         
         self.view.layoutIfNeeded()
         
-        debugPrint(model)
+//        debugPrint(model)
     }
 }
 
@@ -205,9 +243,10 @@ extension DetailViewController
     {
         titleLabel.font = model.titleFont
         descriptionLabel.font = model.descriptionFont
+
         self.view.layoutIfNeeded()
         
-        debugPrint(model)
+//        debugPrint(model)
     }
 }
 
