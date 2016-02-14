@@ -101,18 +101,19 @@ class ListController: UITableViewController
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
         let cell = sender as! UITableViewCell
         let navC = segue.destinationViewController as! UINavigationController
         let detailVC = navC.topViewController as! DetailViewController
-        let _ = detailVC.view
-        
-        detailVC.titleLabel.text = cell.textLabel?.text
-        detailVC.imageView.image = cell.imageView?.image
+
+        let title: String = cell.textLabel!.text!
         
         let indexPath = self.tableView.indexPathForCell(cell)!
         let dict: [String: AnyObject] = json![indexPath.row] as! [String: AnyObject]
-        let text: String = dict["translated_safe_extended_description"] as! String
-        detailVC.descriptionLabel.text = text
+        let description: String = dict["translated_safe_extended_description"] as! String
+
+        let service = DetailViewController.DataModelService(title: title, description: description)
+        detailVC.dataService = service
     }
 }
 

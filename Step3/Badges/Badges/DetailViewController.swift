@@ -31,6 +31,8 @@ class DetailViewController: UIViewController
         }
     }
     
+    var dataService: DataModelService? = nil
+    
     var layoutModel: LayoutModel = LayoutModel.defaultModel() {
         didSet {
             applyLayoutModelIfViewLoaded(layoutModel)
@@ -49,6 +51,20 @@ class DetailViewController: UIViewController
         applyDataModel(dataModel)
         applyStyleModel(styleModel)
         applyLayoutModel(layoutModel)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        dataService?.subscribe { (model) -> () in
+            self.dataModel = model
+        }
+    }
+
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        dataService?.unsubscribe()
     }
     
     @IBAction func dismiss(sender: AnyObject?)
@@ -247,6 +263,47 @@ extension DetailViewController
         self.view.layoutIfNeeded()
         
 //        debugPrint(model)
+    }
+}
+
+extension DetailViewController
+{
+    typealias DataModelClosure = (DataModel)->()
+    
+    class DataModelService
+    {
+        private var closure: DataModelClosure?
+        
+        private var title: String
+        private var description: String
+        private var image: UIImage = UIImage(named: "question_mark.png")!
+        
+        private var latestModel: DataModel {
+            get {
+                return DataModel(
+                    title: title,
+                    description: description,
+                    image: image
+                )
+            }
+        }
+        
+        init(title: String, description: String)
+        {
+            self.title = title
+            self.description = description
+        }
+        
+        func subscribe(dataDidBecomeAvailableClosure: DataModelClosure)
+        {
+            closure = dataDidBecomeAvailableClosure
+            closure?(latestModel)
+        }
+        
+        func unsubscribe()
+        {
+            closure = nil
+        }
     }
 }
 
