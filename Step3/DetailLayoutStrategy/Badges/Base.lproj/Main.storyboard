@@ -35,7 +35,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axT-gC-HYs">
-                                <rect key="frame" x="16" y="436" width="568" height="21"/>
+                                <rect key="frame" x="16" y="418" width="568" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -49,8 +49,8 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbe-ci-CeO">
-                                <rect key="frame" x="16" y="117" width="568" height="27"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <rect key="frame" x="16" y="129" width="568" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -58,9 +58,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="cbe-ci-CeO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H7W-SD-O3j" secondAttribute="bottom" constant="8" id="Jbn-eH-EVM"/>
-                            <constraint firstItem="axT-gC-HYs" firstAttribute="top" secondItem="Npb-wv-1SD" secondAttribute="bottom" constant="36" id="JxR-wh-dox"/>
+                            <constraint firstItem="axT-gC-HYs" firstAttribute="top" secondItem="Npb-wv-1SD" secondAttribute="bottom" constant="18" id="JxR-wh-dox"/>
                             <constraint firstItem="Npb-wv-1SD" firstAttribute="centerY" secondItem="hmD-CJ-FnT" secondAttribute="centerY" priority="249" constant="-16" id="XIe-Bz-vxp"/>
-                            <constraint firstItem="Npb-wv-1SD" firstAttribute="top" secondItem="cbe-ci-CeO" secondAttribute="bottom" constant="24" id="c9l-Ua-yus"/>
+                            <constraint firstItem="Npb-wv-1SD" firstAttribute="top" secondItem="cbe-ci-CeO" secondAttribute="bottom" constant="18" id="c9l-Ua-yus"/>
                             <constraint firstItem="axT-gC-HYs" firstAttribute="leading" secondItem="hmD-CJ-FnT" secondAttribute="leading" constant="16" id="cC3-vE-Lfo"/>
                             <constraint firstItem="Npb-wv-1SD" firstAttribute="centerX" secondItem="hmD-CJ-FnT" secondAttribute="centerX" id="eew-40-Udb"/>
                             <constraint firstItem="cbe-ci-CeO" firstAttribute="leading" secondItem="hmD-CJ-FnT" secondAttribute="leading" constant="16" id="g4y-8x-Rkw"/>
@@ -72,8 +72,16 @@
                     <navigationItem key="navigationItem" title="Challenge Patch" id="BSv-7D-bLI"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="axT-gC-HYs" id="jAd-D2-ZYs"/>
+                        <outlet property="imageToDescriptionVerticalSpacingConstraint" destination="JxR-wh-dox" id="XF3-ML-pjP"/>
                         <outlet property="imageView" destination="Npb-wv-1SD" id="r3U-Ar-w6U"/>
+                        <outlet property="imageViewHeightConstraint" destination="KVf-qy-EoB" id="y7S-yO-VFG"/>
+                        <outlet property="imageViewVerticallyCenteredConstraint" destination="XIe-Bz-vxp" id="prZ-3i-Xpi"/>
+                        <outlet property="imageViewWidthConstraint" destination="dMx-uc-5TO" id="dKZ-iW-u9w"/>
                         <outlet property="titleLabel" destination="cbe-ci-CeO" id="TRQ-hk-eM3"/>
+                        <outlet property="titleToImageVerticalSpacingConstraint" destination="c9l-Ua-yus" id="0Qg-ay-gvB"/>
+                        <outletCollection property="verticalPaddingConstraints" destination="Jbn-eH-EVM" collectionClass="NSMutableArray" id="b0M-rx-cqR"/>
+                        <outletCollection property="verticalGutterConstraints" destination="JxR-wh-dox" collectionClass="NSMutableArray" id="NlJ-Ip-EbL"/>
+                        <outletCollection property="horizontalPaddingConstraints" destination="g4y-8x-Rkw" collectionClass="NSMutableArray" id="Uk0-Uj-BaN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CC6-lO-jwC" userLabel="First Responder" sceneMemberID="firstResponder"/>
