@@ -262,6 +262,13 @@ and similar behavior when the description grows:
 
 ![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/magenta.gif?token=AANopE5ziJZh4Gztvy9zT68Em52yyrZsks5WyONrwA%3D%3D)
 
+With a little additional AutoLayout tweaking, we can apply this to UILabels and a UIImageView:
+
+!()[https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/title2.gif?token=AANopKrJbusHPPKOLSM2CLZTX0ZCfk4bks5WyRbcwA%3D%3D]
+
+!()[https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/description2.gif?token=AANopMEYnYXT5aj6Y_reCCMbhzrFv8ffks5WyRbZwA%3D%3D]
+
+
 ### Patch image size
 
 Visually, it would be nice to have the patch image occupy the same relative screen proportion across all phones.  Let's go with the golden ratio:
