@@ -31,8 +31,6 @@ class DetailViewController: UIViewController
         }
     }
     
-    var dataService: DataModelService? = nil
-    
     var layoutModel: LayoutModel = LayoutModel.defaultModel() {
         didSet {
             applyLayoutModelIfViewLoaded(layoutModel)
@@ -45,6 +43,8 @@ class DetailViewController: UIViewController
         }
     }
 
+    var dataService: DataModelService? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -272,26 +272,11 @@ extension DetailViewController
     
     class DataModelService
     {
-        private var closure: DataModelClosure?
-        
-        private var title: String
-        private var description: String
-        private var image: UIImage = UIImage(named: "question_mark.png")!
-        
-        private var latestModel: DataModel {
-            get {
-                return DataModel(
-                    title: title,
-                    description: description,
-                    image: image
-                )
-            }
-        }
-        
         init(title: String, description: String)
         {
             self.title = title
             self.description = description
+            self.image = DataModel.defaultModel().image
         }
         
         func subscribe(dataDidBecomeAvailableClosure: DataModelClosure)
@@ -303,6 +288,22 @@ extension DetailViewController
         func unsubscribe()
         {
             closure = nil
+        }
+        
+        private var closure: DataModelClosure?
+        
+        private var title: String
+        private var description: String
+        private var image: UIImage
+        
+        private var latestModel: DataModel {
+            get {
+                return DataModel(
+                    title: title,
+                    description: description,
+                    image: image
+                )
+            }
         }
     }
 }
