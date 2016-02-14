@@ -1,0 +1,44 @@
+Programming Project:
+
+Khan Academy students earn badges for different activities on our site (for 
+things from watching videos to participating in community discussions); these 
+fall mostly into different space-themed categories (from small "meteorite" 
+badges to the super-elusive "black hole" badge). In addition to celestial 
+bodies, our students earn badges in the "challenge patch" category for 
+mastering all the skills in a single area--they actually get pretty proud of 
+them!
+
+If you log in to KA, go to your profile page, and click "badges" under 
+"Accomplishments", you'll see a collection of all your badges + all the ones 
+that are possible to earn; it may make more sense than this explanation here :)
+
+For this project, we'd like a simple phone app that tells students what the 
+different challenge patches represent. The first screen should be a collection 
+of all the badges, and tapping any single badge should bring up a detail view 
+for that badge (preferably with a larger image and more verbose description!).
+
+Our entire collection of badges lives here: 
+http://www.khanacademy.org/api/v1/badges
+
+And the collection key (that describes what each "category" integer actually 
+means) is here: http://www.khanacademy.org/api/v1/badges/categories
+
+Notes: 
+* For all our API calls, appending ?format=pretty makes the JSON easier to 
+read. 
+* Our public API is mostly documented here: 
+http://api-explorer.khanacademy.org/group/api/v1/badges 
+* Using third-party code is completely ok, but make sure to attribute it in the 
+app somewhere (settings bundle is fine).
+
+After you're done, feel free to spruce it up a bit or add neat features that 
+come to mind. More than quantity of features, though, we want to see your 
+architectural choices, design decisions, and thought process--and then have a 
+great conversation around your project and the choices you made.
+
+When you've got your project to a demo-able state, go ahead and zip it up and 
+please send it back to me. I will then schedule a follow-up interview with a 
+member of our mobile team for you to discuss your response in more detail.
+
+We're excited to see what you put together!
+

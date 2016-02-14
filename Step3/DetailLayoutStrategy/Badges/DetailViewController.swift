@@ -49,10 +49,10 @@ class DetailViewController: UIViewController
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        titleLabel.cycleText(text: longTitle, minCharCount: 48, maxCharCount: 320, fps: 45)
+//        titleLabel.cycleText(text: longTitle, minCharCount: 48, maxCharCount: 320, fps: 45)
 //        descriptionLabel.cycleText(text: longDescription, minCharCount: 240, maxCharCount: 560, fps: 75)
     }
-    
+        
     var layoutModel: LayoutModel = LayoutModel.defaultModel() {
         didSet {
             applyLayoutModelIfViewLoaded(layoutModel)
