@@ -293,7 +293,7 @@ Notice how the navigation bar gets smaller as phone size increases, but the labe
 
 ### Subscription services all the way down
 
-Let's try a "reactive" style of coding, where objects subscribe to resources and then react to whatever results come there way.  This is a great way to reduce the amount of imperative complexity in your code.
+Let's try a "reactive" style of coding, where objects subscribe to resources and then react to whatever results come there way.  This is a great way to reduce the amount of imperative complexity in your code, because most of the mutable state can be concentrated "upstream".
 
 It turns out this programming challenge is well suited to attempting this, because the network requirements are simple:
 * No authentication is needed
