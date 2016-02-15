@@ -191,7 +191,7 @@ extension BadgeTableViewController
                     partialModel: partialModel,
                     image: image)
 
-                trimmedModels.append(completeModel)
+                trimmedModels.insert(completeModel, atIndex: indexPath.row)
                 weakSelf.dataModels = trimmedModels
 
                 closure((dataModels: weakSelf.dataModels, changeList: [indexPath]))
