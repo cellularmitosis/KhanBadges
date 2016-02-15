@@ -63,7 +63,7 @@ class BadgeDetailViewController: UIViewController
     
     deinit
     {
-        debugPrint("\(self): \(__FUNCTION__)")
+        debugPrint("BadgeDetailViewController.deinit()")
     }
     
     @IBAction func dismiss(sender: AnyObject?)

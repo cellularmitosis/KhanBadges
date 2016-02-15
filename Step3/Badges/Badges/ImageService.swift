@@ -17,13 +17,13 @@ class ImageService
 
     init(resourceService: ResourceService)
     {
-        debugPrint("ImageService.init(), url: \(resourceService.url)")
+        debugPrint("ImageService.init(): \(resourceService.url.path?.componentsSeparatedByString("/").last))")
         self.resourceService = resourceService
     }
     
     deinit
     {
-        debugPrint("\(self): \(__FUNCTION__)")
+        debugPrint("ImageService.deinit(): \(resourceService.url.path?.componentsSeparatedByString("/").last))")
     }
 
     func subscribeImmediate(subscriber subscriber: AnyObject, closure: ImageServiceClosure)
@@ -83,7 +83,7 @@ class ImageService
     
     func didReceiveMemoryWarning()
     {
-        // empty for now.  perhaps we will add non-computed cache later.
+        // empty for now.  perhaps we will add non-computed cache later?
     }
     
     func subscriberCount() -> Int

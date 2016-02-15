@@ -8,15 +8,6 @@
 
 import UIKit
 
-extension UITableView
-{
-    func deselectSelectedCellIfNeeded(animated animated: Bool)
-    {
-        guard let indexPath = indexPathForSelectedRow else { return }
-        deselectRowAtIndexPath(indexPath, animated: animated)
-    }
-}
-
 class BadgeTableViewController: UITableViewController
 {
     // MARK: public interface
@@ -175,8 +166,6 @@ extension BadgeTableViewController
 
         func shouldFetchImageAtIndexPath(indexPath: NSIndexPath)
         {
-            debugPrint("shouldFetchImageAtIndexPath \(indexPath.row)")
-            
             guard let dto = dtos.get(indexPath.row) else { return }
             
             let url = dto.iconUrl
@@ -306,8 +295,6 @@ extension BadgeTableViewController
                 dataModelsService.shouldFetchImageAtIndexPath(indexPath)
             }
             
-            debugPrint("willDisplay row \(indexPath.row), title: \(model.title)")
-            
             badgeCell.dataModel = model
         }
         
@@ -335,7 +322,6 @@ extension BadgeTableViewController
                 return
             }
             
-            debugPrint("reloadRowsAtIndexPaths: \(changeList[0].row)")
             tableView?.reloadRowsAtIndexPaths(changeList, withRowAnimation: UITableViewRowAnimation.Fade)
         }
     }

@@ -19,13 +19,13 @@ class ResourceService
 
     init(url: NSURL)
     {
-        debugPrint("ResourceService.init(\(url))")
+        debugPrint("ResourceService.init(): \(url.path?.componentsSeparatedByString("/").last))")
         self.url = url
     }
     
     deinit
     {
-        debugPrint("\(self): \(__FUNCTION__)")
+        debugPrint("ResourceService.deinit(): \(url.path?.componentsSeparatedByString("/").last))")
     }
     
     func subscribeImmediate(subscriber subscriber: AnyObject, closure: ResourceServiceClosure)
@@ -36,8 +36,6 @@ class ResourceService
         let subscription = Subscription(closure: closure)
         _addSubscriber(weakSubscriber, subscription: subscription)
         
-        debugPrint("ResourceService.subscribe: subscriber count = \(subscriptions.count) (url: \(url.path?.componentsSeparatedByString("/").last))")
-
         if let cache = cache
         {
             closure(cache)
