@@ -13,6 +13,9 @@ class BadgeTableViewController: UITableViewController
     // MARK: public interface
     
     var dataSourceService: DataSourceService? {
+        willSet {
+            dataSourceService?.unsubscribe()
+        }
         didSet {
             _applyDataSourceServiceIfViewLoaded()
         }
@@ -30,6 +33,11 @@ class BadgeTableViewController: UITableViewController
         return navC
     }
 
+    deinit
+    {
+        dataSourceService?.unsubscribe()
+    }
+    
     // MARK: view lifecycle methods
     
     override func viewDidLoad() {
@@ -145,6 +153,7 @@ extension BadgeTableViewController
         func subscribeImmediate(dataDidUpdateClosure: CellDataModelSetClosure)
         {
             closure = dataDidUpdateClosure
+            closure?((dataModels: dataModels, changeList: []))
         }
         
         func unsubscribe()
@@ -168,7 +177,7 @@ extension BadgeTableViewController
                 {
                     return
                 }
-
+                
                 // FIXME this is what I want:
                 //
                 //   guard (let a, var b) = foo()
@@ -184,7 +193,7 @@ extension BadgeTableViewController
 
                 trimmedModels.append(completeModel)
                 weakSelf.dataModels = trimmedModels
-                
+
                 closure((dataModels: weakSelf.dataModels, changeList: [indexPath]))
                 
                 // FIXME unsubscribe after you get the image
@@ -280,7 +289,17 @@ extension BadgeTableViewController
         
         private func _dataDidArrive(dataModels: [BadgeTableViewCellDataModelProtocol], changeList: [NSIndexPath])
         {
+            let oldCount = self.dataModels.count
+            let newCount = dataModels.count
+            
             self.dataModels = dataModels
+            
+            guard oldCount == newCount else
+            {
+                tableView?.reloadData()
+                return
+            }
+            
             tableView?.reloadRowsAtIndexPaths(changeList, withRowAnimation: UITableViewRowAnimation.Fade)
         }
     }
@@ -361,6 +380,7 @@ extension BadgeTableViewController
         
         func unsubscribe()
         {
+            resourceService.unsubscribe(subscriber: self)
             closure = nil
         }
         
