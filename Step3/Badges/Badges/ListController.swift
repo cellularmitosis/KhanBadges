@@ -12,6 +12,20 @@ var json: [AnyObject]?
 
 class ListController: UITableViewController
 {
+    class func instantiateFromStoryboard() -> ListController
+    {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("ListController") as! ListController
+        return vc
+    }
+    
+    class func instantiateInNavigationControllerFromStoryboard() -> UINavigationController
+    {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let navC = storyboard.instantiateViewControllerWithIdentifier("ListNavController") as! UINavigationController
+        return navC
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         FakeAnalytics.recordEvent("ListController.viewDidLoad")

@@ -59,6 +59,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2BAE6E021C7194EF0061E09B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2BFA70FB1C7131E30082D893 /* UIFont+Scaled.swift */,
+				2BFA70FD1C7132350082D893 /* CGFloat+Scaled.swift */,
+				2BFA70FF1C7132B90082D893 /* UIScreen+Width.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		2BAE6E031C7194FC0061E09B /* Badge Detail */ = {
+			isa = PBXGroup;
+			children = (
+				2BCF3CE61C6DA770003BBABF /* BadgeDetailViewController.swift */,
+				2BAE6E001C718FD90061E09B /* BadgeDetailView.swift */,
+			);
+			name = "Badge Detail";
+			sourceTree = "<group>";
+		};
+		2BAE6E041C7195070061E09B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2BFA71031C717AEF0082D893 /* ServiceRepository.swift */,
+				2BFA71011C716C580082D893 /* ResourceService.swift */,
+				2BFA70F91C7131420082D893 /* ImageService.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		2BCF3CC01C6D7D21003BBABF = {
 			isa = PBXGroup;
 			children = (
@@ -80,16 +109,11 @@
 			isa = PBXGroup;
 			children = (
 				2BCF3CCC1C6D7D21003BBABF /* AppDelegate.swift */,
-				2BFA71031C717AEF0082D893 /* ServiceRepository.swift */,
-				2BFA71011C716C580082D893 /* ResourceService.swift */,
-				2BFA70F91C7131420082D893 /* ImageService.swift */,
+				2BAE6E041C7195070061E09B /* Services */,
 				2BCF3CE41C6D8A44003BBABF /* ListController.swift */,
-				2BCF3CE61C6DA770003BBABF /* BadgeDetailViewController.swift */,
-				2BAE6E001C718FD90061E09B /* BadgeDetailView.swift */,
+				2BAE6E031C7194FC0061E09B /* Badge Detail */,
 				2BF968781C6F9FFD00755C0A /* FakeAnalytics.swift */,
-				2BFA70FB1C7131E30082D893 /* UIFont+Scaled.swift */,
-				2BFA70FD1C7132350082D893 /* CGFloat+Scaled.swift */,
-				2BFA70FF1C7132B90082D893 /* UIScreen+Width.swift */,
+				2BAE6E021C7194EF0061E09B /* Extensions */,
 				2BCF3CD01C6D7D21003BBABF /* Main.storyboard */,
 				2BCF3CD31C6D7D21003BBABF /* Assets.xcassets */,
 				2BCF3CD51C6D7D21003BBABF /* LaunchScreen.storyboard */,

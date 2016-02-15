@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nUv-vF-byx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -9,7 +9,7 @@
         <!--List-->
         <scene sceneID="KE2-Rl-4Tf">
             <objects>
-                <navigationController id="nUv-vF-byx" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ListNavController" id="nUv-vF-byx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="List" id="cJ2-Ke-9L9"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ldp-a0-S84">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -26,7 +26,7 @@
         <!--Challenge Patches-->
         <scene sceneID="TEC-hE-bqF">
             <objects>
-                <tableViewController id="MOG-Eg-nLi" customClass="ListController" customModule="Badges" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ListController" id="MOG-Eg-nLi" customClass="ListController" customModule="Badges" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="Zde-L1-5yH">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
