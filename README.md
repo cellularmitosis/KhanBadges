@@ -301,7 +301,7 @@ It turns out this programming challenge is well suited to attempting this, becau
 
 ## Retrying failed requests
 
-Because all of views in the app are driven by "subscription"-based data, it is relatively easy to have the entire app fill in missing pieces by retry failed requests, either when the app resumes from background, or when the networking becomes available again (by pulling in [Reachability.swift](https://github.com/ashleymills/Reachability.swift)).
+Because all of views in the app are driven by "subscription"-based data, it is relatively easy to have the entire app fill in missing pieces by retrying failed requests, either when the app resumes from background, or when the networking becomes available again (by pulling in [Reachability.swift](https://github.com/ashleymills/Reachability.swift)).
 
 ![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/reachability.gif?token=AANopApW97KmLdQjBOOqvI3e9HqJlygpks5Wy5HjwA%3D%3D)
 
