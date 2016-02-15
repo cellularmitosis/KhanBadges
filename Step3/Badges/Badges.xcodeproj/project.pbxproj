@@ -11,6 +11,9 @@
 		2BAE6E071C7235930061E09B /* BadgeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAE6E061C7235930061E09B /* BadgeTableViewCell.swift */; };
 		2BAE6E091C7244900061E09B /* Array+Get.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAE6E081C7244900061E09B /* Array+Get.swift */; };
 		2BAE6E0B1C727D8F0061E09B /* UITableView+DeselectSelectedCellIfNeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAE6E0A1C727D8F0061E09B /* UITableView+DeselectSelectedCellIfNeeded.swift */; };
+		2BAE6E0D1C727DC90061E09B /* BadgeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAE6E0C1C727DC90061E09B /* BadgeDTO.swift */; };
+		2BAE6E0F1C727DF50061E09B /* BadgeTableViewController+CellDataModelSetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAE6E0E1C727DF50061E09B /* BadgeTableViewController+CellDataModelSetService.swift */; };
+		2BAE6E111C727E700061E09B /* BadgeTableViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAE6E101C727E700061E09B /* BadgeTableViewController+DataSource.swift */; };
 		2BCF3CCD1C6D7D21003BBABF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF3CCC1C6D7D21003BBABF /* AppDelegate.swift */; };
 		2BCF3CD21C6D7D21003BBABF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BCF3CD01C6D7D21003BBABF /* Main.storyboard */; };
 		2BCF3CD41C6D7D21003BBABF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BCF3CD31C6D7D21003BBABF /* Assets.xcassets */; };
@@ -34,6 +37,9 @@
 		2BAE6E061C7235930061E09B /* BadgeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeTableViewCell.swift; sourceTree = "<group>"; };
 		2BAE6E081C7244900061E09B /* Array+Get.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Get.swift"; sourceTree = "<group>"; };
 		2BAE6E0A1C727D8F0061E09B /* UITableView+DeselectSelectedCellIfNeeded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+DeselectSelectedCellIfNeeded.swift"; sourceTree = "<group>"; };
+		2BAE6E0C1C727DC90061E09B /* BadgeDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeDTO.swift; sourceTree = "<group>"; };
+		2BAE6E0E1C727DF50061E09B /* BadgeTableViewController+CellDataModelSetService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BadgeTableViewController+CellDataModelSetService.swift"; sourceTree = "<group>"; };
+		2BAE6E101C727E700061E09B /* BadgeTableViewController+DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BadgeTableViewController+DataSource.swift"; sourceTree = "<group>"; };
 		2BCF3CC91C6D7D21003BBABF /* Badges.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badges.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BCF3CCC1C6D7D21003BBABF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BCF3CD11C6D7D21003BBABF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -100,6 +106,9 @@
 			isa = PBXGroup;
 			children = (
 				2BCF3CE41C6D8A44003BBABF /* BadgeTableViewController.swift */,
+				2BAE6E0E1C727DF50061E09B /* BadgeTableViewController+CellDataModelSetService.swift */,
+				2BAE6E101C727E700061E09B /* BadgeTableViewController+DataSource.swift */,
+				2BAE6E0C1C727DC90061E09B /* BadgeDTO.swift */,
 				2BAE6E061C7235930061E09B /* BadgeTableViewCell.swift */,
 			);
 			name = "Badge Table";
@@ -231,6 +240,7 @@
 			files = (
 				2BCF3CCD1C6D7D21003BBABF /* AppDelegate.swift in Sources */,
 				2BFA70F61C711A0D0082D893 /* Result.swift in Sources */,
+				2BAE6E0D1C727DC90061E09B /* BadgeDTO.swift in Sources */,
 				2BAE6E011C718FD90061E09B /* BadgeDetailView.swift in Sources */,
 				2BFA70FC1C7131E30082D893 /* UIFont+Scaled.swift in Sources */,
 				2BF968791C6F9FFD00755C0A /* FakeAnalytics.swift in Sources */,
@@ -244,6 +254,8 @@
 				2BCF3CE71C6DA770003BBABF /* BadgeDetailViewController.swift in Sources */,
 				2BFA71021C716C580082D893 /* ResourceService.swift in Sources */,
 				2BFA71001C7132B90082D893 /* UIScreen+Width.swift in Sources */,
+				2BAE6E0F1C727DF50061E09B /* BadgeTableViewController+CellDataModelSetService.swift in Sources */,
+				2BAE6E111C727E700061E09B /* BadgeTableViewController+DataSource.swift in Sources */,
 				2BFA70FA1C7131420082D893 /* ImageService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
