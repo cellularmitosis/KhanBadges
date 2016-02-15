@@ -59,6 +59,11 @@ class ResourceService
         }
     }
     
+    func retryFailedRequests()
+    {
+        _retryFailedRequestsIfNeeded()
+    }
+
     enum Error: ErrorType
     {
         case NSURLSessionFailed(error: NSError)
@@ -157,21 +162,21 @@ extension ResourceService
     
     private func _requestDidFinish(result: ResourceServiceResult)
     {
-        var closures = [ResourceServiceClosure]()
+        var closuresToCall = [ResourceServiceClosure]()
         
         switch result
         {
         case .Success(_):
             cache = result
-            closures = _allClosures()
+            closuresToCall = _allClosures()
             
         case .Failure(_):
             cache = nil
-            closures = _closuresWhichHaveNotAlreadyBeenGivenAFailureResult()
+            closuresToCall = _closuresWhichHaveNotAlreadyBeenGivenAFailureResult()
             _markAllSubscriptionsFailed()
         }
         
-        _callClosuresWithResult(closures, result: result)
+        _callClosuresWithResult(closuresToCall, result: result)
     }
     
     private func _allClosures() -> [ResourceServiceClosure]
@@ -207,6 +212,24 @@ extension ResourceService
         for closure in closures
         {
             closure(result)
+        }
+    }
+
+    private func _subscriptionsInAFailureStateExist() -> Bool
+    {
+        let failuresExist = subscriptions.reduce(false, combine: { (previousAnswer, kvTuple: (Subscriber, Subscription)) -> Bool in
+            guard previousAnswer == false else { return true }
+            let subscription = kvTuple.1
+            return subscription.lastResultGiven == .Failure
+        })
+        return failuresExist
+    }
+    
+    private func _retryFailedRequestsIfNeeded()
+    {
+        if _subscriptionsInAFailureStateExist()
+        {
+            _startNewRequestIfNotAlreadyInFlight()
         }
     }
 }

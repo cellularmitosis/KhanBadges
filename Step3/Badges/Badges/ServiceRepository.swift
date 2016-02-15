@@ -72,6 +72,13 @@ class ServiceRepository
         debugPrint("ServiceRepository.didReceiveMemoryWarning: (after) \(resourceServices.count) \(imageServices.count)")
     }
     
+    func retryFailedRequests()
+    {
+        resourceServices.forEach { (url, service) -> () in
+            service.retryFailedRequests()
+        }
+    }
+    
     // MARK: private implementation
     
     private var resourceServices = [NSURL: ResourceService]()
