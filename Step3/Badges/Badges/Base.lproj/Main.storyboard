@@ -9,7 +9,7 @@
         <!--List-->
         <scene sceneID="KE2-Rl-4Tf">
             <objects>
-                <navigationController storyboardIdentifier="ListNavController" id="nUv-vF-byx" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BadgeTableViewControllerNavigationController" id="nUv-vF-byx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="List" id="cJ2-Ke-9L9"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ldp-a0-S84">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -26,13 +26,13 @@
         <!--Challenge Patches-->
         <scene sceneID="TEC-hE-bqF">
             <objects>
-                <tableViewController storyboardIdentifier="ListController" id="MOG-Eg-nLi" customClass="BadgeTableViewController" customModule="Badges" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="BadgeTableViewController" id="MOG-Eg-nLi" customClass="BadgeTableViewController" customModule="Badges" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="Zde-L1-5yH">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListCell" textLabel="DCi-oD-QFY" style="IBUITableViewCellStyleDefault" id="zMH-f9-yyC">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BadgeTableViewCell" textLabel="DCi-oD-QFY" style="IBUITableViewCellStyleDefault" id="zMH-f9-yyC" customClass="BadgeTableViewCell" customModule="Badges" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zMH-f9-yyC" id="94H-iT-eDt">

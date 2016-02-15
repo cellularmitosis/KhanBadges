@@ -21,6 +21,12 @@ class BadgeTableViewCell: UITableViewCell
             return BadgeTableViewCell.reuseIdentifier
         }
     }
+    
+    override func prepareForReuse()
+    {
+        let model = PartialDataModel.emptyModel()
+        applyDataModel(model)
+    }
 }
 
 protocol BadgeTableViewCellDataModelProtocol
@@ -39,6 +45,11 @@ extension BadgeTableViewCell
         init(title: String)
         {
             self.title = title
+        }
+        
+        static func emptyModel() -> PartialDataModel
+        {
+            return PartialDataModel(title: "")
         }
     }
     

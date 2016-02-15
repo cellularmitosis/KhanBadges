@@ -52,7 +52,7 @@ class BadgeTableViewController: UITableViewController
         dataSourceService dataSourceService: BadgeTableViewController.DataSourceService) -> UINavigationController
     {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let navC = storyboard.instantiateViewControllerWithIdentifier("ListNavController") as! UINavigationController
+        let navC = storyboard.instantiateViewControllerWithIdentifier("BadgeTableViewControllerNavigationController") as! UINavigationController
         let vc = navC.topViewController as! BadgeTableViewController
         vc.dataSourceService = dataSourceService
         return navC
@@ -98,71 +98,100 @@ class BadgeTableViewController: UITableViewController
     }
 }
 
+extension Array
+{
+    func get(index: Int) -> Element?
+    {
+        guard index < count else { return nil }
+        
+        return self[index]
+    }
+}
+
+class BadgeTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate
+{
+    private var dataModels = [BadgeTableViewCellDataModelProtocol]()
+    private let dataModelsService: BadgeTableViewController.CellDataModelSetService
+    
+    init(dataModelsService: BadgeTableViewController.CellDataModelSetService)
+    {
+        self.dataModelsService = dataModelsService
+        
+        self.dataModelsService.subscribeImmediate { [weak self] (dataModels, changeList) -> () in
+            guard let weakSelf = self else { return }
+            
+            weakSelf._dataDidArrive(dataModels, changeList: changeList)
+        }
+    }
+
+    private func _dataDidArrive(dataModels: [BadgeTableViewCellDataModelProtocol], changeList: [NSIndexPath])
+    {
+        
+    }
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return dataModels.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCellWithIdentifier(BadgeTableViewCell.reuseIdentifier)!
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        guard
+            let model = dataModels.get(indexPath.row),
+            let badgeCell = cell as? BadgeTableViewCell
+        else
+        {
+            return
+        }
+        
+        if let partialModel = model as? BadgeTableViewCell.PartialDataModel
+        {
+            // FIXME notify the data set service that we need to fetch the image at this indexPath
+        }
+        
+        badgeCell.applyDataModel(model)
+    }
+}
+
 extension BadgeTableViewController
 {
-    class DataSource: NSObject, UITableViewDataSource, UITableViewDelegate
+    typealias CellDataModelSetClosure = ((dataModels: [BadgeTableViewCellDataModelProtocol], changeList: [NSIndexPath]))->()
+
+    class CellDataModelSetService
     {
-        private let jsonData: [BadgeDTO]
+        private let dtos: [BadgeDTO]
         
-        init(jsonData: [BadgeDTO])
+        init(dtos: [BadgeDTO])
         {
-            self.jsonData = jsonData
+            self.dtos = dtos
         }
         
-        func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+        func subscribeImmediate(dataDidUpdateClosure: CellDataModelSetClosure)
         {
-            return jsonData.count
+
         }
         
-        func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+        func unsubscribe()
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier("ListCell")!
-            cell.textLabel?.text = ""
-            cell.imageView?.image = UIImage(named: "question_mark.png")
-            return cell
-        }
-        
-        func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
-        {
-//            let dict: [String: AnyObject] = json![indexPath.row] as! [String: AnyObject]
             
-//            let text: String = dict["description"] as! String
-//            cell.textLabel?.text = text
-            
-//            let iconUrlStrings: [String:String] = dict["icons"] as! [String:String]
-//            let urlString = iconUrlStrings["large"]!
-//            let url = NSURL(string: urlString)!
-            
-//            let imageService = serviceRepo.imageServiceForURL(url: url)
-            
-//            if let cachedImage = imageService.cachedValue
-//            {
-//                cell.imageView?.image = cachedImage
-//            }
-//            else
-//            {
-//                // we use subscribeAsync to guarantee we don't get an immediate return.
-//                // if we did, reloadRowsAtIndexPaths would crash the app.
-//                imageService.subscribeAsync(subscriber: self) { [weak tableView] (result) -> () in
-//                    guard let weakTableView = tableView else { return }
-//                    
-//                    if case .Success(_) = result
-//                    {
-//                        weakTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-//                    }
-//                }
-//            }
         }
     }
 }
 
 extension BadgeTableViewController
 {
-    typealias DataSourceClosure = (BadgeTableViewController.DataSource)->()
+    typealias DataSourceClosure = (BadgeTableViewDataSource)->()
     
     class DataSourceService
     {
         private let resourceService: ResourceService
+        private var cache: BadgeTableViewDataSource?
         
         init(resourceService: ResourceService)
         {
