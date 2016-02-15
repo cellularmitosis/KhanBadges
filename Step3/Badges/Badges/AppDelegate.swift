@@ -16,8 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        
-        let navController = BadgeTableViewController.instantiateInNavigationControllerFromStoryboard()
+
+        let url = NSURL(string: "https://www.khanacademy.org/api/v1/badges")!
+        let resourceService = ServiceRepository.sharedInstance.resourceServiceForURL(url: url)
+        let dataSourceService = BadgeTableViewController.DataSourceService(resourceService: resourceService)
+        let navController = BadgeTableViewController.instantiateInNavigationControllerFromStoryboard(dataSourceService: dataSourceService)
         
         window?.rootViewController = navController
         window?.makeKeyAndVisible()

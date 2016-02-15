@@ -88,6 +88,14 @@
 			name = Services;
 			sourceTree = "<group>";
 		};
+		2BAE6E051C71A62B0061E09B /* Badge Table */ = {
+			isa = PBXGroup;
+			children = (
+				2BCF3CE41C6D8A44003BBABF /* BadgeTableViewController.swift */,
+			);
+			name = "Badge Table";
+			sourceTree = "<group>";
+		};
 		2BCF3CC01C6D7D21003BBABF = {
 			isa = PBXGroup;
 			children = (
@@ -110,7 +118,7 @@
 			children = (
 				2BCF3CCC1C6D7D21003BBABF /* AppDelegate.swift */,
 				2BAE6E041C7195070061E09B /* Services */,
-				2BCF3CE41C6D8A44003BBABF /* BadgeTableViewController.swift */,
+				2BAE6E051C71A62B0061E09B /* Badge Table */,
 				2BAE6E031C7194FC0061E09B /* Badge Detail */,
 				2BF968781C6F9FFD00755C0A /* FakeAnalytics.swift */,
 				2BAE6E021C7194EF0061E09B /* Extensions */,
