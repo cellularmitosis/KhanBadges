@@ -70,6 +70,13 @@ class BadgeDetailViewController: UIViewController
     {
         self.parentViewController!.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    class func instantiateInNavigationControllerFromStoryboard() -> UINavigationController
+    {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let navC = storyboard.instantiateViewControllerWithIdentifier("BadgeDetailViewControllerNavigationController") as! UINavigationController
+        return navC
+    }
 }
 
 // MARK: private methods

@@ -59,15 +59,8 @@ class BadgeTableViewController: UITableViewController
         _applyDataSource()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        let navC = segue.destinationViewController as! UINavigationController
-        let detailVC = navC.topViewController as! BadgeDetailViewController
-
-        let cell = sender as! BadgeTableViewCell
-        let indexPath = self.tableView.indexPathForCell(cell)!
-        
-        // FIXME yeesh... law of demeter much?
+    private func _presentDetailController(indexPath: NSIndexPath)
+    {
         guard let dto = badgeDataSource?.dataModelsService.dtos.get(indexPath.row) else
         {
             tableView.deselectSelectedCellIfNeeded(animated: true)
@@ -75,13 +68,17 @@ class BadgeTableViewController: UITableViewController
         }
         
         let imageService = ServiceRepository.sharedInstance.imageServiceForURL(url: dto.iconUrl)
-
+        
         let service = BadgeDetailViewController.DataModelService(
-            title: cell.dataModel!.title,
+            title: dto.translated_description,
             description: description,
             imageService: imageService)
-        
+
+        let navC = BadgeDetailViewController.instantiateInNavigationControllerFromStoryboard()
+        let detailVC = navC.topViewController as! BadgeDetailViewController
         detailVC.dataService = service
+        
+        presentViewController(navC, animated: true, completion: nil)
     }
     
     // MARK: private implementation
@@ -96,11 +93,22 @@ class BadgeTableViewController: UITableViewController
     
     private func _applyDataSourceService()
     {
-        dataSourceService?.subscribeImmediate(self.tableView, dataDidBecomeAvailableClosure: { [weak self] (dataSource) -> () in
+        let dataDidBecomeAvailableClosure: DataSourceClosure = ({ [weak self] (dataSource) -> () in
             guard let weakSelf = self else { return }
             
             weakSelf.badgeDataSource = dataSource
         })
+
+        let didSelectRowClosure: DataSource.DidSelectBadgeCellClosure = ({ [weak self] (indexPath) -> () in
+            guard let weakSelf = self else { return }
+            
+            weakSelf._presentDetailController(indexPath)
+        })
+        
+        dataSourceService?.subscribeImmediate(
+            tableView: self.tableView,
+            didSelectRowClosure: didSelectRowClosure,
+            dataDidBecomeAvailableClosure: dataDidBecomeAvailableClosure)
     }
     
     private var badgeDataSource: DataSource? {
@@ -239,14 +247,17 @@ extension BadgeTableViewController
 {
     class DataSource: NSObject, UITableViewDataSource, UITableViewDelegate
     {
+        typealias DidSelectBadgeCellClosure = (NSIndexPath)->()
+        
         // MARK: public interface
         
         let dataModelsService: BadgeTableViewController.CellDataModelSetService
 
-        init(dataModelsService: BadgeTableViewController.CellDataModelSetService, tableView: UITableView)
+        init(dataModelsService: BadgeTableViewController.CellDataModelSetService, tableView: UITableView, didSelectRowClosure: DidSelectBadgeCellClosure)
         {
             self.dataModelsService = dataModelsService
             self.tableView = tableView
+            self.didSelectRowClosure = didSelectRowClosure
             super.init()
             
             self.dataModelsService.subscribeImmediate { [weak self] (dataModels, changeList) -> () in
@@ -292,14 +303,16 @@ extension BadgeTableViewController
             badgeCell.dataModel = model
         }
         
-        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            debugPrint("\(indexPath)")
+        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+        {
+            didSelectRowClosure(indexPath)
         }
         
         // MARK: private implementation
         
         private var dataModels = [BadgeTableViewCellDataModelProtocol]()
         private weak var tableView: UITableView?
+        private var didSelectRowClosure: DidSelectBadgeCellClosure
         
         private func _dataDidArrive(dataModels: [BadgeTableViewCellDataModelProtocol], changeList: [NSIndexPath])
         {
@@ -335,7 +348,10 @@ extension BadgeTableViewController
             self.serviceRepository = serviceRepository
         }
         
-        func subscribeImmediate(tableView: UITableView, dataDidBecomeAvailableClosure: DataSourceClosure)
+        func subscribeImmediate(
+            tableView tableView: UITableView,
+            didSelectRowClosure: DataSource.DidSelectBadgeCellClosure,
+            dataDidBecomeAvailableClosure: DataSourceClosure)
         {
             closure = dataDidBecomeAvailableClosure
             
@@ -385,8 +401,14 @@ extension BadgeTableViewController
                     dtos.append(dto)
                 })
                 
-                let dataModelsService = BadgeTableViewController.CellDataModelSetService(dtos: dtos, serviceRepository: weakSelf.serviceRepository)
-                let dataSource = BadgeTableViewController.DataSource(dataModelsService: dataModelsService, tableView: tableView)
+                let dataModelsService = BadgeTableViewController.CellDataModelSetService(
+                    dtos: dtos,
+                    serviceRepository: weakSelf.serviceRepository)
+                
+                let dataSource = BadgeTableViewController.DataSource(
+                    dataModelsService: dataModelsService,
+                    tableView: tableView,
+                    didSelectRowClosure: didSelectRowClosure)
                 
                 weakSelf.closure?(dataSource)
             }
