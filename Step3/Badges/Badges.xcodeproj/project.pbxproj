@@ -21,6 +21,7 @@
 		2BFA70FC1C7131E30082D893 /* UIFont+Scaled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFA70FB1C7131E30082D893 /* UIFont+Scaled.swift */; };
 		2BFA70FE1C7132350082D893 /* CGFloat+Scaled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFA70FD1C7132350082D893 /* CGFloat+Scaled.swift */; };
 		2BFA71001C7132B90082D893 /* UIScreen+Width.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFA70FF1C7132B90082D893 /* UIScreen+Width.swift */; };
+		2BFA71021C716C580082D893 /* ResourceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFA71011C716C580082D893 /* ResourceService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		2BFA70FB1C7131E30082D893 /* UIFont+Scaled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Scaled.swift"; sourceTree = "<group>"; };
 		2BFA70FD1C7132350082D893 /* CGFloat+Scaled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Scaled.swift"; sourceTree = "<group>"; };
 		2BFA70FF1C7132B90082D893 /* UIScreen+Width.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreen+Width.swift"; sourceTree = "<group>"; };
+		2BFA71011C716C580082D893 /* ResourceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				2BCF3CCC1C6D7D21003BBABF /* AppDelegate.swift */,
+				2BFA71011C716C580082D893 /* ResourceService.swift */,
 				2BFA70F91C7131420082D893 /* ImageService.swift */,
 				2BCF3CE41C6D8A44003BBABF /* ListController.swift */,
 				2BCF3CE61C6DA770003BBABF /* DetailViewController.swift */,
@@ -187,6 +190,7 @@
 				2BCF3CE51C6D8A44003BBABF /* ListController.swift in Sources */,
 				2BFA70F71C711A0D0082D893 /* ResultType.swift in Sources */,
 				2BCF3CE71C6DA770003BBABF /* DetailViewController.swift in Sources */,
+				2BFA71021C716C580082D893 /* ResourceService.swift in Sources */,
 				2BFA71001C7132B90082D893 /* UIScreen+Width.swift in Sources */,
 				2BFA70FA1C7131420082D893 /* ImageService.swift in Sources */,
 			);
