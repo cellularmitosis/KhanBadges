@@ -289,6 +289,12 @@ Here's the final result: a much more consistent look across all phone sizes:
 
 Notice how the navigation bar gets smaller as phone size increases, but the labels, patch image, and spacing appear to stay the same.
 
+### Rotation
+
+This layout strategy also handles rotation:
+
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/rotation.gif?token=AANopD4DvTV_yxhyj3j0jO3vWwVevgweks5Wy5v9wA%3D%3D)
+
 ## Architecture
 
 ### Subscription services all the way down
