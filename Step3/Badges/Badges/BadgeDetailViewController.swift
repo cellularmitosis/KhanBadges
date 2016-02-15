@@ -10,36 +10,27 @@ import UIKit
 
 class BadgeDetailViewController: UIViewController
 {
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
-    
-    @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageViewVerticallyCenteredConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var titleToImageVerticalSpacingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageToDescriptionVerticalSpacingConstraint: NSLayoutConstraint!
-    
-    @IBOutlet var verticalPaddingConstraints: [NSLayoutConstraint]!
-    @IBOutlet var horizontalPaddingConstraints: [NSLayoutConstraint]!
-    @IBOutlet var verticalGutterConstraints: [NSLayoutConstraint]!
-    
-    var dataModel: DataModel = DataModel.defaultModel() {
-        didSet {
-            applyDataModelIfViewLoaded(dataModel)
+    var badgeView: BadgeDetailView {
+        get {
+            return view as! BadgeDetailView
         }
     }
     
-    var layoutModel: LayoutModel = LayoutModel.defaultModel() {
+    var dataModel: BadgeDetailView.DataModel = BadgeDetailView.DataModel.defaultModel() {
         didSet {
-            applyLayoutModelIfViewLoaded(layoutModel)
+            _applyDataModelIfViewLoaded(dataModel)
         }
     }
     
-    var styleModel: StyleModel = StyleModel.defaultModel() {
+    var layoutModel: BadgeDetailView.LayoutModel = BadgeDetailView.LayoutModel.defaultModel() {
         didSet {
-            applyStyleModelIfViewLoaded(styleModel)
+            _applyLayoutModelIfViewLoaded(layoutModel)
+        }
+    }
+    
+    var styleModel: BadgeDetailView.StyleModel = BadgeDetailView.StyleModel.defaultModel() {
+        didSet {
+            _applyStyleModelIfViewLoaded(styleModel)
         }
     }
 
@@ -49,16 +40,18 @@ class BadgeDetailViewController: UIViewController
         super.viewDidLoad()
         FakeAnalytics.recordEvent("DetailViewController.viewDidLoad")
         
-        applyDataModel(dataModel)
-        applyStyleModel(styleModel)
-        applyLayoutModel(layoutModel)
+        badgeView.applyDataModel(dataModel)
+        badgeView.applyStyleModel(styleModel)
+        badgeView.applyLayoutModel(layoutModel)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        dataService?.subscribeImmediate { (model) -> () in
-            self.dataModel = model
+        dataService?.subscribeImmediate { [weak self] (model) -> () in
+            guard let weakSelf = self else { return }
+            
+            weakSelf.dataModel = model
         }
     }
 
@@ -79,180 +72,38 @@ class BadgeDetailViewController: UIViewController
     }
 }
 
+// MARK: private methods
 extension BadgeDetailViewController
 {
-    struct DataModel
-    {
-        let title: String
-        let description: String
-        let image: UIImage
-        
-        static func defaultModel() -> DataModel
-        {
-            return DataModel(
-                title: "",
-                description: "",
-                image: UIImage(named: "question_mark.png")!
-            )
-        }
-    }
-    
-    func applyDataModelIfViewLoaded(model: DataModel)
+    private func _applyDataModelIfViewLoaded(model: BadgeDetailView.DataModel)
     {
         if isViewLoaded()
         {
-            applyDataModel(model)
+            badgeView.applyDataModel(model)
         }
     }
     
-    func applyDataModel(model: DataModel)
-    {
-        titleLabel.text = model.title
-        descriptionLabel.text = model.description
-        imageView.image = model.image
-        
-        self.view.layoutIfNeeded()
-    }    
-}
-
-extension BadgeDetailViewController
-{
-    struct LayoutModel
-    {
-        let imageViewWidthConstraintConstant: CGFloat
-        let imageViewHeightConstraintConstant: CGFloat
-        
-        let verticalPadding: CGFloat
-        let verticalGutter: CGFloat
-        let horizontalPadding: CGFloat
-        
-        let imageViewVerticallyCenteredOffset: CGFloat
-        
-        static func defaultModel() -> LayoutModel
-        {
-            let model = LayoutModel(
-                imageViewWidthConstraintConstant: 232,
-                imageViewHeightConstraintConstant: 232,
-                verticalPadding: 16,
-                verticalGutter: 16,
-                horizontalPadding: 16,
-                imageViewVerticallyCenteredOffset: -16
-            )
-            return model.scaledForCurrentDevice()
-        }
-        
-        func scaled(factor: CGFloat) -> LayoutModel
-        {
-            return LayoutModel(
-                imageViewWidthConstraintConstant: self.imageViewWidthConstraintConstant.scaled(factor),
-                imageViewHeightConstraintConstant: self.imageViewHeightConstraintConstant.scaled(factor),
-                verticalPadding: self.verticalPadding.scaled(factor),
-                verticalGutter: self.verticalGutter.scaled(factor),
-                horizontalPadding: self.horizontalPadding.scaled(factor),
-                imageViewVerticallyCenteredOffset: self.imageViewVerticallyCenteredOffset.scaled(factor)
-            )
-        }
-        
-        func scaledForCurrentDevice() -> LayoutModel
-        {
-            let factor = UIScreen.width() / designedForWidth
-            return self.scaled(factor)
-        }
-        
-        private let designedForWidth: CGFloat = 375.0
-    }
-    
-    func applyLayoutModelIfViewLoaded(model: LayoutModel)
+    private func _applyLayoutModelIfViewLoaded(model: BadgeDetailView.LayoutModel)
     {
         if self.isViewLoaded()
         {
-            applyLayoutModel(model)
+            badgeView.applyLayoutModel(model)
         }
     }
     
-    func applyLayoutModel(model: LayoutModel)
-    {
-        imageViewHeightConstraint.constant = model.imageViewHeightConstraintConstant
-        imageViewWidthConstraint.constant = model.imageViewWidthConstraintConstant
-        imageViewVerticallyCenteredConstraint.constant = model.imageViewVerticallyCenteredOffset
-        
-        for constraint in verticalPaddingConstraints
-        {
-            constraint.constant = model.verticalPadding
-        }
-        
-        for constraint in verticalGutterConstraints
-        {
-            constraint.constant = model.verticalGutter
-        }
-        
-        for constraint in horizontalPaddingConstraints
-        {
-            constraint.constant = model.horizontalPadding
-        }
-        
-        self.view.layoutIfNeeded()
-        
-//        debugPrint(model)
-    }
-}
-
-extension BadgeDetailViewController
-{
-    struct StyleModel
-    {
-        let titleFont: UIFont
-        let descriptionFont: UIFont
-        
-        static func defaultModel() -> StyleModel
-        {
-            let model = StyleModel(
-                titleFont: UIFont.preferredFontForTextStyle(UIFontTextStyleTitle2),
-                descriptionFont: UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-            )
-            return model.scaledForCurrentDevice()
-        }
-        
-        func scaled(factor: CGFloat) -> StyleModel
-        {
-            return StyleModel(
-                titleFont: self.titleFont.scaled(factor),
-                descriptionFont: self.descriptionFont.scaled(factor)
-            )
-        }
-        
-        func scaledForCurrentDevice() -> StyleModel
-        {
-            let factor = UIScreen.width() / designedForWidth
-            return self.scaled(factor)
-        }
-        
-        private let designedForWidth: CGFloat = 375.0
-    }
-    
-    func applyStyleModelIfViewLoaded(model: StyleModel)
+    private func _applyStyleModelIfViewLoaded(model: BadgeDetailView.StyleModel)
     {
         if isViewLoaded()
         {
-            applyStyleModel(model)
+            badgeView.applyStyleModel(model)
         }
-    }
-    
-    func applyStyleModel(model: StyleModel)
-    {
-        titleLabel.font = model.titleFont
-        descriptionLabel.font = model.descriptionFont
-
-        self.view.layoutIfNeeded()
-        
-//        debugPrint(model)
     }
 }
 
 // Note: pulling this out into its own file causes the Swift compiler to segfault.
 extension BadgeDetailViewController
 {
-    typealias DataModelClosure = (DataModel)->()
+    typealias DataModelClosure = (BadgeDetailView.DataModel)->()
     
     class DataModelService
     {
@@ -261,7 +112,7 @@ extension BadgeDetailViewController
             self.title = title
             self.description = description
             self.imageService = imageService
-            self.image = DataModel.defaultModel().image
+            self.image = BadgeDetailView.DataModel.defaultModel().image
         }
         
         func subscribeImmediate(dataDidBecomeAvailableClosure: DataModelClosure)
@@ -302,9 +153,9 @@ extension BadgeDetailViewController
         private var image: UIImage
         private let imageService: ImageService
         
-        private var latestModel: DataModel {
+        private var latestModel: BadgeDetailView.DataModel {
             get {
-                return DataModel(
+                return BadgeDetailView.DataModel(
                     title: title,
                     description: description,
                     image: image

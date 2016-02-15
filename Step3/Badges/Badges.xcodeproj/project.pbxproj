@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BAE6E011C718FD90061E09B /* BadgeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAE6E001C718FD90061E09B /* BadgeDetailView.swift */; };
 		2BCF3CCD1C6D7D21003BBABF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF3CCC1C6D7D21003BBABF /* AppDelegate.swift */; };
 		2BCF3CD21C6D7D21003BBABF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BCF3CD01C6D7D21003BBABF /* Main.storyboard */; };
 		2BCF3CD41C6D7D21003BBABF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BCF3CD31C6D7D21003BBABF /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2BAE6E001C718FD90061E09B /* BadgeDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeDetailView.swift; sourceTree = "<group>"; };
 		2BCF3CC91C6D7D21003BBABF /* Badges.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Badges.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BCF3CCC1C6D7D21003BBABF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BCF3CD11C6D7D21003BBABF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				2BFA70F91C7131420082D893 /* ImageService.swift */,
 				2BCF3CE41C6D8A44003BBABF /* ListController.swift */,
 				2BCF3CE61C6DA770003BBABF /* BadgeDetailViewController.swift */,
+				2BAE6E001C718FD90061E09B /* BadgeDetailView.swift */,
 				2BF968781C6F9FFD00755C0A /* FakeAnalytics.swift */,
 				2BFA70FB1C7131E30082D893 /* UIFont+Scaled.swift */,
 				2BFA70FD1C7132350082D893 /* CGFloat+Scaled.swift */,
@@ -187,6 +190,7 @@
 			files = (
 				2BCF3CCD1C6D7D21003BBABF /* AppDelegate.swift in Sources */,
 				2BFA70F61C711A0D0082D893 /* Result.swift in Sources */,
+				2BAE6E011C718FD90061E09B /* BadgeDetailView.swift in Sources */,
 				2BFA70FC1C7131E30082D893 /* UIFont+Scaled.swift in Sources */,
 				2BF968791C6F9FFD00755C0A /* FakeAnalytics.swift in Sources */,
 				2BFA70FE1C7132350082D893 /* CGFloat+Scaled.swift in Sources */,
