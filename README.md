@@ -57,11 +57,11 @@ $ cat badges.json | grep '"badge_category": 5' | wc -l
 
 The JSON portion of the API does not support `Cache-Control`:
 
-![]()
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-15%20at%205.46.18%20PM.png?token=AANopH0KYuAMamgaoMEFxIYPtOs1TdiIks5Wy57VwA%3D%3D)
 
 However, the images (served from kastatic.org) may be cached indefinitely:
 
-![]()
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-15%20at%205.45.40%20PM.png?token=AANopEDYHFVWDSRvqMW1VTOG5lsgD-bUks5Wy57SwA%3D%3D)
 
 # The Plan
 
