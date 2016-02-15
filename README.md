@@ -53,6 +53,16 @@ $ cat badges.json | grep '"badge_category": 5' | wc -l
      152
 ```
 
+### Cache support
+
+The JSON portion of the API does not support `Cache-Control`:
+
+![]()
+
+However, the images (served from kastatic.org) may be cached indefinitely:
+
+![]()
+
 # The Plan
 
 ## Step 1: Rough (Offline) Prototype for UX
@@ -305,7 +315,11 @@ It turns out this programming challenge is well suited to attempting this, becau
 * No authentication is needed
 * Everything is a GET request
 
-## Recovering from failed requests
+### Caching
+
+It turns out the Khan API doesn't support the `Cache-Control` header in its JSON output.
+
+### Recovering from failed requests
 
 Because all of views in the app are driven by "subscription"-based data, it is relatively easy to have the entire app fill in missing pieces by retrying failed requests, either when the app resumes from background, or when the networking becomes available again (by pulling in [Reachability.swift](https://github.com/ashleymills/Reachability.swift)).
 
