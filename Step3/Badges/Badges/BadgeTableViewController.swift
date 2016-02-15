@@ -110,12 +110,12 @@ extension Array
 
 class BadgeTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate
 {
-    private var dataModels = [BadgeTableViewCellDataModelProtocol]()
-    private let dataModelsService: BadgeTableViewController.CellDataModelSetService
+    // MARK: public interface
     
-    init(dataModelsService: BadgeTableViewController.CellDataModelSetService)
+    init(dataModelsService: BadgeTableViewController.CellDataModelSetService, tableView: UITableView)
     {
         self.dataModelsService = dataModelsService
+        self.tableView = tableView
         
         self.dataModelsService.subscribeImmediate { [weak self] (dataModels, changeList) -> () in
             guard let weakSelf = self else { return }
@@ -123,12 +123,14 @@ class BadgeTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
             weakSelf._dataDidArrive(dataModels, changeList: changeList)
         }
     }
-
-    private func _dataDidArrive(dataModels: [BadgeTableViewCellDataModelProtocol], changeList: [NSIndexPath])
+    
+    deinit
     {
-        
+        self.dataModelsService.unsubscribe()
     }
 
+    // MARK: table view methods
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return dataModels.count
@@ -150,12 +152,24 @@ class BadgeTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDele
             return
         }
         
-        if let partialModel = model as? BadgeTableViewCell.PartialDataModel
+        if model is BadgeTableViewCell.PartialDataModel
         {
-            // FIXME notify the data set service that we need to fetch the image at this indexPath
+            dataModelsService.shouldFetchImageAtIndexPath(indexPath)
         }
         
         badgeCell.applyDataModel(model)
+    }
+    
+    // MARK: private implementation
+    
+    private var dataModels = [BadgeTableViewCellDataModelProtocol]()
+    private let dataModelsService: BadgeTableViewController.CellDataModelSetService
+    private weak var tableView: UITableView?
+    
+    private func _dataDidArrive(dataModels: [BadgeTableViewCellDataModelProtocol], changeList: [NSIndexPath])
+    {
+        self.dataModels = dataModels
+        tableView?.reloadRowsAtIndexPaths(changeList, withRowAnimation: UITableViewRowAnimation.Fade)
     }
 }
 
@@ -178,6 +192,11 @@ extension BadgeTableViewController
         }
         
         func unsubscribe()
+        {
+            
+        }
+        
+        func shouldFetchImageAtIndexPath(indexPath: NSIndexPath)
         {
             
         }
