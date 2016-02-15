@@ -6,7 +6,63 @@
 //  Copyright © 2016 Pepas Labs. All rights reserved.
 //
 
+// TODO: change this into a subscription interface and intelligently handle e.g. coming back online?
+
 import UIKit
+
+class ResourceService
+{
+    typealias ResourceServiceResult = Result<NSData, ResourceService.Error>
+    typealias ResourceServiceClosure = (ResourceServiceResult)->()
+    
+    enum Error: ErrorType
+    {
+        case NSURLSessionError(error: NSError)
+    }
+
+    typealias Subscriber = UnsafePointer<Void>
+    typealias UrlString = String
+    
+    struct Subscription
+    {
+        let subscriber: Subscriber
+        let urlString: UrlString
+        let closure: ResourceServiceClosure
+    }
+
+    // note: this is effectively like a database of Subscription which is indexed on UrlString.
+    // this means handling the result of a network request is fast, but removing a subscriber is expensive.
+    private var subscriptions = [UrlString: [Subscription]]()
+    
+    func subscribe(subscriber subscriber: AnyObject, urlString: String, closure: ResourceServiceClosure)
+    {
+        let weakSubscriber = unsafeAddressOf(subscriber)
+        
+        let subscription = Subscription(
+            subscriber: unsafeAddressOf(subscriber),
+            urlString: urlString,
+            closure: closure)
+
+        _appendSubscription(subscription)
+    }
+
+    func unsubscribe(subscriber subscriber: Subscriber)
+    {
+        _removeAllSubscriptionsForSubscriber(subscriber)
+    }
+    
+    private func _appendSubscription(subscription: Subscription)
+    {
+        var subscribers = subscriptions[subscription.urlString] ?? [Subscription]()
+        subscribers.append(subscription)
+        subscriptions[subscription.urlString] = subscribers
+    }
+    
+    func _removeAllSubscriptionsForSubscriber(subscriber: Subscriber)
+    {
+
+    }
+}
 
 class ImageService
 {
