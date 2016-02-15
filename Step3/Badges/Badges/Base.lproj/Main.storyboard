@@ -26,7 +26,7 @@
         <!--Challenge Patches-->
         <scene sceneID="TEC-hE-bqF">
             <objects>
-                <tableViewController storyboardIdentifier="ListController" id="MOG-Eg-nLi" customClass="ListController" customModule="Badges" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ListController" id="MOG-Eg-nLi" customClass="BadgeTableViewController" customModule="Badges" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="Zde-L1-5yH">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -1,5 +1,5 @@
 //
-//  ListController.swift
+//  BadgeTableViewController.swift
 //  Badges
 //
 //  Created by Pepas Personal on 2/11/16.
@@ -10,12 +10,12 @@ import UIKit
 
 var json: [AnyObject]?
 
-class ListController: UITableViewController
+class BadgeTableViewController: UITableViewController
 {
-    class func instantiateFromStoryboard() -> ListController
+    class func instantiateFromStoryboard() -> BadgeTableViewController
     {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("ListController") as! ListController
+        let vc = storyboard.instantiateViewControllerWithIdentifier("ListController") as! BadgeTableViewController
         return vc
     }
     

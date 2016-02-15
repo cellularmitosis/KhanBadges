@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        let navController = ListController.instantiateInNavigationControllerFromStoryboard()
+        let navController = BadgeTableViewController.instantiateInNavigationControllerFromStoryboard()
         
         window?.rootViewController = navController
         window?.makeKeyAndVisible()

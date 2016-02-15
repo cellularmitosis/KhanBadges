@@ -12,7 +12,7 @@
 		2BCF3CD21C6D7D21003BBABF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BCF3CD01C6D7D21003BBABF /* Main.storyboard */; };
 		2BCF3CD41C6D7D21003BBABF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BCF3CD31C6D7D21003BBABF /* Assets.xcassets */; };
 		2BCF3CD71C6D7D21003BBABF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BCF3CD51C6D7D21003BBABF /* LaunchScreen.storyboard */; };
-		2BCF3CE51C6D8A44003BBABF /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF3CE41C6D8A44003BBABF /* ListController.swift */; };
+		2BCF3CE51C6D8A44003BBABF /* BadgeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF3CE41C6D8A44003BBABF /* BadgeTableViewController.swift */; };
 		2BCF3CE71C6DA770003BBABF /* BadgeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCF3CE61C6DA770003BBABF /* BadgeDetailViewController.swift */; };
 		2BF968791C6F9FFD00755C0A /* FakeAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF968781C6F9FFD00755C0A /* FakeAnalytics.swift */; };
 		2BFA70F51C711A0D0082D893 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 2BFA70F21C711A0D0082D893 /* LICENSE */; };
@@ -34,7 +34,7 @@
 		2BCF3CD31C6D7D21003BBABF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2BCF3CD61C6D7D21003BBABF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BCF3CD81C6D7D21003BBABF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2BCF3CE41C6D8A44003BBABF /* ListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
+		2BCF3CE41C6D8A44003BBABF /* BadgeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeTableViewController.swift; sourceTree = "<group>"; };
 		2BCF3CE61C6DA770003BBABF /* BadgeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeDetailViewController.swift; sourceTree = "<group>"; };
 		2BF968781C6F9FFD00755C0A /* FakeAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeAnalytics.swift; sourceTree = "<group>"; };
 		2BFA70F21C711A0D0082D893 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 			children = (
 				2BCF3CCC1C6D7D21003BBABF /* AppDelegate.swift */,
 				2BAE6E041C7195070061E09B /* Services */,
-				2BCF3CE41C6D8A44003BBABF /* ListController.swift */,
+				2BCF3CE41C6D8A44003BBABF /* BadgeTableViewController.swift */,
 				2BAE6E031C7194FC0061E09B /* Badge Detail */,
 				2BF968781C6F9FFD00755C0A /* FakeAnalytics.swift */,
 				2BAE6E021C7194EF0061E09B /* Extensions */,
@@ -218,7 +218,7 @@
 				2BFA70FC1C7131E30082D893 /* UIFont+Scaled.swift in Sources */,
 				2BF968791C6F9FFD00755C0A /* FakeAnalytics.swift in Sources */,
 				2BFA70FE1C7132350082D893 /* CGFloat+Scaled.swift in Sources */,
-				2BCF3CE51C6D8A44003BBABF /* ListController.swift in Sources */,
+				2BCF3CE51C6D8A44003BBABF /* BadgeTableViewController.swift in Sources */,
 				2BFA70F71C711A0D0082D893 /* ResultType.swift in Sources */,
 				2BFA71041C717AEF0082D893 /* ServiceRepository.swift in Sources */,
 				2BCF3CE71C6DA770003BBABF /* BadgeDetailViewController.swift in Sources */,
