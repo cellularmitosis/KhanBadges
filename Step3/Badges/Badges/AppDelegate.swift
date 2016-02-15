@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let url = NSURL(string: "https://www.khanacademy.org/api/v1/badges")!
         let resourceService = ServiceRepository.sharedInstance.resourceServiceForURL(url: url)
-        let dataSourceService = BadgeTableViewController.DataSourceService(resourceService: resourceService)
+        let dataSourceService = BadgeTableViewController.DataSourceService(resourceService: resourceService, serviceRepository: ServiceRepository.sharedInstance)
         let navController = BadgeTableViewController.instantiateInNavigationControllerFromStoryboard(dataSourceService: dataSourceService)
         
         window?.rootViewController = navController

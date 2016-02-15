@@ -10,35 +10,12 @@ import UIKit
 
 class BadgeTableViewController: UITableViewController
 {
+    // MARK: public interface
+    
     var dataSourceService: DataSourceService? {
         didSet {
-            dataSourceService?.subscribeImmediate({ [weak self] (dataSource) -> () in
-                guard let weakSelf = self else { return }
-                
-                weakSelf.badgeDataSource = dataSource
-            })
+            _applyDataSourceServiceIfViewLoaded()
         }
-    }
-    
-    var badgeDataSource: DataSource? {
-        didSet {
-            _applyDataSourceIfViewLoaded()
-        }
-    }
-    
-    private func _applyDataSourceIfViewLoaded()
-    {
-        if isViewLoaded()
-        {
-            _applyDataSource()
-        }
-    }
-    
-    private func _applyDataSource()
-    {
-        tableView.dataSource = badgeDataSource
-        tableView.delegate = badgeDataSource
-        tableView.reloadData()
     }
     
     class func instantiateInNavigationControllerFromStoryboard(
@@ -46,17 +23,22 @@ class BadgeTableViewController: UITableViewController
     {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let navC = storyboard.instantiateViewControllerWithIdentifier("BadgeTableViewControllerNavigationController") as! UINavigationController
+        
         let vc = navC.topViewController as! BadgeTableViewController
         vc.dataSourceService = dataSourceService
+        
         return navC
     }
 
+    // MARK: view lifecycle methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         FakeAnalytics.recordEvent("ListController.viewDidLoad")
 
         tableView.registerClass(BadgeTableViewCell.self, forCellReuseIdentifier: BadgeTableViewCell.reuseIdentifier)
         
+        _applyDataSourceService()
         _applyDataSource()
     }
     
@@ -88,6 +70,46 @@ class BadgeTableViewController: UITableViewController
 //            imageService: imageService)
 //        
 //        detailVC.dataService = service
+    }
+    
+    // MARK: private implementation
+    
+    private func _applyDataSourceServiceIfViewLoaded()
+    {
+        if isViewLoaded()
+        {
+            _applyDataSourceService()
+        }
+    }
+    
+    private func _applyDataSourceService()
+    {
+        dataSourceService?.subscribeImmediate(self.tableView, dataDidBecomeAvailableClosure: { [weak self] (dataSource) -> () in
+            guard let weakSelf = self else { return }
+            
+            weakSelf.badgeDataSource = dataSource
+        })
+    }
+    
+    private var badgeDataSource: DataSource? {
+        didSet {
+            _applyDataSourceIfViewLoaded()
+        }
+    }
+    
+    private func _applyDataSourceIfViewLoaded()
+    {
+        if isViewLoaded()
+        {
+            _applyDataSource()
+        }
+    }
+    
+    private func _applyDataSource()
+    {
+        tableView.dataSource = badgeDataSource
+        tableView.delegate = badgeDataSource
+        tableView.reloadData()
     }
 }
 
@@ -147,7 +169,7 @@ extension BadgeTableViewController
                     return
                 }
 
-                // FIXME I want this:
+                // FIXME this is what I want:
                 //
                 //   guard (let a, var b) = foo()
                 //
@@ -205,6 +227,7 @@ extension BadgeTableViewController
         {
             self.dataModelsService = dataModelsService
             self.tableView = tableView
+            super.init()
             
             self.dataModelsService.subscribeImmediate { [weak self] (dataModels, changeList) -> () in
                 guard let weakSelf = self else { return }
@@ -265,24 +288,32 @@ extension BadgeTableViewController
 
 extension BadgeTableViewController
 {
-    typealias DataSourceClosure = (BadgeTableViewDataSource)->()
+    typealias DataSourceClosure = (BadgeTableViewController.DataSource)->()
     
     class DataSourceService
     {
         private let resourceService: ResourceService
-        private var cache: BadgeTableViewDataSource?
+        private let serviceRepository: ServiceRepository
+        private var cache: BadgeTableViewController.DataSource?
         
-        init(resourceService: ResourceService)
+        init(resourceService: ResourceService, serviceRepository: ServiceRepository)
         {
             self.resourceService = resourceService
+            self.serviceRepository = serviceRepository
         }
         
-        func subscribeImmediate(dataDidBecomeAvailableClosure: DataSourceClosure)
+        func subscribeImmediate(tableView: UITableView, dataDidBecomeAvailableClosure: DataSourceClosure)
         {
             closure = dataDidBecomeAvailableClosure
             
-            resourceService.subscribeImmediate(subscriber: self) { [weak self] (result) -> () in
-                guard let weakSelf = self else { return }
+            resourceService.subscribeImmediate(subscriber: self) { [weak self, weak tableView] (result) -> () in
+                guard
+                    let weakSelf = self,
+                    let tableView = tableView
+                else
+                {
+                    return
+                }
                 
                 guard
                     case .Success(let data) = result,
@@ -321,22 +352,11 @@ extension BadgeTableViewController
                     dtos.append(dto)
                 })
                 
-                let dataSource = BadgeTableViewController.DataSource(jsonData: dtos)
+                let dataModelsService = BadgeTableViewController.CellDataModelSetService(dtos: dtos, serviceRepository: weakSelf.serviceRepository)
+                let dataSource = BadgeTableViewController.DataSource(dataModelsService: dataModelsService, tableView: tableView)
                 
                 weakSelf.closure?(dataSource)
             }
-        }
-        
-        class DataSourceFactory
-        {
-            private let dtos: [BadgeDTO]
-            
-            init(dtos: [BadgeDTO])
-            {
-                self.dtos = dtos
-            }
-            
-            
         }
         
         func unsubscribe()
