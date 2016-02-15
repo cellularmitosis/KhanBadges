@@ -15,53 +15,6 @@ struct BadgeDTO
     let iconUrl: NSURL
 }
 
-class BadgeTableViewCell: UITableViewCell
-{
-    static var reuseIdentifier: String {
-        get {
-            return "\(self)"
-        }
-    }
-    
-    override var reuseIdentifier: String? {
-        get {
-            return BadgeTableViewCell.reuseIdentifier
-        }
-    }
-}
-
-protocol BadgeTableViewCellDataModelProtocol
-{
-    var title: String { get }
-    var image: UIImage { get }
-}
-
-extension BadgeTableViewCell
-{
-    struct PartialDataModel: BadgeTableViewCellDataModelProtocol
-    {
-        let title: String
-        let image: UIImage = { UIImage(named: "question_mark.png")! }()
-
-        init(title: String)
-        {
-            self.title = title
-        }
-    }
-    
-    struct CompleteDataModel
-    {
-        let title: String
-        let image: UIImage
-    }
-    
-    func applyDataModel(model: BadgeTableViewCellDataModelProtocol)
-    {
-        textLabel?.text = model.title
-        imageView?.image = model.image
-    }
-}
-
 class BadgeTableViewController: UITableViewController
 {
     var dataSourceService: DataSourceService? {
