@@ -8,6 +8,15 @@
 
 import UIKit
 
+extension UITableView
+{
+    func deselectSelectedCellIfNeeded(animated animated: Bool)
+    {
+        guard let indexPath = indexPathForSelectedRow else { return }
+        deselectRowAtIndexPath(indexPath, animated: animated)
+    }
+}
+
 class BadgeTableViewController: UITableViewController
 {
     // MARK: public interface
@@ -50,34 +59,29 @@ class BadgeTableViewController: UITableViewController
         _applyDataSource()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-//        let cell = sender as! UITableViewCell
-//        let navC = segue.destinationViewController as! UINavigationController
-//        let detailVC = navC.topViewController as! BadgeDetailViewController
-//
-//        let title: String = cell.textLabel!.text!
-//        
-//        let indexPath = self.tableView.indexPathForCell(cell)!
-//        let dict: [String: AnyObject] = json![indexPath.row] as! [String: AnyObject]
-//        let description: String = dict["translated_safe_extended_description"] as! String
-//
-//        let iconUrlStrings: [String:String] = dict["icons"] as! [String:String]
-//        let urlString = iconUrlStrings["large"]!
-//        let url = NSURL(string: urlString)!
-//        
-//        let imageService = ServiceRepository.sharedInstance.imageServiceForURL(url: url)
-//
-//        let service = BadgeDetailViewController.DataModelService(
-//            title: title,
-//            description: description,
-//            imageService: imageService)
-//        
-//        detailVC.dataService = service
+        let navC = segue.destinationViewController as! UINavigationController
+        let detailVC = navC.topViewController as! BadgeDetailViewController
+
+        let cell = sender as! BadgeTableViewCell
+        let indexPath = self.tableView.indexPathForCell(cell)!
+        
+        // FIXME yeesh... law of demeter much?
+        guard let dto = badgeDataSource?.dataModelsService.dtos.get(indexPath.row) else
+        {
+            tableView.deselectSelectedCellIfNeeded(animated: true)
+            return
+        }
+        
+        let imageService = ServiceRepository.sharedInstance.imageServiceForURL(url: dto.iconUrl)
+
+        let service = BadgeDetailViewController.DataModelService(
+            title: cell.dataModel!.title,
+            description: description,
+            imageService: imageService)
+        
+        detailVC.dataService = service
     }
     
     // MARK: private implementation
@@ -134,10 +138,9 @@ extension BadgeTableViewController
     
     class CellDataModelSetService
     {
-        private var dtos: [BadgeDTO]
-        private var dataModels: [BadgeTableViewCellDataModelProtocol]
-        private let serviceRepository: ServiceRepository
-        private var closure: CellDataModelSetClosure?
+        // MARK: public interface 
+        
+        private(set) var dtos: [BadgeDTO]
         
         init(dtos: [BadgeDTO], serviceRepository: ServiceRepository)
         {
@@ -200,6 +203,12 @@ extension BadgeTableViewController
             }
         }
         
+        // MARK: private implementation
+        
+        private var dataModels: [BadgeTableViewCellDataModelProtocol]
+        private let serviceRepository: ServiceRepository
+        private var closure: CellDataModelSetClosure?
+        
         private func _extractPartialDataModelForDTO(dto: BadgeDTO) -> (BadgeTableViewCell.PartialDataModel, [BadgeTableViewCellDataModelProtocol])?
         {
             var extractedModel: BadgeTableViewCell.PartialDataModel?
@@ -232,6 +241,8 @@ extension BadgeTableViewController
     {
         // MARK: public interface
         
+        let dataModelsService: BadgeTableViewController.CellDataModelSetService
+
         init(dataModelsService: BadgeTableViewController.CellDataModelSetService, tableView: UITableView)
         {
             self.dataModelsService = dataModelsService
@@ -278,13 +289,16 @@ extension BadgeTableViewController
                 dataModelsService.shouldFetchImageAtIndexPath(indexPath)
             }
             
-            badgeCell.applyDataModel(model)
+            badgeCell.dataModel = model
+        }
+        
+        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            debugPrint("\(indexPath)")
         }
         
         // MARK: private implementation
         
         private var dataModels = [BadgeTableViewCellDataModelProtocol]()
-        private let dataModelsService: BadgeTableViewController.CellDataModelSetService
         private weak var tableView: UITableView?
         
         private func _dataDidArrive(dataModels: [BadgeTableViewCellDataModelProtocol], changeList: [NSIndexPath])

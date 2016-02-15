@@ -49,7 +49,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="aIK-XR-YEb" kind="presentation" id="D0K-OP-PXk"/>
+                                    <segue destination="aIK-XR-YEb" kind="presentation" id="PKO-YB-DrT"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -68,7 +68,7 @@
         <!--Navigation Controller-->
         <scene sceneID="TPy-XK-fzq">
             <objects>
-                <navigationController id="aIK-XR-YEb" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BadgeDetailViewControllerNavigationController" id="aIK-XR-YEb" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ydH-bi-ItQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -84,7 +84,7 @@
         <!--Challenge Patch-->
         <scene sceneID="b9J-sF-Svy">
             <objects>
-                <viewController id="00y-MY-uZM" customClass="BadgeDetailViewController" customModule="Badges" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BadgeDetailViewController" id="00y-MY-uZM" customClass="BadgeDetailViewController" customModule="Badges" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tMP-Fe-1qi"/>
                         <viewControllerLayoutGuide type="bottom" id="sM7-aE-ycB"/>

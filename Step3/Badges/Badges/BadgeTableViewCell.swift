@@ -10,6 +10,12 @@ import UIKit
 
 class BadgeTableViewCell: UITableViewCell
 {
+    var dataModel: BadgeTableViewCellDataModelProtocol? {
+        didSet {
+            _applyDataModel(dataModel)
+        }
+    }
+
     static var reuseIdentifier: String {
         get {
             return "\(self)"
@@ -24,8 +30,7 @@ class BadgeTableViewCell: UITableViewCell
     
     override func prepareForReuse()
     {
-        let model = PartialDataModel.emptyModel()
-        applyDataModel(model)
+        dataModel = PartialDataModel.emptyModel()
     }
 }
 
@@ -70,9 +75,9 @@ extension BadgeTableViewCell
         }
     }
     
-    func applyDataModel(model: BadgeTableViewCellDataModelProtocol)
+    private func _applyDataModel(model: BadgeTableViewCellDataModelProtocol?)
     {
-        textLabel?.text = model.title
-        imageView?.image = model.image
+        textLabel?.text = model?.title
+        imageView?.image = model?.image
     }
 }
