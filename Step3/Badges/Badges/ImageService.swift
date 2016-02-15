@@ -17,6 +17,7 @@ class ImageService
 
     init(resourceService: ResourceService)
     {
+        debugPrint("ImageService.init(), url: \(resourceService.url)")
         self.resourceService = resourceService
     }
     

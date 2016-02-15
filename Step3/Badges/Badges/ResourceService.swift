@@ -15,8 +15,11 @@ class ResourceService
     typealias ResourceServiceResult = Result<NSData, ResourceService.Error>
     typealias ResourceServiceClosure = (ResourceServiceResult)->()
     
+    let url: NSURL
+
     init(url: NSURL)
     {
+        debugPrint("ResourceService.init(\(url))")
         self.url = url
     }
     
@@ -33,6 +36,8 @@ class ResourceService
         let subscription = Subscription(closure: closure)
         _addSubscriber(weakSubscriber, subscription: subscription)
         
+        debugPrint("ResourceService.subscribe: subscriber count = \(subscriptions.count) (url: \(url.path?.componentsSeparatedByString("/").last))")
+
         if let cache = cache
         {
             closure(cache)
@@ -95,7 +100,6 @@ class ResourceService
         }
     }
     
-    private let url: NSURL
     private var subscriptions = [Subscriber: Subscription]()
     private var requestInFlight = false
     private var cache: ResourceServiceResult?

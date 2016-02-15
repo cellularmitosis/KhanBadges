@@ -175,11 +175,15 @@ extension BadgeTableViewController
 
         func shouldFetchImageAtIndexPath(indexPath: NSIndexPath)
         {
+            debugPrint("shouldFetchImageAtIndexPath \(indexPath.row)")
+            
             guard let dto = dtos.get(indexPath.row) else { return }
             
             let url = dto.iconUrl
             let imageService = serviceRepository.imageServiceForURL(url: url)
-            imageService.subscribeAsync(subscriber: self) { [weak self] (result) -> () in
+            imageServices[indexPath] = imageService
+            
+            imageService.subscribeAsync(subscriber: indexPath) { [weak self] (result) -> () in
                 
                 guard
                     let weakSelf = self,
@@ -204,30 +208,11 @@ extension BadgeTableViewController
                     image: image)
 
                 trimmedModels.insert(completeModel, atIndex: indexPath.row)
-                
-                debugPrint("--- shouldFetchImageAtIndexPath -----------------------------------------")
-                debugPrint("old dataModels:")
-                debugPrint(" 0: \(weakSelf.dataModels.get(0)?.title)")
-                debugPrint(" 1: \(weakSelf.dataModels.get(1)?.title)")
-                debugPrint(" 2: \(weakSelf.dataModels.get(2)?.title)")
-                debugPrint(" 3: \(weakSelf.dataModels.get(3)?.title)")
-                debugPrint(" 4: \(weakSelf.dataModels.get(4)?.title)")
-                debugPrint(" 5: \(weakSelf.dataModels.get(5)?.title)")
-                
                 weakSelf.dataModels = trimmedModels
-
-                debugPrint("new dataModels:")
-                debugPrint(" 0: \(weakSelf.dataModels.get(0)?.title)")
-                debugPrint(" 1: \(weakSelf.dataModels.get(1)?.title)")
-                debugPrint(" 2: \(weakSelf.dataModels.get(2)?.title)")
-                debugPrint(" 3: \(weakSelf.dataModels.get(3)?.title)")
-                debugPrint(" 4: \(weakSelf.dataModels.get(4)?.title)")
-                debugPrint(" 5: \(weakSelf.dataModels.get(5)?.title)")
-                debugPrint("--- end shouldFetchImageAtIndexPath -----------------------------------------")
 
                 closure((dataModels: weakSelf.dataModels, changeList: [indexPath]))
                 
-                // FIXME unsubscribe after you get the image
+                weakSelf.imageServices[indexPath]?.unsubscribe(subscriber: indexPath)
             }
         }
         
@@ -236,6 +221,7 @@ extension BadgeTableViewController
         private var dataModels: [BadgeTableViewCellDataModelProtocol]
         private let serviceRepository: ServiceRepository
         private var closure: CellDataModelSetClosure?
+        private var imageServices = [NSIndexPath: ImageService]()
         
         private func _extractPartialDataModelForDTO(dto: BadgeDTO) -> (BadgeTableViewCell.PartialDataModel, [BadgeTableViewCellDataModelProtocol])?
         {
@@ -341,32 +327,15 @@ extension BadgeTableViewController
             let oldCount = self.dataModels.count
             let newCount = dataModels.count
             
-            debugPrint("--- _dataDidArrive -----------------------------------------")
-            debugPrint("old dataModels:")
-            debugPrint(" 0: \(self.dataModels.get(0)?.title)")
-            debugPrint(" 1: \(self.dataModels.get(1)?.title)")
-            debugPrint(" 2: \(self.dataModels.get(2)?.title)")
-            debugPrint(" 3: \(self.dataModels.get(3)?.title)")
-            debugPrint(" 4: \(self.dataModels.get(4)?.title)")
-            debugPrint(" 5: \(self.dataModels.get(5)?.title)")
-            
             self.dataModels = dataModels
 
-            debugPrint("new dataModels:")
-            debugPrint(" 0: \(self.dataModels.get(0)?.title)")
-            debugPrint(" 1: \(self.dataModels.get(1)?.title)")
-            debugPrint(" 2: \(self.dataModels.get(2)?.title)")
-            debugPrint(" 3: \(self.dataModels.get(3)?.title)")
-            debugPrint(" 4: \(self.dataModels.get(4)?.title)")
-            debugPrint(" 5: \(self.dataModels.get(5)?.title)")
-            debugPrint("--- end _dataDidArrive -----------------------------------------")
-            
             guard oldCount == newCount else
             {
                 tableView?.reloadData()
                 return
             }
             
+            debugPrint("reloadRowsAtIndexPaths: \(changeList[0].row)")
             tableView?.reloadRowsAtIndexPaths(changeList, withRowAnimation: UITableViewRowAnimation.Fade)
         }
     }
