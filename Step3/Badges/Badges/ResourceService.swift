@@ -8,72 +8,6 @@
 
 import UIKit
 
-class ServiceRepository
-{
-    // MARK: public interface
-    
-    static let sharedInstance = ServiceRepository()
-    
-    func resourceServiceForURL(url url: NSURL) -> ResourceService
-    {
-        if let service = resourceServices[url]
-        {
-            return service
-        }
-        else
-        {
-            let service = ResourceService(url: url)
-            resourceServices[url] = service
-            return service
-        }
-    }
-    
-    func imageServiceForURL(url url: NSURL) -> ImageService
-    {
-        if let service = imageServices[url]
-        {
-            return service
-        }
-        else
-        {
-            let resourceService = resourceServiceForURL(url: url)
-            let imageService = ImageService(resourceService: resourceService)
-            imageServices[url] = imageService
-            return imageService
-        }
-    }
-    
-    func didReceiveMemoryWarning()
-    {
-        resourceServices.forEach { (url, service) -> () in
-            if service.subscriberCount() == 0
-            {
-                resourceServices.removeValueForKey(url)
-            }
-            else
-            {
-                service.didReceiveMemoryWarning()
-            }
-        }
-        
-        imageServices.forEach { (url, service) -> () in
-            if service.subscriberCount() == 0
-            {
-                imageServices.removeValueForKey(url)
-            }
-            else
-            {
-                service.didReceiveMemoryWarning()
-            }
-        }
-    }
-    
-    // MARK: private implementation
-    
-    private var resourceServices = [NSURL: ResourceService]()
-    private var imageServices = [NSURL: ImageService]()
-}
-
 class ResourceService
 {
     // MARK: public interface
@@ -160,7 +94,11 @@ class ResourceService
     private var subscriptions = [Subscriber: Subscription]()
     private var requestInFlight = false
     private var cache: ResourceServiceResult?
-    
+}
+
+// MARK: private methods
+extension ResourceService
+{
     private func _addSubscriber(subscriber: Subscriber, subscription: Subscription)
     {
         subscriptions[subscriber] = subscription

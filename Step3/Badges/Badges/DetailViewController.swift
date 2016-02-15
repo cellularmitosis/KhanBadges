@@ -47,6 +47,7 @@ class DetailViewController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        FakeAnalytics.recordEvent("DetailViewController.viewDidLoad")
         
         applyDataModel(dataModel)
         applyStyleModel(styleModel)
@@ -106,7 +107,7 @@ extension DetailViewController
         imageView.image = model.image
         
         self.view.layoutIfNeeded()
-    }
+    }    
 }
 
 extension DetailViewController
@@ -243,6 +244,7 @@ extension DetailViewController
     }
 }
 
+// Note: pulling this out into its own file causes the Swift compiler to segfault.
 extension DetailViewController
 {
     typealias DataModelClosure = (DataModel)->()
@@ -260,7 +262,7 @@ extension DetailViewController
         func subscribeImmediate(dataDidBecomeAvailableClosure: DataModelClosure)
         {
             closure = dataDidBecomeAvailableClosure
-
+            
             if imageService.cachedValue == nil
             {
                 // If imageService doesn't have a cached value, then imageService.subscribeImmediate()
@@ -280,7 +282,7 @@ extension DetailViewController
                 weakSelf.closure?(weakSelf.latestModel)
             }
         }
-    
+        
         func unsubscribe()
         {
             imageService.unsubscribe(subscriber: self)
@@ -304,6 +306,6 @@ extension DetailViewController
                 )
             }
         }
-
+        
     }
 }
