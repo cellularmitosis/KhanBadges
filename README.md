@@ -305,7 +305,7 @@ It turns out this programming challenge is well suited to attempting this, becau
 * No authentication is needed
 * Everything is a GET request
 
-## Retrying failed requests
+## Recovering from failed requests
 
 Because all of views in the app are driven by "subscription"-based data, it is relatively easy to have the entire app fill in missing pieces by retrying failed requests, either when the app resumes from background, or when the networking becomes available again (by pulling in [Reachability.swift](https://github.com/ashleymills/Reachability.swift)).
 
