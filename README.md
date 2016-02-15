@@ -299,3 +299,8 @@ It turns out this programming challenge is well suited to attempting this, becau
 * No authentication is needed
 * Everything is a GET request
 
+## Reachability support
+
+By pulling in [Reachability.swift](https://github.com/ashleymills/Reachability.swift), we can easily add support for automatically retrying previously failed requests when the network becomes available again:
+
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/reachability.gif?token=AANopApW97KmLdQjBOOqvI3e9HqJlygpks5Wy5HjwA%3D%3D)
