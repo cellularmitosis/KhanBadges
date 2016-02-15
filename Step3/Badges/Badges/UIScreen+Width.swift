@@ -13,6 +13,6 @@ extension UIScreen
     class func width() -> CGFloat
     {
         // Note: this will return e.g. 320 regardless of what orientation the phone is currently held.
-        return UIScreen.mainScreen().bounds.size.width
+        return min(UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height)
     }
 }

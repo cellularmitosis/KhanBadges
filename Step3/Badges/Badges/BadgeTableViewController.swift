@@ -49,6 +49,8 @@ class BadgeTableViewController: UITableViewController
         _applyDataSourceService()
         _applyDataSource()
     }
+
+    // MARK: private implementation
     
     private func _presentDetailController(indexPath: NSIndexPath)
     {
@@ -71,8 +73,6 @@ class BadgeTableViewController: UITableViewController
         
         presentViewController(navC, animated: true, completion: nil)
     }
-    
-    // MARK: private implementation
     
     private func _applyDataSourceServiceIfViewLoaded()
     {
