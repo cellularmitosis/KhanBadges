@@ -135,6 +135,7 @@ class BadgeTableViewController: UITableViewController
 
 struct BadgeDTO
 {
+    let name: String
     let translated_description: String
     let translated_safe_extended_description: String
     let iconUrl: NSURL
@@ -203,7 +204,26 @@ extension BadgeTableViewController
                     image: image)
 
                 trimmedModels.insert(completeModel, atIndex: indexPath.row)
+                
+                debugPrint("--- shouldFetchImageAtIndexPath -----------------------------------------")
+                debugPrint("old dataModels:")
+                debugPrint(" 0: \(weakSelf.dataModels.get(0)?.title)")
+                debugPrint(" 1: \(weakSelf.dataModels.get(1)?.title)")
+                debugPrint(" 2: \(weakSelf.dataModels.get(2)?.title)")
+                debugPrint(" 3: \(weakSelf.dataModels.get(3)?.title)")
+                debugPrint(" 4: \(weakSelf.dataModels.get(4)?.title)")
+                debugPrint(" 5: \(weakSelf.dataModels.get(5)?.title)")
+                
                 weakSelf.dataModels = trimmedModels
+
+                debugPrint("new dataModels:")
+                debugPrint(" 0: \(weakSelf.dataModels.get(0)?.title)")
+                debugPrint(" 1: \(weakSelf.dataModels.get(1)?.title)")
+                debugPrint(" 2: \(weakSelf.dataModels.get(2)?.title)")
+                debugPrint(" 3: \(weakSelf.dataModels.get(3)?.title)")
+                debugPrint(" 4: \(weakSelf.dataModels.get(4)?.title)")
+                debugPrint(" 5: \(weakSelf.dataModels.get(5)?.title)")
+                debugPrint("--- end shouldFetchImageAtIndexPath -----------------------------------------")
 
                 closure((dataModels: weakSelf.dataModels, changeList: [indexPath]))
                 
@@ -224,7 +244,7 @@ extension BadgeTableViewController
             let trimmedDataModels = dataModels.filter({ (model) -> Bool in
                 
                 if let partialModel = model as? BadgeTableViewCell.PartialDataModel
-                    where partialModel.title == dto.translated_description
+                    where partialModel.id == dto.name
                 {
                     extractedModel = partialModel
                     return false
@@ -300,6 +320,8 @@ extension BadgeTableViewController
                 dataModelsService.shouldFetchImageAtIndexPath(indexPath)
             }
             
+            debugPrint("willDisplay row \(indexPath.row), title: \(model.title)")
+            
             badgeCell.dataModel = model
         }
         
@@ -319,7 +341,25 @@ extension BadgeTableViewController
             let oldCount = self.dataModels.count
             let newCount = dataModels.count
             
+            debugPrint("--- _dataDidArrive -----------------------------------------")
+            debugPrint("old dataModels:")
+            debugPrint(" 0: \(self.dataModels.get(0)?.title)")
+            debugPrint(" 1: \(self.dataModels.get(1)?.title)")
+            debugPrint(" 2: \(self.dataModels.get(2)?.title)")
+            debugPrint(" 3: \(self.dataModels.get(3)?.title)")
+            debugPrint(" 4: \(self.dataModels.get(4)?.title)")
+            debugPrint(" 5: \(self.dataModels.get(5)?.title)")
+            
             self.dataModels = dataModels
+
+            debugPrint("new dataModels:")
+            debugPrint(" 0: \(self.dataModels.get(0)?.title)")
+            debugPrint(" 1: \(self.dataModels.get(1)?.title)")
+            debugPrint(" 2: \(self.dataModels.get(2)?.title)")
+            debugPrint(" 3: \(self.dataModels.get(3)?.title)")
+            debugPrint(" 4: \(self.dataModels.get(4)?.title)")
+            debugPrint(" 5: \(self.dataModels.get(5)?.title)")
+            debugPrint("--- end _dataDidArrive -----------------------------------------")
             
             guard oldCount == newCount else
             {
@@ -383,6 +423,7 @@ extension BadgeTableViewController
                     
                     guard
                         let jsonDict = object as? [String:AnyObject],
+                        let name: String = jsonDict["name"] as? String,
                         let translated_description: String = jsonDict["translated_description"] as? String,
                         let translated_safe_extended_description: String = jsonDict["translated_safe_extended_description"] as? String,
                         let iconUrlStrings: [String: String] = jsonDict["icons"] as? [String:String],
@@ -394,6 +435,7 @@ extension BadgeTableViewController
                     }
                     
                     let dto = BadgeDTO(
+                        name: name,
                         translated_description: translated_description,
                         translated_safe_extended_description: translated_safe_extended_description,
                         iconUrl: iconUrl)

@@ -44,32 +44,37 @@ extension BadgeTableViewCell
 {
     struct PartialDataModel: BadgeTableViewCellDataModelProtocol
     {
+        let id: String
         let title: String
         let image: UIImage = { UIImage(named: "question_mark.png")! }()
         
-        init(title: String)
+        init(id: String, title: String)
         {
+            self.id = id
             self.title = title
         }
         
         init(dto: BadgeDTO)
         {
+            self.id = dto.name
             self.title = dto.translated_description
         }
         
         static func emptyModel() -> PartialDataModel
         {
-            return PartialDataModel(title: "")
+            return PartialDataModel(id: "", title: "")
         }
     }
     
     struct CompleteDataModel: BadgeTableViewCellDataModelProtocol
     {
+        let id: String
         let title: String
         let image: UIImage
         
         init(partialModel: PartialDataModel, image: UIImage)
         {
+            self.id = partialModel.id
             self.title = partialModel.title
             self.image = image
         }
