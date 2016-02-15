@@ -80,7 +80,7 @@ class ListController: UITableViewController
             }
         }
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = json?.count ?? 0
         return count

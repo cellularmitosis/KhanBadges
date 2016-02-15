@@ -68,6 +68,11 @@ class DetailViewController: UIViewController
         dataService?.unsubscribe()
     }
     
+    deinit
+    {
+        debugPrint("\(self): \(__FUNCTION__)")
+    }
+    
     @IBAction func dismiss(sender: AnyObject?)
     {
         self.parentViewController!.dismissViewControllerAnimated(true, completion: nil)

@@ -20,6 +20,11 @@ class ImageService
         self.resourceService = resourceService
     }
     
+    deinit
+    {
+        debugPrint("\(self): \(__FUNCTION__)")
+    }
+
     func subscribeImmediate(subscriber subscriber: AnyObject, closure: ImageServiceClosure)
     {
         resourceService.subscribeImmediate(subscriber: subscriber, closure: { (result)->() in

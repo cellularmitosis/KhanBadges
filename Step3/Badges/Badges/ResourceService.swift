@@ -20,6 +20,11 @@ class ResourceService
         self.url = url
     }
     
+    deinit
+    {
+        debugPrint("\(self): \(__FUNCTION__)")
+    }
+    
     func subscribeImmediate(subscriber subscriber: AnyObject, closure: ResourceServiceClosure)
     {
         assert(NSThread.isMainThread())
