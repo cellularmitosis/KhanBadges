@@ -8,32 +8,58 @@
 
 import UIKit
 
-class ResourceServiceRepository
+class ServiceRepository
 {
     // MARK: public interface
     
-    static let sharedInstance = ResourceServiceRepository()
+    static let sharedInstance = ServiceRepository()
     
-    func serviceForURL(url url: NSURL) -> ResourceService
+    func resourceServiceForURL(url url: NSURL) -> ResourceService
     {
-        if let service = services[url]
+        if let service = resourceServices[url]
         {
             return service
         }
         else
         {
             let service = ResourceService(url: url)
-            services[url] = service
+            resourceServices[url] = service
             return service
+        }
+    }
+    
+    func imageServiceForURL(url url: NSURL) -> ImageService
+    {
+        if let service = imageServices[url]
+        {
+            return service
+        }
+        else
+        {
+            let resourceService = resourceServiceForURL(url: url)
+            let imageService = ImageService(resourceService: resourceService)
+            imageServices[url] = imageService
+            return imageService
         }
     }
     
     func didReceiveMemoryWarning()
     {
-        services.forEach { (url, service) -> () in
+        resourceServices.forEach { (url, service) -> () in
             if service.subscriberCount() == 0
             {
-                services.removeValueForKey(url)
+                resourceServices.removeValueForKey(url)
+            }
+            else
+            {
+                service.didReceiveMemoryWarning()
+            }
+        }
+        
+        imageServices.forEach { (url, service) -> () in
+            if service.subscriberCount() == 0
+            {
+                imageServices.removeValueForKey(url)
             }
             else
             {
@@ -44,7 +70,8 @@ class ResourceServiceRepository
     
     // MARK: private implementation
     
-    private var services = [NSURL: ResourceService]()
+    private var resourceServices = [NSURL: ResourceService]()
+    private var imageServices = [NSURL: ImageService]()
 }
 
 class ResourceService
@@ -82,6 +109,12 @@ class ResourceService
         assert(NSThread.isMainThread())
         let weakSubscriber = unsafeAddressOf(subscriber)
         _removeSubscriber(weakSubscriber)
+    }
+    
+    var cachedValue: NSData? {
+        get {
+            return cache?.value
+        }
     }
     
     enum Error: ErrorType
@@ -146,8 +179,9 @@ class ResourceService
             
             _startNewRequest({ [weak self] (result) -> () in
                 guard let weakSelf = self else { return }
+                weakSelf.requestInFlight = false
                 weakSelf._requestDidFinish(result)
-                })
+            })
         }
     }
     

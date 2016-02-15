@@ -56,7 +56,7 @@ class DetailViewController: UIViewController
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        dataService?.subscribe { (model) -> () in
+        dataService?.subscribeImmediate { (model) -> () in
             self.dataModel = model
         }
     }
@@ -249,40 +249,41 @@ extension DetailViewController
     
     class DataModelService
     {
-        init(title: String, description: String, imageUrlString: String, imageService: ImageService)
+        init(title: String, description: String, imageService: ImageService)
         {
             self.title = title
             self.description = description
-            self.image = DataModel.defaultModel().image
-            self.imageUrlString = imageUrlString
             self.imageService = imageService
-            
-            if let cachedImage = imageService.cachedImage(urlString: imageUrlString)
-            {
-                self.image = cachedImage
-            }
-            else
-            {
-                imageService.fetch(urlString: imageUrlString, completion: { [weak self] (result) -> () in
-                    guard let weakSelf = self else { return }
-                    
-                    if case .Success(let fetchedImage) = result
-                    {
-                        weakSelf.image = fetchedImage
-                        weakSelf.closure?(weakSelf.latestModel)
-                    }
-                })
-            }
+            self.image = DataModel.defaultModel().image
         }
         
-        func subscribe(dataDidBecomeAvailableClosure: DataModelClosure)
+        func subscribeImmediate(dataDidBecomeAvailableClosure: DataModelClosure)
         {
             closure = dataDidBecomeAvailableClosure
-            closure?(latestModel)
+
+            if imageService.cachedValue == nil
+            {
+                // If imageService doesn't have a cached value, then imageService.subscribeImmediate()
+                // might take a while to return something.
+                // In the mean time, call the closure immediately with the default (placeholder) image.
+                closure?(latestModel)
+            }
+            
+            imageService.subscribeImmediate(subscriber: self) { [weak self] (result) -> () in
+                guard let weakSelf = self else { return }
+                
+                if case .Success(let image) = result
+                {
+                    weakSelf.image = image
+                }
+                
+                weakSelf.closure?(weakSelf.latestModel)
+            }
         }
-        
+    
         func unsubscribe()
         {
+            imageService.unsubscribe(subscriber: self)
             closure = nil
         }
         
@@ -292,7 +293,6 @@ extension DetailViewController
         private var description: String
         
         private var image: UIImage
-        private let imageUrlString: String
         private let imageService: ImageService
         
         private var latestModel: DataModel {

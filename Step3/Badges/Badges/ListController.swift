@@ -58,24 +58,29 @@ class ListController: UITableViewController
         
         let iconUrlStrings: [String:String] = dict["icons"] as! [String:String]
         let urlString = iconUrlStrings["large"]!
+        let url = NSURL(string: urlString)!
         
-        if let icon = ImageService.sharedInstance.cachedImage(urlString: urlString)
+        let imageService = ServiceRepository.sharedInstance.imageServiceForURL(url: url)
+        
+        if let cachedImage = imageService.cachedValue
         {
-            cell.imageView?.image = icon
+            cell.imageView?.image = cachedImage
         }
         else
         {
-            ImageService.sharedInstance.fetch(urlString: urlString, completion: { [weak self] (result) -> () in
-                guard let weakSelf = self else { return }
+            // we use subscribeAsync to guarantee we don't get an immediate return.
+            // if we did, reloadRowsAtIndexPaths would crash the app.
+            imageService.subscribeAsync(subscriber: self) { [weak tableView] (result) -> () in
+                guard let weakTableView = tableView else { return }
                 
                 if case .Success(_) = result
                 {
-                    weakSelf.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+                    weakTableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
                 }
-            })
+            }
         }
     }
-    
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = json?.count ?? 0
         return count
@@ -95,12 +100,14 @@ class ListController: UITableViewController
 
         let iconUrlStrings: [String:String] = dict["icons"] as! [String:String]
         let urlString = iconUrlStrings["large"]!
+        let url = NSURL(string: urlString)!
+        
+        let imageService = ServiceRepository.sharedInstance.imageServiceForURL(url: url)
 
         let service = DetailViewController.DataModelService(
             title: title,
             description: description,
-            imageUrlString: urlString,
-            imageService: ImageService.sharedInstance)
+            imageService: imageService)
         
         detailVC.dataService = service
     }

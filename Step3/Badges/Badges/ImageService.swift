@@ -17,12 +17,12 @@ class ImageService
 
     init(resourceService: ResourceService)
     {
-        self.service = resourceService
+        self.resourceService = resourceService
     }
     
     func subscribeImmediate(subscriber subscriber: AnyObject, closure: ImageServiceClosure)
     {
-        service.subscribeImmediate(subscriber: subscriber, closure: { (result)->() in
+        resourceService.subscribeImmediate(subscriber: subscriber, closure: { (result)->() in
 
             switch result
             {
@@ -45,9 +45,26 @@ class ImageService
         })
     }
     
+    func subscribeAsync(subscriber subscriber: AnyObject, closure: ImageServiceClosure)
+    {
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self.subscribeImmediate(subscriber: subscriber, closure: closure)
+        }
+    }
+    
     func unsubscribe(subscriber subscriber: AnyObject)
     {
-        service.unsubscribe(subscriber: subscriber)
+        resourceService.unsubscribe(subscriber: subscriber)
+    }
+    
+    var cachedValue: UIImage? {
+        get {
+            guard let data = resourceService.cachedValue else
+            {
+                return nil
+            }
+            return UIImage(data: data)
+        }
     }
     
     enum Error: ErrorType
@@ -56,7 +73,19 @@ class ImageService
         case ResourceServiceFailed(error: ResourceService.Error)
     }
 
+    // MARK: maintenance interface
+    
+    func didReceiveMemoryWarning()
+    {
+        // empty for now.  perhaps we will add non-computed cache later.
+    }
+    
+    func subscriberCount() -> Int
+    {
+        return resourceService.subscriberCount()
+    }
+    
     // MARK: private implementation
     
-    private let service: ResourceService
+    private let resourceService: ResourceService
 }

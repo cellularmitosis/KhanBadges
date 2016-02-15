@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidReceiveMemoryWarning(application: UIApplication) {
-        ResourceServiceRepository.sharedInstance.didReceiveMemoryWarning()
+        ServiceRepository.sharedInstance.didReceiveMemoryWarning()
     }
 }
 
