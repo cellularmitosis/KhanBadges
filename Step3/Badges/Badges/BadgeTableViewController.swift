@@ -8,13 +8,6 @@
 
 import UIKit
 
-struct BadgeDTO
-{
-    let translated_description: String
-    let translated_safe_extended_description: String
-    let iconUrl: NSURL
-}
-
 class BadgeTableViewController: UITableViewController
 {
     var dataSourceService: DataSourceService? {
@@ -98,85 +91,17 @@ class BadgeTableViewController: UITableViewController
     }
 }
 
-extension Array
+struct BadgeDTO
 {
-    func get(index: Int) -> Element?
-    {
-        guard index < count else { return nil }
-        
-        return self[index]
-    }
-}
-
-class BadgeTableViewDataSource: NSObject, UITableViewDataSource, UITableViewDelegate
-{
-    // MARK: public interface
-    
-    init(dataModelsService: BadgeTableViewController.CellDataModelSetService, tableView: UITableView)
-    {
-        self.dataModelsService = dataModelsService
-        self.tableView = tableView
-        
-        self.dataModelsService.subscribeImmediate { [weak self] (dataModels, changeList) -> () in
-            guard let weakSelf = self else { return }
-            
-            weakSelf._dataDidArrive(dataModels, changeList: changeList)
-        }
-    }
-    
-    deinit
-    {
-        self.dataModelsService.unsubscribe()
-    }
-
-    // MARK: table view methods
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        return dataModels.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
-    {
-        let cell = tableView.dequeueReusableCellWithIdentifier(BadgeTableViewCell.reuseIdentifier)!
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
-    {
-        guard
-            let model = dataModels.get(indexPath.row),
-            let badgeCell = cell as? BadgeTableViewCell
-        else
-        {
-            return
-        }
-        
-        if model is BadgeTableViewCell.PartialDataModel
-        {
-            dataModelsService.shouldFetchImageAtIndexPath(indexPath)
-        }
-        
-        badgeCell.applyDataModel(model)
-    }
-    
-    // MARK: private implementation
-    
-    private var dataModels = [BadgeTableViewCellDataModelProtocol]()
-    private let dataModelsService: BadgeTableViewController.CellDataModelSetService
-    private weak var tableView: UITableView?
-    
-    private func _dataDidArrive(dataModels: [BadgeTableViewCellDataModelProtocol], changeList: [NSIndexPath])
-    {
-        self.dataModels = dataModels
-        tableView?.reloadRowsAtIndexPaths(changeList, withRowAnimation: UITableViewRowAnimation.Fade)
-    }
+    let translated_description: String
+    let translated_safe_extended_description: String
+    let iconUrl: NSURL
 }
 
 extension BadgeTableViewController
 {
     typealias CellDataModelSetClosure = ((dataModels: [BadgeTableViewCellDataModelProtocol], changeList: [NSIndexPath]))->()
-
+    
     class CellDataModelSetService
     {
         private let dtos: [BadgeDTO]
@@ -188,7 +113,7 @@ extension BadgeTableViewController
         
         func subscribeImmediate(dataDidUpdateClosure: CellDataModelSetClosure)
         {
-
+            
         }
         
         func unsubscribe()
@@ -199,6 +124,74 @@ extension BadgeTableViewController
         func shouldFetchImageAtIndexPath(indexPath: NSIndexPath)
         {
             
+        }
+    }
+}
+
+extension BadgeTableViewController
+{
+    class DataSource: NSObject, UITableViewDataSource, UITableViewDelegate
+    {
+        // MARK: public interface
+        
+        init(dataModelsService: BadgeTableViewController.CellDataModelSetService, tableView: UITableView)
+        {
+            self.dataModelsService = dataModelsService
+            self.tableView = tableView
+            
+            self.dataModelsService.subscribeImmediate { [weak self] (dataModels, changeList) -> () in
+                guard let weakSelf = self else { return }
+                
+                weakSelf._dataDidArrive(dataModels, changeList: changeList)
+            }
+        }
+        
+        deinit
+        {
+            self.dataModelsService.unsubscribe()
+        }
+        
+        // MARK: table view methods
+        
+        func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+        {
+            return dataModels.count
+        }
+        
+        func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+        {
+            let cell = tableView.dequeueReusableCellWithIdentifier(BadgeTableViewCell.reuseIdentifier)!
+            return cell
+        }
+        
+        func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+        {
+            guard
+                let model = dataModels.get(indexPath.row),
+                let badgeCell = cell as? BadgeTableViewCell
+                else
+            {
+                return
+            }
+            
+            if model is BadgeTableViewCell.PartialDataModel
+            {
+                dataModelsService.shouldFetchImageAtIndexPath(indexPath)
+            }
+            
+            badgeCell.applyDataModel(model)
+        }
+        
+        // MARK: private implementation
+        
+        private var dataModels = [BadgeTableViewCellDataModelProtocol]()
+        private let dataModelsService: BadgeTableViewController.CellDataModelSetService
+        private weak var tableView: UITableView?
+        
+        private func _dataDidArrive(dataModels: [BadgeTableViewCellDataModelProtocol], changeList: [NSIndexPath])
+        {
+            self.dataModels = dataModels
+            tableView?.reloadRowsAtIndexPaths(changeList, withRowAnimation: UITableViewRowAnimation.Fade)
         }
     }
 }
