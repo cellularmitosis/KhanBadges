@@ -104,26 +104,93 @@ extension BadgeTableViewController
     
     class CellDataModelSetService
     {
-        private let dtos: [BadgeDTO]
+        private var dtos: [BadgeDTO]
+        private var dataModels: [BadgeTableViewCellDataModelProtocol]
+        private let serviceRepository: ServiceRepository
+        private var closure: CellDataModelSetClosure?
         
-        init(dtos: [BadgeDTO])
+        init(dtos: [BadgeDTO], serviceRepository: ServiceRepository)
         {
             self.dtos = dtos
+            
+            self.dataModels = dtos.map({ (dto) -> BadgeTableViewCellDataModelProtocol in
+                return BadgeTableViewCell.PartialDataModel(dto: dto)
+            })
+            
+            self.serviceRepository = serviceRepository
         }
         
         func subscribeImmediate(dataDidUpdateClosure: CellDataModelSetClosure)
         {
-            
+            closure = dataDidUpdateClosure
         }
         
         func unsubscribe()
         {
-            
+            closure = nil
         }
-        
+
         func shouldFetchImageAtIndexPath(indexPath: NSIndexPath)
         {
+            guard let dto = dtos.get(indexPath.row) else { return }
             
+            let url = dto.iconUrl
+            let imageService = serviceRepository.imageServiceForURL(url: url)
+            imageService.subscribeAsync(subscriber: self) { [weak self] (result) -> () in
+                
+                guard
+                    let weakSelf = self,
+                    let closure = weakSelf.closure,
+                    case .Success(let image) = result
+                else
+                {
+                    return
+                }
+
+                // FIXME I want this:
+                //
+                //   guard (let a, var b) = foo()
+                //
+                // but the compiler doesn't like it.
+                // what's the closest I can get to that?
+                
+                guard var (partialModel, trimmedModels) = weakSelf._extractPartialDataModelForDTO(dto) else { return }
+
+                let completeModel = BadgeTableViewCell.CompleteDataModel(
+                    partialModel: partialModel,
+                    image: image)
+
+                trimmedModels.append(completeModel)
+                weakSelf.dataModels = trimmedModels
+                
+                closure((dataModels: weakSelf.dataModels, changeList: [indexPath]))
+                
+                // FIXME unsubscribe after you get the image
+            }
+        }
+        
+        private func _extractPartialDataModelForDTO(dto: BadgeDTO) -> (BadgeTableViewCell.PartialDataModel, [BadgeTableViewCellDataModelProtocol])?
+        {
+            var extractedModel: BadgeTableViewCell.PartialDataModel?
+            
+            let trimmedDataModels = dataModels.filter({ (model) -> Bool in
+                
+                if let partialModel = model as? BadgeTableViewCell.PartialDataModel
+                    where partialModel.title == dto.translated_description
+                {
+                    extractedModel = partialModel
+                    return false
+                }
+                else
+                {
+                    return true
+                }
+                
+            })
+
+            guard let model = extractedModel else { return nil }
+            
+            return (model, trimmedDataModels)
         }
     }
 }

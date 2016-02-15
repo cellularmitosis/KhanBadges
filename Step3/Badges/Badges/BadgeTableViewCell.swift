@@ -47,16 +47,27 @@ extension BadgeTableViewCell
             self.title = title
         }
         
+        init(dto: BadgeDTO)
+        {
+            self.title = dto.translated_description
+        }
+        
         static func emptyModel() -> PartialDataModel
         {
             return PartialDataModel(title: "")
         }
     }
     
-    struct CompleteDataModel
+    struct CompleteDataModel: BadgeTableViewCellDataModelProtocol
     {
         let title: String
         let image: UIImage
+        
+        init(partialModel: PartialDataModel, image: UIImage)
+        {
+            self.title = partialModel.title
+            self.image = image
+        }
     }
     
     func applyDataModel(model: BadgeTableViewCellDataModelProtocol)
