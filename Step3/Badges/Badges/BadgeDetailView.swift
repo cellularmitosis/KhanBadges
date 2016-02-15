@@ -18,9 +18,6 @@ class BadgeDetailView: UIView
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewVerticallyCenteredConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var titleToImageVerticalSpacingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageToDescriptionVerticalSpacingConstraint: NSLayoutConstraint!
-    
     @IBOutlet var verticalPaddingConstraints: [NSLayoutConstraint]!
     @IBOutlet var horizontalPaddingConstraints: [NSLayoutConstraint]!
     @IBOutlet var verticalGutterConstraints: [NSLayoutConstraint]!

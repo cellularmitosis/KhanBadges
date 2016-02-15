@@ -89,7 +89,7 @@
                         <viewControllerLayoutGuide type="top" id="tMP-Fe-1qi"/>
                         <viewControllerLayoutGuide type="bottom" id="sM7-aE-ycB"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Uyh-FP-HGb">
+                    <view key="view" contentMode="scaleToFill" id="Uyh-FP-HGb" customClass="BadgeDetailView" customModule="Badges" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -127,6 +127,22 @@
                             <constraint firstItem="2vH-F8-7A1" firstAttribute="leading" secondItem="Uyh-FP-HGb" secondAttribute="leading" constant="16" id="oDd-qk-heW"/>
                             <constraint firstAttribute="trailing" secondItem="2vH-F8-7A1" secondAttribute="trailing" constant="16" id="qTq-3b-ixd"/>
                         </constraints>
+                        <connections>
+                            <outlet property="descriptionLabel" destination="2vH-F8-7A1" id="7ZF-Px-hc1"/>
+                            <outlet property="imageView" destination="eEs-f0-0Oh" id="96m-8Y-QeN"/>
+                            <outlet property="imageViewHeightConstraint" destination="CV5-uQ-etP" id="LGY-Su-4kt"/>
+                            <outlet property="imageViewVerticallyCenteredConstraint" destination="ma3-f5-Igm" id="kEe-t8-glh"/>
+                            <outlet property="imageViewWidthConstraint" destination="ZJf-Az-Ck1" id="8Xq-ge-Zh3"/>
+                            <outlet property="titleLabel" destination="OVR-I9-HEG" id="gu7-qi-eKA"/>
+                            <outletCollection property="verticalPaddingConstraints" destination="cAf-dj-uek" collectionClass="NSMutableArray" id="7m9-MI-3Uz"/>
+                            <outletCollection property="verticalPaddingConstraints" destination="lPl-IL-GiS" collectionClass="NSMutableArray" id="KXX-Ib-gaZ"/>
+                            <outletCollection property="verticalGutterConstraints" destination="hz7-On-Adz" collectionClass="NSMutableArray" id="P8O-kU-4p5"/>
+                            <outletCollection property="verticalGutterConstraints" destination="QlP-0l-x42" collectionClass="NSMutableArray" id="sn6-ch-kxd"/>
+                            <outletCollection property="horizontalPaddingConstraints" destination="ika-5a-Ntd" collectionClass="NSMutableArray" id="8bi-qM-2as"/>
+                            <outletCollection property="horizontalPaddingConstraints" destination="qTq-3b-ixd" collectionClass="NSMutableArray" id="nIC-qp-Zbs"/>
+                            <outletCollection property="horizontalPaddingConstraints" destination="oDd-qk-heW" collectionClass="NSMutableArray" id="RlB-zk-jCw"/>
+                            <outletCollection property="horizontalPaddingConstraints" destination="JzH-M4-e8i" collectionClass="NSMutableArray" id="oOY-5g-eJs"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Challenge Patch" id="wQp-JS-wUf">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="cvb-uu-h90">
@@ -135,19 +151,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="descriptionLabel" destination="2vH-F8-7A1" id="hZB-IV-5fv"/>
-                        <outlet property="imageToDescriptionVerticalSpacingConstraint" destination="hz7-On-Adz" id="jM8-kX-LSR"/>
-                        <outlet property="imageView" destination="eEs-f0-0Oh" id="RaO-TP-54S"/>
-                        <outlet property="imageViewHeightConstraint" destination="CV5-uQ-etP" id="wfA-Bq-Idv"/>
-                        <outlet property="imageViewVerticallyCenteredConstraint" destination="ma3-f5-Igm" id="Att-FW-rjE"/>
-                        <outlet property="imageViewWidthConstraint" destination="ZJf-Az-Ck1" id="7RO-Nl-vTo"/>
-                        <outlet property="titleLabel" destination="OVR-I9-HEG" id="eBG-U4-BQ0"/>
-                        <outlet property="titleToImageVerticalSpacingConstraint" destination="QlP-0l-x42" id="ctg-hy-XXP"/>
-                        <outletCollection property="verticalPaddingConstraints" destination="cAf-dj-uek" collectionClass="NSMutableArray" id="FUQ-DP-rwW"/>
-                        <outletCollection property="verticalGutterConstraints" destination="hz7-On-Adz" collectionClass="NSMutableArray" id="AcA-sH-9iB"/>
-                        <outletCollection property="horizontalPaddingConstraints" destination="ika-5a-Ntd" collectionClass="NSMutableArray" id="bVl-4t-xvM"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hml-Ke-WYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
