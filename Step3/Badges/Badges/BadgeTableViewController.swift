@@ -8,11 +8,11 @@
 
 import UIKit
 
-struct BadgeJSONData
+struct BadgeDTO
 {
     let translated_description: String
     let translated_safe_extended_description: String
-    let iconUrlString: String
+    let iconUrl: NSURL
 }
 
 class BadgeTableViewCell: UITableViewCell
@@ -30,23 +30,32 @@ class BadgeTableViewCell: UITableViewCell
     }
 }
 
+protocol BadgeTableViewCellDataModelProtocol
+{
+    var title: String { get }
+    var image: UIImage { get }
+}
+
 extension BadgeTableViewCell
 {
-    struct DataModel
+    struct PartialDataModel: BadgeTableViewCellDataModelProtocol
     {
         let title: String
-        let image: UIImage
-        
-        static func defaultModel() -> DataModel
+        let image: UIImage = { UIImage(named: "question_mark.png")! }()
+
+        init(title: String)
         {
-            return DataModel(
-                title: "",
-                image: UIImage(named: "question_mark.png")!
-            )
+            self.title = title
         }
     }
     
-    func applyDataModel(model: DataModel)
+    struct CompleteDataModel
+    {
+        let title: String
+        let image: UIImage
+    }
+    
+    func applyDataModel(model: BadgeTableViewCellDataModelProtocol)
     {
         textLabel?.text = model.title
         imageView?.image = model.image
@@ -111,20 +120,20 @@ class BadgeTableViewController: UITableViewController
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        let cell = sender as! UITableViewCell
-        let navC = segue.destinationViewController as! UINavigationController
-        let detailVC = navC.topViewController as! BadgeDetailViewController
-
-        let title: String = cell.textLabel!.text!
-        
-        let indexPath = self.tableView.indexPathForCell(cell)!
+//        let cell = sender as! UITableViewCell
+//        let navC = segue.destinationViewController as! UINavigationController
+//        let detailVC = navC.topViewController as! BadgeDetailViewController
+//
+//        let title: String = cell.textLabel!.text!
+//        
+//        let indexPath = self.tableView.indexPathForCell(cell)!
 //        let dict: [String: AnyObject] = json![indexPath.row] as! [String: AnyObject]
 //        let description: String = dict["translated_safe_extended_description"] as! String
-
+//
 //        let iconUrlStrings: [String:String] = dict["icons"] as! [String:String]
 //        let urlString = iconUrlStrings["large"]!
 //        let url = NSURL(string: urlString)!
-        
+//        
 //        let imageService = ServiceRepository.sharedInstance.imageServiceForURL(url: url)
 //
 //        let service = BadgeDetailViewController.DataModelService(
@@ -140,13 +149,11 @@ extension BadgeTableViewController
 {
     class DataSource: NSObject, UITableViewDataSource, UITableViewDelegate
     {
-        private let jsonData: [BadgeJSONData]
-        private let serviceRepo: ServiceRepository
+        private let jsonData: [BadgeDTO]
         
-        init(jsonData: [BadgeJSONData], serviceRepo: ServiceRepository)
+        init(jsonData: [BadgeDTO])
         {
             self.jsonData = jsonData
-            self.serviceRepo = serviceRepo
         }
         
         func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -218,19 +225,57 @@ extension BadgeTableViewController
                 
                 guard
                     case .Success(let data) = result,
-                    let allBadgeDicts = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? [AnyObject]
+                    let maybeBadgeDicts: [AnyObject]? = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? [AnyObject],
+                    let allBadgeDicts = maybeBadgeDicts
                 else
                 {
                     return
                 }
 
-                let patchDicts = allBadgeDicts?.filter({ (element) -> Bool in
-                    return element["badge_category"] as! Int == 5
+                let patchDicts: [AnyObject] = allBadgeDicts.filter({ (dict) -> Bool in
+                    guard let category: Int = dict["badge_category"] as? Int else { return false }
+                    return category == 5
                 })
                 
+                var dtos = [BadgeDTO]()
+                patchDicts.forEach({ (object) -> () in
+                    
+                    guard
+                        let jsonDict = object as? [String:AnyObject],
+                        let translated_description: String = jsonDict["translated_description"] as? String,
+                        let translated_safe_extended_description: String = jsonDict["translated_safe_extended_description"] as? String,
+                        let iconUrlStrings: [String: String] = jsonDict["icons"] as? [String:String],
+                        let iconUrlString: String = iconUrlStrings["large"],
+                        let iconUrl: NSURL = NSURL(string: iconUrlString)
+                    else
+                    {
+                        return
+                    }
+                    
+                    let dto = BadgeDTO(
+                        translated_description: translated_description,
+                        translated_safe_extended_description: translated_safe_extended_description,
+                        iconUrl: iconUrl)
+                    
+                    dtos.append(dto)
+                })
                 
+                let dataSource = BadgeTableViewController.DataSource(jsonData: dtos)
                 
+                weakSelf.closure?(dataSource)
             }
+        }
+        
+        class DataSourceFactory
+        {
+            private let dtos: [BadgeDTO]
+            
+            init(dtos: [BadgeDTO])
+            {
+                self.dtos = dtos
+            }
+            
+            
         }
         
         func unsubscribe()
