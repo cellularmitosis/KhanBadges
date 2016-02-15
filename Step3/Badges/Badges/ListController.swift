@@ -90,7 +90,7 @@ class ListController: UITableViewController
         
         let cell = sender as! UITableViewCell
         let navC = segue.destinationViewController as! UINavigationController
-        let detailVC = navC.topViewController as! DetailViewController
+        let detailVC = navC.topViewController as! BadgeDetailViewController
 
         let title: String = cell.textLabel!.text!
         
@@ -104,7 +104,7 @@ class ListController: UITableViewController
         
         let imageService = ServiceRepository.sharedInstance.imageServiceForURL(url: url)
 
-        let service = DetailViewController.DataModelService(
+        let service = BadgeDetailViewController.DataModelService(
             title: title,
             description: description,
             imageService: imageService)

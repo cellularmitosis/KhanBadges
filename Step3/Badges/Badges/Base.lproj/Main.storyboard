@@ -84,7 +84,7 @@
         <!--Challenge Patch-->
         <scene sceneID="b9J-sF-Svy">
             <objects>
-                <viewController id="00y-MY-uZM" customClass="DetailViewController" customModule="Badges" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="00y-MY-uZM" customClass="BadgeDetailViewController" customModule="Badges" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tMP-Fe-1qi"/>
                         <viewControllerLayoutGuide type="bottom" id="sM7-aE-ycB"/>

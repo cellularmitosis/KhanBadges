@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  BadgeDetailViewController.swift
 //  Badges
 //
 //  Created by Pepas Personal on 2/11/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController
+class BadgeDetailViewController: UIViewController
 {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -79,7 +79,7 @@ class DetailViewController: UIViewController
     }
 }
 
-extension DetailViewController
+extension BadgeDetailViewController
 {
     struct DataModel
     {
@@ -115,7 +115,7 @@ extension DetailViewController
     }    
 }
 
-extension DetailViewController
+extension BadgeDetailViewController
 {
     struct LayoutModel
     {
@@ -197,7 +197,7 @@ extension DetailViewController
     }
 }
 
-extension DetailViewController
+extension BadgeDetailViewController
 {
     struct StyleModel
     {
@@ -250,7 +250,7 @@ extension DetailViewController
 }
 
 // Note: pulling this out into its own file causes the Swift compiler to segfault.
-extension DetailViewController
+extension BadgeDetailViewController
 {
     typealias DataModelClosure = (DataModel)->()
     
