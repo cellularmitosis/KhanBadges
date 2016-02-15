@@ -62,7 +62,7 @@ class BadgeTableViewController: UITableViewController
         
         let service = BadgeDetailViewController.DataModelService(
             title: dto.translated_description,
-            description: description,
+            description: dto.translated_safe_extended_description,
             imageService: imageService)
 
         let navC = BadgeDetailViewController.instantiateInNavigationControllerFromStoryboard()
