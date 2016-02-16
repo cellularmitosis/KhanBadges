@@ -90,7 +90,7 @@ Create a Minimum Viable Product.  This should be something just good enough to u
   * Just target one device width.
 * Keep the code cheap.
   * [MassiveViewController.](https://wififorce.files.wordpress.com/2009/04/badcable16.jpg?w=1200&h=)
-  * [No](https://www.youtube.com/watch?v=WpkDN78P884&t=40m5s) [unit tests](http://i.imgur.com/Mcwm5.jpg).
+  * [No unit](https://www.youtube.com/watch?v=WpkDN78P884&t=40m5s) [tests](http://i.imgur.com/Mcwm5.jpg).
 
 ## Step 3: Refined Product
 
@@ -112,8 +112,6 @@ OK, for reals now.
     * [Abstractions for healthy bones!](https://www.youtube.com/watch?v=WpkDN78P884)
     * [Immutable data types for shiny hair!](https://www.youtube.com/watch?v=7AqXBuJOJkY)
     * [Functional code for strong teeth!](https://www.destroyallsoftware.com/talks/boundaries)
-  * But wait, what minimum iOS version are you targeting?
- 
 
 ## Step 4: Accessible Product
 
@@ -404,4 +402,4 @@ This is the responsibility of only one object: `ResourceService`.  Keeping this 
 
 ## Problems with this approach / Seeking feedback
 
-I feel that this project is a great demonstration of where I'm currently at in my career: I strongly yearn to break through the fog of sprawling complexity which results from undisciplined coding, and I have a familiarity with the concepts involved in climbing out of the tarpit, but I'm still somewhat clumbsily applying these ideas.  I'm taking steps in the right direction, but I'm in search of strong technical leadership which can guide me to refining my approach.
+I feel that this project is a great demonstration of where I'm currently at in my career: I strongly yearn to break through the fog of sprawling complexity which results from undisciplined coding, and I have a familiarity with the concepts involved in climbing out of the tarpit, but I'm still somewhat clumbsily applying these ideas.  I'm taking steps in the right direction, but I'm in search of strong technical mentorship which can guide me to refining my approach.
