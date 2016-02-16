@@ -1,0 +1,14 @@
+title Cache prevents duplicate requests for sequenced calls
+participant VC1
+participant VC2
+VC1->+NetworkingLibrary: request("/foo")
+NetworkingLibrary->+Cache: request("/foo")
+Cache->+API: GET /foo
+API->-Cache: 200
+Cache->-NetworkingLibrary: data
+NetworkingLibrary->-VC1: data
+VC2->+NetworkingLibrary: request("/foo")
+NetworkingLibrary->+Cache: request("/foo")
+Cache->-NetworkingLibrary: data
+NetworkingLibrary->-VC2: data
+

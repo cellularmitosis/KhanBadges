@@ -1,0 +1,17 @@
+title Subscription services can corral overlapping calls
+participant VC1
+participant VC2
+
+VC1->+SubscriptionService: subscribe("/foo")
+SubscriptionService->+NetworkingLibrary: request("/foo")
+NetworkingLibrary->+Cache: request("/foo")
+Cache->+API: GET /foo
+
+VC2->SubscriptionService: subscribe("/foo")
+
+API->-Cache: 200
+Cache->-NetworkingLibrary: data
+NetworkingLibrary->-SubscriptionService: data
+SubscriptionService->VC1: data
+SubscriptionService->-VC2: data
+

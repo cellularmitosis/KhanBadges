@@ -1,0 +1,9 @@
+title Single calls, single request
+participant VC1
+VC1->+NetworkingLibrary: request("/foo")
+NetworkingLibrary->+Cache: request("/foo")
+Cache->+API: GET /foo
+API->-Cache: 200
+Cache->-NetworkingLibrary: data
+NetworkingLibrary->-VC1: data
+

@@ -1,0 +1,20 @@
+title Cache can't help with overlapping calls
+participant VC1
+participant VC2
+
+VC1->+NetworkingLibrary: request("/foo")
+NetworkingLibrary->+Cache: request("/foo")
+Cache->+API: GET /foo
+
+VC2->NetworkingLibrary: request("/foo")
+NetworkingLibrary->Cache: request("/foo")
+Cache->API: GET /foo
+
+API->Cache: 200
+Cache->NetworkingLibrary: data
+NetworkingLibrary->VC1: data
+
+API->-Cache: 200
+Cache->-NetworkingLibrary: data
+NetworkingLibrary->-VC2: data
+
