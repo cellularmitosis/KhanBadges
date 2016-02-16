@@ -357,7 +357,7 @@ This is because the data starts in an partial state (title, description), and is
 
 Here is the full logic flow involved in fetching the image for `BadgeDetailViewController`:
 
-![detail logic flow](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/detail_to_api.png?token=AANopNefwR19xDhhBWZ64-tmpH-lM0bMks5Wy9bTwA%3D%3D)
+![detail logic flow](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/detail_to_api_simple.png?token=AANopArMjoEGJRE8Vuo17LM1SghDJPd_ks5Wy_CXwA%3D%3D)
 
 ### Master screen architecture
 
@@ -389,9 +389,6 @@ As the user scrolls around the table view, each `willDisplayCell()` causes the `
 
 ![nth data source update](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/subscribe_cell_nth.png?token=AANopDOK15hCQ_Z4ETEy6rnSNvUrh_swks5Wy9bnwA%3D%3D)
 
-### Caching
-
-
 ### Recovering from failed requests
 
 Because all of views in the app are driven by "subscription"-based data, it is relatively easy to have the entire app fill in missing pieces by retrying failed requests, either when the app resumes from background, or when the networking becomes available again (by pulling in [Reachability.swift](https://github.com/ashleymills/Reachability.swift)).
@@ -400,6 +397,28 @@ Because all of views in the app are driven by "subscription"-based data, it is r
 
 This is the responsibility of only one object: `ResourceService`.  Keeping this code out of the view controllers prevents MassiveViewController.
 
+Let's take a look at how this works.  Let's revisit the example of `BadgeDetailViewController`, but let's assume the API returns a 500:
+
+![API returns a 500](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/detail_to_api_500.png?token=AANopJl01I-010m4pPYbfDivCyvHpmsZks5Wy_CZwA%3D%3D)
+
+Recovery from this state is not the responsibility of the view controller.  Instead, the service is notified that the network has become available (or in this case, that the app has resumed from background) and retries any failed requests:
+
+![retry simple](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/detail_to_api_recover.png?token=AANopJEYRlcS1Jm7oS_9w13mpYDxEjT1ks5Wy_CVwA%3D%3D)
+
+Now consider the possibility that a user navigated to a detail screen while offline.  In that case, the table view screen and the detail screen would both be subscribed to the same `ImageService`:
+
+![both subscribed](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/multi_to_api_500.png?token=AANopOSY45OAOJxy0VrAnr3KlXjLcjxHks5Wy_CbwA%3D%3D)
+
+Here's the beauty of not having the view controllers implement this functionality.  The more subscribers there are, the more recovery functionality we have reaped "for free":
+
+![multiple recover](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/multi_to_api_recover.png?token=AANopJEEw-6g0jrFSBWwJkCv3rdP9LA6ks5Wy_CdwA%3D%3D)
+
+
 ## Problems with this approach / Seeking feedback
 
 I feel that this project is a great demonstration of where I'm currently at in my career: I strongly yearn to break through the fog of sprawling complexity which results from undisciplined coding, and I have a familiarity with the concepts involved in climbing out of the tarpit, but I'm still somewhat clumbsily applying these ideas.  I'm taking steps in the right direction, but I'm in search of strong technical mentorship which can guide me to refining my approach.
+
+Notes:
+* The `ImageService` / `ResourceService` combo feels clunky.  It feels like `ImageService` should just be some sort of `map` call on `ResourceService`.
+* Ownership of the services and unsubscring from them is currently fertile ground for bugs.
+
