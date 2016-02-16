@@ -307,6 +307,36 @@ This layout strategy also handles rotation:
 
 ## Architecture
 
+![key](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/key.png?token=AANopPY17G4EW82wU518v9FMR3j7kcz_ks5Wy9bhwA%3D%3D)
+
+### Ownership relationships
+
+![service repo ownership](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/service_repo_own.png?token=AANopJR6601JCn2Tao2USQzTM3q5vOBwks5Wy9bjwA%3D%3D)
+
+![tablevc ownership](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/table_own.png?token=AANopGh9xGsI3OvjDYMuAFbOmOP2P5Ltks5Wy9bswA%3D%3D)
+
+### BadgeDetailViewController architecture
+
+Here is the ownership diagram for BadgeDetailViewController:
+
+![detailvc ownership](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/detail_vc_own.png?token=AANopOil0stzwyjkTgoBzTlpoel4Yvvhks5Wy9bfwA%3D%3D)
+
+The BadgeDetailView uses three data models:
+* DataModel: content (title text, description text, image)
+* LayoutModel: constants to fine-tune autolayout constraints
+* StyleModel: fonts, etc.
+
+The LayoutModel and StyleModel are only applied once (upon viewDidLoad()):
+
+![applyLayoutModel()](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/apply_layout.png?token=AANopOxyT5a07XuYzu-HiMEcNRbGvctZks5Wy9bLwA%3D%3D)
+
+![applyStyleModel()](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/apply_style.png?token=AANopM-LxOO7lEhcAEgB_4TElS6IkHJCks5Wy9bNwA%3D%3D)
+
+The DataModel is handled differently: the BadgeDetailViewController subscribes to an object which provides a sequence of DataModels which may change over time:
+
+![subscribe to data model service](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/apply_data.png?token=AANopGsKhq_TDDtAoEOKOCFOb2HrMXGZks5Wy9bHwA%3D%3D)
+
+
 ### Subscription services all the way down
 
 Let's try a "reactive" style of coding, where objects subscribe to resources and then react to whatever results come there way.  This is a great way to reduce the amount of imperative complexity in your code, because most of the mutable state can be concentrated "upstream".
@@ -316,6 +346,8 @@ It turns out this programming challenge is well suited to attempting this, becau
 * Everything is a GET request
 
 ### Detail view data 
+
+
 
 ### Caching
 
