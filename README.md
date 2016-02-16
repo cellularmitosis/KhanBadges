@@ -371,7 +371,7 @@ The subscription-based unidirectional flow of data in the Detail screen worked o
 
 ![data source stream](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/datasource_time.png?token=AANopOOGxXTYHYpd-L1bUGaPWIjTdKtgks5Wy9bPwA%3D%3D)
 
-However, frequently calling reloadData() on a UITableView tends to cause glitches in the UX (scrolling, etc), so that approach isn't practical.
+However, frequently assigning new data sources to a UITableView (equivalent to calling `reloadData()`) tends to cause glitches in the UX (scrolling, etc), so that approach isn't practical.
 
 Let's take a look at how the data is changing over time.  Once we have the initial `/badges` JSON data, we have all of the titles and descriptions.  The images then get filled in over time as the user scrolls down the page:
 
