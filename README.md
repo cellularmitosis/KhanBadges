@@ -1,3 +1,44 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [KhanBadges](#khanbadges)
+- [The Scenario](#the-scenario)
+- [Source Material](#source-material)
+  - [UI/UX Source Material](#uiux-source-material)
+  - [API Source Material](#api-source-material)
+    - [Cache support](#cache-support)
+- [The Plan](#the-plan)
+  - [Step 1: Rough (Offline) Prototype for UX](#step-1-rough-offline-prototype-for-ux)
+  - [Step 2: Minimally Functional Demo With Minimal UI](#step-2-minimally-functional-demo-with-minimal-ui)
+  - [Step 3: Refined Product](#step-3-refined-product)
+  - [Step 4: Accessible Product](#step-4-accessible-product)
+- [Implementing Step 1](#implementing-step-1)
+  - [The "Master" screen](#the-master-screen)
+    - [Line length](#line-length)
+    - [Stumbling blocks](#stumbling-blocks)
+  - [Detail screen](#detail-screen)
+  - [Results of Step 1](#results-of-step-1)
+- [Implementing Step 2](#implementing-step-2)
+  - [Analytics](#analytics)
+  - [Results of Step 2](#results-of-step-2)
+- [Implementing Step 3](#implementing-step-3)
+  - [Image asset sizing](#image-asset-sizing)
+    - [Opportunity to improve Khan's image asset workflow](#opportunity-to-improve-khans-image-asset-workflow)
+  - [Detail layout: Targeting multiple screen sizes](#detail-layout-targeting-multiple-screen-sizes)
+    - [Handling long titles and descriptions](#handling-long-titles-and-descriptions)
+    - [Patch image size](#patch-image-size)
+    - [Achieving proportionally similar layouts across all device sizes](#achieving-proportionally-similar-layouts-across-all-device-sizes)
+    - [Rotation](#rotation)
+  - [Architecture](#architecture)
+    - [Subscription services all the way down](#subscription-services-all-the-way-down)
+    - [Detail screen architecture](#detail-screen-architecture)
+    - [Master screen architecture](#master-screen-architecture)
+    - [Recovering from failed requests](#recovering-from-failed-requests)
+  - [Problems with this approach / Seeking feedback](#problems-with-this-approach--seeking-feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # KhanBadges
 The "badges" programming challenge associated with my Khan Academy mobile developer job application.
 
