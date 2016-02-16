@@ -1,6 +1,19 @@
+# KhanBadges
+
+Dear Khan Engineering Team,
+
+Thank you for reviewing my programming challenge submission.
+
+I feel that this project is a great demonstration of where I'm currently at in my career: I strongly yearn to break through the fog of sprawling complexity which results from undisciplined coding.  I have a familiarity with the concepts involved in climbing out of the tarpit, but I'm still somewhat clumbsily applying these ideas.  I'm taking steps in the right direction, but I'm in search of strong technical mentorship which can guide me to refining my approach.
+
+This submission contains a few Xcode projects.  They correspond to the milestones described in [The Plan](#the-plan).
+* Step1/Badges/Badges.xcodeproj
+* Step2/Badges/Badges.xcodeproj
+* Step3/Badges/Badges.xcodeproj
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+# Table of Contents
 
 - [KhanBadges](#khanbadges)
 - [The Scenario](#the-scenario)
@@ -39,10 +52,9 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# KhanBadges
-The "badges" programming challenge associated with my Khan Academy mobile developer job application.
-
 # The Scenario
+
+*(This is a fictional narrative I have constructed to drive the development process)*
 
 Product would like for badges to have more of a mobile presence.  To prevent the UX from becomming bloated, it has been decided that we will focus only on "Challenge Patches" initially, as those are thought to have the greatest potential for engagement on the mobile platform.
 
@@ -198,11 +210,7 @@ Were this a real project, we would also have to consider other languages as well
 
 * Dragging images into the Asset catalog directly from Chrome.  [Ugh](http://stackoverflow.com/a/14737744).
 
-So it turns out that if you grag a PNG directly from your web browser (Chrome) into Xcode, it appears to work, but `UIImage(named:)` will return nil.
-
-If you right-click on the image in the Assets catalog, choose "Show in Finder", then drag the file back into the Assets catalog, **that** image will load just fine.
-
-Argh!!!  I wasted half an hour on this one.
+So it turns out that if you grag a PNG directly from your web browser (Chrome) into Xcode, it appears to work, but `UIImage(named:)` will return nil.  If you right-click on the image in the Assets catalog, choose "Show in Finder", then drag the file back into the Assets catalog, **that** image will load just fine.
 
 * Setting row height for prototype cells is a guessing game.  [Blargh].
 
@@ -481,10 +489,7 @@ Here's the beauty of not having the view controllers implement this functionalit
 
 * `CellDataModelSetService` initially passed `self` as the `subscriber` parameter to the `subscribe()` call.  For table cells which had identical image URL's (e.g. the "Hour of drawing in code" badge), this caused only the first cell to actually get subscribed.
 
-## Problems with this approach / Seeking feedback
+## Problems with this approach
 
-I feel that this project is a great demonstration of where I'm currently at in my career: I strongly yearn to break through the fog of sprawling complexity which results from undisciplined coding, and I have a familiarity with the concepts involved in climbing out of the tarpit, but I'm still somewhat clumbsily applying these ideas.  I'm taking steps in the right direction, but I'm in search of strong technical mentorship which can guide me to refining my approach.
-
-Notes:
 * The `ImageService` / `ResourceService` combo feels clunky.  It feels like `ImageService` should just be some sort of `map` call on `ResourceService`.
 * Ownership of the services and unsubscring from them is currently fertile ground for bugs.
