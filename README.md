@@ -305,28 +305,47 @@ This layout strategy also handles rotation:
 
 ## Architecture
 
-Here's the key for the diagrams below:
+Here's the key used in the diagrams below:
 
 ![key](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/key.png?token=AANopPY17G4EW82wU518v9FMR3j7kcz_ks5Wy9bhwA%3D%3D)
 
 ### Subscription services all the way down
 
-The main theme I've tried to explore here is that of a "subscription service".  My hope is that coding this up from scratch will yeild a better understanding of the central ideas behind reactive programming than if I had simply pulled in RxSwift or ReactiveCocoa and followed a tutorial
+The main theme I've tried to explore here is that of a "subscription service".  My hope is that coding this up from scratch will yeild a better understanding of the central ideas behind reactive programming than if I had simply pulled in RxSwift or ReactiveCocoa and followed a tutorial.
 
-It turns out this programming challenge is well suited to attempting this, because the network requirements are simple:
+This programming challenge is well suited to attempting this, because the network requirements are simple:
 * No authentication is needed
 * Everything is a GET request (no mutation across the network, no cache invalidation, etc.)
 
-The main benefit I'd hoped to achieve with this approach were
-* To avoid MassiveViewController
-  * This is particularly true for BadgeDetailViewController
-* To avoid duplication of imperative logic by pushing feature implementations "upstream" of the unidirectional flow of data
-  * A good example of this recovery from failed network requests (driven by regaining network reachability or waking the app from background).  This logic was only implemented in one place (ResourceService), and everything downstream of the "subscription steam" automatically benefits from the functionality.
+The main benefits I'd hoped to achieve with this approach were:
+* To avoid MassiveViewController.
+  * This is particularly true for BadgeDetailViewController.
+* To avoid duplication of imperative logic by pushing feature implementations "upstream" of the unidirectional flow of data.
+  * A good example of this is recovery from failed network requests (detailed further below).
 
-* TODO: say something about the responsibilities:
-  * corralling common overlapping network requests
-    * example of ImageService for a detail vc if the table cell's image request is still in flight.
-* TODO: show some railroad diagrams to demonstate understanding of the concepts involved
+#### Subscription services solve problems which cache alone can't solve
+
+Consider a simple network request:
+
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-16%20at%201.18.12%20AM.png?token=AANopE_wxtayZ5GRO84xG6qpahUqwQgqks5WzAoIwA%3D%3D)
+
+Cache can be used to prevent a second (duplicate) network request if the calls are sequenced:
+
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-16%20at%201.18.19%20AM.png?token=AANopBS1VJAvbRBQjnOgzLliUyy40Qjqks5WzAoKwA%3D%3D)
+
+However, cache doesn't help if the calls are overlapping.  A duplicate request will get sent:
+
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-16%20at%201.18.32%20AM.png?token=AANopMnfxouAkBMTEHDKPG6K9_IVQEddks5WzAoMwA%3D%3D)
+
+One of the responsibilities of a subscription service is to "corral" similar requests, such that only one network request is made for N subscribers:
+
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-16%20at%201.18.39%20AM.png?token=AANopJtKzhidPdzrbbU81Indrfy7M_0Aks5WzAoNwA%3D%3D)
+
+### Services Repository
+
+In order for the request corralling to work, a central object must "own" all of the services, so that a second subscriber gets handed the same service as the first subscriber.
+
+This is the ownership diagram for the `ServiceRepository`:
 
 ![service repo ownership](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/service_repo_own.png?token=AANopJR6601JCn2Tao2USQzTM3q5vOBwks5Wy9bjwA%3D%3D)
 
