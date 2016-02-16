@@ -4,7 +4,7 @@ Dear Khan Engineering Team,
 
 Thank you for reviewing my programming challenge submission.
 
-I feel that this project is a great demonstration of where I'm currently at in my career: I strongly yearn to break through the fog of sprawling complexity which results from undisciplined coding.  I have a familiarity with the concepts involved in climbing out of the tarpit, but I'm still somewhat clumbsily applying these ideas.  I'm taking steps in the right direction, but I'm in search of strong technical mentorship which can guide me in refining my approach.
+I feel that this project is a great demonstration of where I'm currently at in my career: I'm a capable developer who strongly yearns to break through the fog of sprawling complexity which results from undisciplined coding.  I have a familiarity with the concepts involved in climbing out of the tarpit, but I'm still somewhat clumbsily applying these ideas.  I'm taking steps in the right direction, but I'm in search of strong technical mentorship which can guide me in refining my approach.
 
 This submission contains a few Xcode projects.  They correspond to the milestones described in [The Plan](#the-plan).
 * Step1/Badges/Badges.xcodeproj: This is an offline demo to be given to the UX designer to validate the concept.
