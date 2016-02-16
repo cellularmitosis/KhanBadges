@@ -307,15 +307,32 @@ This layout strategy also handles rotation:
 
 ## Architecture
 
+Here's the key for the diagrams below:
+
 ![key](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/key.png?token=AANopPY17G4EW82wU518v9FMR3j7kcz_ks5Wy9bhwA%3D%3D)
 
-### Ownership relationships
+### Subscription services all the way down
+
+The main theme I've tried to explore here is that of a "subscription service".  My hope is that coding this up from scratch will yeild a better understanding of the central ideas behind reactive programming than if I had simply pulled in RxSwift or ReactiveCocoa and followed a tutorial
+
+It turns out this programming challenge is well suited to attempting this, because the network requirements are simple:
+* No authentication is needed
+* Everything is a GET request (no mutation across the network, no cache invalidation, etc.)
+
+The main benefit I'd hoped to achieve with this approach were
+* To avoid MassiveViewController
+  * This is particularly true for BadgeDetailViewController
+* To avoid duplication of imperative logic by pushing feature implementations "upstream" of the unidirectional flow of data
+  * A good example of this recovery from failed network requests (driven by regaining network reachability or waking the app from background).  This logic was only implemented in one place (ResourceService), and everything downstream of the "subscription steam" automatically benefits from the functionality.
+
+* TODO: say something about the responsibilities:
+  * corralling common overlapping network requests
+    * example of ImageService for a detail vc if the table cell's image request is still in flight.
+* TODO: show some railroad diagrams to demonstate understanding of the concepts involved
 
 ![service repo ownership](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/service_repo_own.png?token=AANopJR6601JCn2Tao2USQzTM3q5vOBwks5Wy9bjwA%3D%3D)
 
-![tablevc ownership](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/table_own.png?token=AANopGh9xGsI3OvjDYMuAFbOmOP2P5Ltks5Wy9bswA%3D%3D)
-
-### BadgeDetailViewController architecture
+### Detail screen architecture
 
 Here is the ownership diagram for BadgeDetailViewController:
 
@@ -340,23 +357,42 @@ This is because the data starts in an partial state (title, description), and is
 
 ![detail data over time](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/detail_time.png?token=AANopG-Pd6Wk1ZcqvMdMeZq95-IEQkirks5Wy9bRwA%3D%3D)
 
+Here is the full logic flow involved in fetching the image for `BadgeDetailViewController`:
 
+![detail logic flow](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/detail_to_api.png?token=AANopNefwR19xDhhBWZ64-tmpH-lM0bMks5Wy9bTwA%3D%3D)
 
-### Subscription services all the way down
+### Master screen architecture
 
-Let's try a "reactive" style of coding, where objects subscribe to resources and then react to whatever results come there way.  This is a great way to reduce the amount of imperative complexity in your code, because most of the mutable state can be concentrated "upstream".
+Here is the ownership diagram for BadgeTableViewController:
 
-It turns out this programming challenge is well suited to attempting this, because the network requirements are simple:
-* No authentication is needed
-* Everything is a GET request
+![tablevc ownership](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/table_own.png?token=AANopGh9xGsI3OvjDYMuAFbOmOP2P5Ltks5Wy9bswA%3D%3D)
 
-### Detail view data 
+The subscription-based unidirectional flow of data in the Detail screen worked out well.  It would be great if we could take a similar approach here, by subscribing to a steam of UITableViewDataSources (a new one for each additional image which arrives from the network):
 
+![data source stream](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/datasource_time.png?token=AANopOOGxXTYHYpd-L1bUGaPWIjTdKtgks5Wy9bPwA%3D%3D)
 
+However, frequently calling reloadData() on a UITableView tends to cause glitches in the UX (scrolling, etc), so that approach isn't practical.
+
+Let's take a look at how the data is changing over time.  Once we have the initial `/badges` JSON data, we have all of the titles and descriptions.  The images then get filled in over time as the user scrolls down the page:
+
+![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/tv_data_time.png?token=AANopCqixDlEA-Cmj06y0fpS7OJRENXGks5Wy9btwA%3D%3D)
+
+First, `BadgesTableViewController` needs a data source, which it receives by subscribing to `DataSourceService`.  `DataSourceService` fetches the JSON (by subscribing to a `ResourceService` pointed at `/badges`) and prodces an initial `DataSource`:
+
+![table bootstrapping](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/subscribe_datasource.png?token=AANopHMaPHzTXU0d31nEFSuekuGCxx4tks5Wy9bqwA%3D%3D)
+
+Once the `BadgeTableViewController` has a `DataSource`, its only responsibility is to handle touches (launching `BadgeDetailViewControllers`).
+
+`DataSource` subscribes to `CellDataModelSetService`, which immediately provides an initial data source which only contains `PartialDataModels` (just titles and descriptions):
+
+![initial data source](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/subscribe_cell_initial.png?token=AANopHZ1o24jrH7EHqrhV6mADcmykCckks5Wy9blwA%3D%3D)
+
+As the user scrolls around the table view, each `willDisplayCell()` causes the `DataSource` to call `shouldFetchImageAtIndexPath()` on `CellDataModelSetService`, which then subscribes to an `ImageService`.  When the image comes in from the network, an updated set of cell data models is created and returned to DataSource, along with a list of which NSIndexPaths were changed in the new set of models (currently this is always just one NSIndexPath).  The `DataSource` updates its set of data models and calls `reloadRowsAtIndexPaths()` on the table view:
+
+![nth data source update](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/subscribe_cell_nth.png?token=AANopDOK15hCQ_Z4ETEy6rnSNvUrh_swks5Wy9bnwA%3D%3D)
 
 ### Caching
 
-It turns out the Khan API doesn't support the `Cache-Control` header in its JSON output.
 
 ### Recovering from failed requests
 
@@ -365,3 +401,7 @@ Because all of views in the app are driven by "subscription"-based data, it is r
 ![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/reachability.gif?token=AANopApW97KmLdQjBOOqvI3e9HqJlygpks5Wy5HjwA%3D%3D)
 
 This is the responsibility of only one object: `ResourceService`.  Keeping this code out of the view controllers prevents MassiveViewController.
+
+## Problems with this approach / Seeking feedback
+
+I feel that this project is a great demonstration of where I'm currently at in my career: I strongly yearn to break through the fog of sprawling complexity which results from undisciplined coding, and I have a familiarity with the concepts involved in climbing out of the tarpit, but I'm still somewhat clumbsily applying these ideas.  I'm taking steps in the right direction, but I'm in search of strong technical leadership which can guide me to refining my approach.
