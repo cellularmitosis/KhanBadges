@@ -315,6 +315,8 @@ It turns out this programming challenge is well suited to attempting this, becau
 * No authentication is needed
 * Everything is a GET request
 
+### Detail view data 
+
 ### Caching
 
 It turns out the Khan API doesn't support the `Cache-Control` header in its JSON output.
