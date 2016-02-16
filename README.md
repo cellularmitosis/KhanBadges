@@ -7,9 +7,11 @@ Thank you for reviewing my programming challenge submission.
 I feel that this project is a great demonstration of where I'm currently at in my career: I strongly yearn to break through the fog of sprawling complexity which results from undisciplined coding.  I have a familiarity with the concepts involved in climbing out of the tarpit, but I'm still somewhat clumbsily applying these ideas.  I'm taking steps in the right direction, but I'm in search of strong technical mentorship which can guide me in refining my approach.
 
 This submission contains a few Xcode projects.  They correspond to the milestones described in [The Plan](#the-plan).
-* Step1/Badges/Badges.xcodeproj
-* Step2/Badges/Badges.xcodeproj
-* Step3/Badges/Badges.xcodeproj
+* Step1/Badges/Badges.xcodeproj: This is an offline demo to be given to the UX designer to validate the concept.
+* Step2/Badges/Badges.xcodeproj: This is a roughly coded MVP which could be used in an A/B test to guage user interest.
+* Step3/Badges/Badges.xcodeproj: This is a refactor of Step2 with a focus on architecture and attention to detail.
+
+If you are in a hurry, just skip to [Implementing Step 3](#implementing-step-3).
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -159,7 +161,7 @@ OK, for reals now.
 * Invest in the code.
   * Performance and reliability
     * Obey the API's `Cache-Control` headers.
-    * JSON structure should be validated (Value types, [motherfucker!](http://programming-motherfucker.com/)).
+    * JSON structure should be validated (use Value types!)
     * Subscription services (corral duplicate network requests)
   * Code quality
     * [Abstractions for healthy bones!](https://www.youtube.com/watch?v=WpkDN78P884)
@@ -210,9 +212,7 @@ Were this a real project, we would also have to consider other languages as well
 
 * Dragging images into the Asset catalog directly from Chrome.  [Ugh](http://stackoverflow.com/a/14737744).
 
-So it turns out that if you grag a PNG directly from your web browser (Chrome) into Xcode, it appears to work, but `UIImage(named:)` will return nil.  If you right-click on the image in the Assets catalog, choose "Show in Finder", then drag the file back into the Assets catalog, **that** image will load just fine.
-
-* Setting row height for prototype cells is a guessing game.  [Blargh].
+It turns out that if you grag a PNG directly from your web browser (Chrome) into Xcode, it appears to work, but `UIImage(named:)` will return nil.  If you right-click on the image in the Assets catalog, choose "Show in Finder", then drag the file back into the Assets catalog, **that** image will load just fine.
 
 ## Detail screen
 
@@ -250,6 +250,8 @@ and the detail screen:
 ## Analytics
 
 For the A/B test, we will record how many times user access the Challenge Patch list view (event name: "ListController.viewDidLoad") and how many times users view the details of patches (event name: "DetailViewController.viewDidLoad").
+
+*(`FakeAnalytics` is just an empty implementation to demonstrate the idea)*
 
 ## Results of Step 2
 
@@ -366,7 +368,7 @@ This programming challenge is well suited to attempting this, because the networ
 * No authentication is needed
 * Everything is a GET request (no mutation across the network, no cache invalidation, etc.)
 
-The main benefits I'd hoped to achieve with this approach were:
+The main benefits I hoped to achieve with this approach were:
 * To avoid MassiveViewController.
   * This is particularly true for BadgeDetailViewController.
 * To avoid duplication of imperative logic by pushing feature implementations "upstream" of the unidirectional flow of data.
@@ -397,6 +399,8 @@ In order for the request corralling to work, a central object must "own" all of 
 This is the ownership diagram for the `ServiceRepository`:
 
 ![service repo ownership](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/service_repo_own.png?token=AANopJR6601JCn2Tao2USQzTM3q5vOBwks5Wy9bjwA%3D%3D)
+
+*(Note: there are still some problems in the area of service ownership and unsubscribing)*
 
 ### Detail screen architecture
 
@@ -437,7 +441,7 @@ The subscription-based unidirectional flow of data in the Detail screen worked o
 
 ![data source stream](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/datasource_time.png?token=AANopOOGxXTYHYpd-L1bUGaPWIjTdKtgks5Wy9bPwA%3D%3D)
 
-However, frequently assigning new data sources to a UITableView (equivalent to calling `reloadData()`) tends to cause glitches in the UX (scrolling, etc), so that approach isn't practical.
+However, frequently assigning new data sources to a UITableView (equivalent to calling `reloadData()`) tends to cause glitches in the UX (scrolling, etc), **so the above approach isn't practical**.
 
 Let's take a look at how the data is changing over time.  Once we have the initial `/badges` JSON data, we have all of the titles and descriptions.  The images then get filled in over time as the user scrolls down the page:
 
