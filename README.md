@@ -163,7 +163,7 @@ If you right-click on the image in the Assets catalog, choose "Show in Finder", 
 
 Argh!!!  I wasted half an hour on this one.
 
-* [Blargh](http://stackoverflow.com/a/9898238).
+* Setting row height for prototype cells is a guessing game.  [Blargh].
 
 ## Detail screen
 
@@ -432,6 +432,13 @@ Here's the beauty of not having the view controllers implement this functionalit
 
 ![multiple recover](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/multi_to_api_recover.png?token=AANopJEEw-6g0jrFSBWwJkCv3rdP9LA6ks5Wy_CdwA%3D%3D)
 
+### Stumbling blocks
+
+* When `CellDataModelSetService` mutates its collection of table cell data models, I mistakenly used `append()` to insert the updated data model into the collection.  This resulted in the data set which gets handed off to `DataSource` being in a different order for each call, which made the table view go haywire.
+
+* I had assumed that the badge titles were unique.  It turns out they aren't (there is one collision: "Hour of drawing in code").  This caused ordering problems in data model collections.
+
+* `CellDataModelSetService` initially passed `self` as the `subscriber` parameter to the `subscribe()` call.  For table cells which had identical image URL's (e.g. the "Hour of drawing in code" badge), this caused only the first cell to actually get subscribed.
 
 ## Problems with this approach / Seeking feedback
 
@@ -440,4 +447,3 @@ I feel that this project is a great demonstration of where I'm currently at in m
 Notes:
 * The `ImageService` / `ResourceService` combo feels clunky.  It feels like `ImageService` should just be some sort of `map` call on `ResourceService`.
 * Ownership of the services and unsubscring from them is currently fertile ground for bugs.
-
