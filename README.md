@@ -336,6 +336,11 @@ The DataModel is handled differently: the BadgeDetailViewController subscribes t
 
 ![subscribe to data model service](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/apply_data.png?token=AANopGsKhq_TDDtAoEOKOCFOb2HrMXGZks5Wy9bHwA%3D%3D)
 
+This is because the data starts in an partial state (title, description), and is later completed when the patch image is fetched from the network:
+
+![detail data over time](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/detail_time.png?token=AANopG-Pd6Wk1ZcqvMdMeZq95-IEQkirks5Wy9bRwA%3D%3D)
+
+
 
 ### Subscription services all the way down
 
