@@ -72,15 +72,15 @@ First, let's get the context of how badges are currently displayed.
 
 This is how the website displays Challenge Patches:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-11%20at%207.17.16%20PM.png?token=AANopOtsO0bhcQgCrlDy1C8ZyZJXVKcLks5WxnBFwA%3D%3D)
+![](media/Screen%20Shot%202016-02-11%20at%207.17.16%20PM.png?token=AANopOtsO0bhcQgCrlDy1C8ZyZJXVKcLks5WxnBFwA%3D%3D)
 
 Here's the same but in a mobile width:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-11%20at%207.10.49%20PM.png?token=AANopCx555CMTA1hOLECDRHRcgyn14F9ks5WxnBCwA%3D%3D)
+![](media/Screen%20Shot%202016-02-11%20at%207.10.49%20PM.png?token=AANopCx555CMTA1hOLECDRHRcgyn14F9ks5WxnBCwA%3D%3D)
 
 The iOS app does not currently display badges.  It only shows badge categories:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-11%20at%207.24.34%20PM.png?token=AANopGXvvWoSyJR7LBeIIQX5OUTdENQrks5WxnBIwA%3D%3D)
+![](media/Screen%20Shot%202016-02-11%20at%207.24.34%20PM.png?token=AANopGXvvWoSyJR7LBeIIQX5OUTdENQrks5WxnBIwA%3D%3D)
 
 ## API Source Material
 
@@ -112,11 +112,11 @@ $ cat badges.json | grep '"badge_category": 5' | wc -l
 
 The JSON portion of the API does not support `Cache-Control`:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-15%20at%205.46.18%20PM.png?token=AANopH0KYuAMamgaoMEFxIYPtOs1TdiIks5Wy57VwA%3D%3D)
+![](media/Screen%20Shot%202016-02-15%20at%205.46.18%20PM.png?token=AANopH0KYuAMamgaoMEFxIYPtOs1TdiIks5Wy57VwA%3D%3D)
 
 However, the images (served from kastatic.org) may be cached indefinitely:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-15%20at%205.45.40%20PM.png?token=AANopEDYHFVWDSRvqMW1VTOG5lsgD-bUks5Wy57SwA%3D%3D)
+![](media/Screen%20Shot%202016-02-15%20at%205.45.40%20PM.png?token=AANopEDYHFVWDSRvqMW1VTOG5lsgD-bUks5Wy57SwA%3D%3D)
 
 # The Plan
 
@@ -233,11 +233,11 @@ We will just target the iPhone 6 screen size for layout purposes.
 
 The list and grid options:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-12%20at%2012.02.04%20AM.png?token=AANopIfw_tL0wps4KW_f5Tqa79QotoYMks5WxrH4wA%3D%3D) ![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-12%20at%2012.02.07%20AM.png?token=AANopOJc9ZXyjuEjB14g03wWz8pQH-K6ks5WxrH7wA%3D%3D)
+![](media/Screen%20Shot%202016-02-12%20at%2012.02.04%20AM.png?token=AANopIfw_tL0wps4KW_f5Tqa79QotoYMks5WxrH4wA%3D%3D) ![](media/Screen%20Shot%202016-02-12%20at%2012.02.07%20AM.png?token=AANopOJc9ZXyjuEjB14g03wWz8pQH-K6ks5WxrH7wA%3D%3D)
 
 and the detail screen:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-12%20at%2012.02.21%20AM.png?token=AANopGQl01AT9-kPTqA-6uOGcCaFEwR-ks5WxrH-wA%3D%3D)
+![](media/Screen%20Shot%202016-02-12%20at%2012.02.21%20AM.png?token=AANopGQl01AT9-kPTqA-6uOGcCaFEwR-ks5WxrH-wA%3D%3D)
 
 **The UX designer has decided to go with the "List" option**, and would like to present the detail view **modally**, as that would later allow for the detail view to become a "gallery" where the user could swipe right or left to view the details of other patches.
 
@@ -255,7 +255,7 @@ For the A/B test, we will record how many times user access the Challenge Patch 
 
 ## Results of Step 2
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/step2.gif?token=AANopMo9yITQ2BpgJ8JYSEUwFYElsaSSks5WyOpJwA%3D%3D)
+![](media/step2.gif?token=AANopMo9yITQ2BpgJ8JYSEUwFYElsaSSks5WyOpJwA%3D%3D)
 
 The data from the A/B test shows that 45% of users accessed the new feature at least once ("ListController.viewDidLoad"), and that on average each user looked at the details of 8 patches ("DetailsViewController.viewDidLoad").
 
@@ -301,7 +301,7 @@ Now that we need to target all screen sizes from the 4s up through the 6+, we ne
 
 Here's what the result of **Step 2** looks like on various phones:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/v1%20240/Screen%20Shot%202016-02-13%20at%2012.11.50%20PM.png?token=AANopDwgzzPWPKPY-DqJMHHtDKLG91Dmks5WyKzqwA%3D%3D)
+![](media/v1%20240/Screen%20Shot%202016-02-13%20at%2012.11.50%20PM.png?token=AANopDwgzzPWPKPY-DqJMHHtDKLG91Dmks5WyKzqwA%3D%3D)
 
 Notice how the fonts and patch image appear to get smaller as the phone size increases?  (This is made apparent by normalizing the screenshots to the same width).
 
@@ -313,23 +313,23 @@ We need to solve two problems:
 
 Here's a vertical layout strategy which should produce reasonable results.  Consider this Autolayout diagram:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-13%20at%203.52.54%20PM.png?token=AANopC_Rgl78hipA3wv9vsrSPN_TQ1gnks5WyOJOwA%3D%3D)
+![](media/Screen%20Shot%202016-02-13%20at%203.52.54%20PM.png?token=AANopC_Rgl78hipA3wv9vsrSPN_TQ1gnks5WyOJOwA%3D%3D)
 
 (Here, the cyan square represents the title label, gray represents the patch image, and magenta represents the description label)
 
 If we used fixed vertical spacing between the patch image and the text labels (24pt), then set a minimum spacing from the text labels to the screen edges (8pt), and finally, slightly reduce the patch images height priority (750), we get the following behavior as the title grows:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/cyan.gif?token=AANopFddICK4L5ir_iQ5cI7QhduYBJdpks5WyONGwA%3D%3D)
+![](media/cyan.gif?token=AANopFddICK4L5ir_iQ5cI7QhduYBJdpks5WyONGwA%3D%3D)
 
 and similar behavior when the description grows:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/magenta.gif?token=AANopE5ziJZh4Gztvy9zT68Em52yyrZsks5WyONrwA%3D%3D)
+![](media/magenta.gif?token=AANopE5ziJZh4Gztvy9zT68Em52yyrZsks5WyONrwA%3D%3D)
 
 With a little additional AutoLayout tweaking, we can apply this to UILabels and a UIImageView:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/title2.gif?token=AANopKrJbusHPPKOLSM2CLZTX0ZCfk4bks5WyRbcwA%3D%3D)
+![](media/title2.gif?token=AANopKrJbusHPPKOLSM2CLZTX0ZCfk4bks5WyRbcwA%3D%3D)
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/description2.gif?token=AANopMEYnYXT5aj6Y_reCCMbhzrFv8ffks5WyRbZwA%3D%3D)
+![](media/description2.gif?token=AANopMEYnYXT5aj6Y_reCCMbhzrFv8ffks5WyRbZwA%3D%3D)
 
 
 ### Patch image size
@@ -344,7 +344,7 @@ Visually, it would be nice to have the patch image occupy the same relative scre
 
 Here's the final result: a much more consistent look across all phone sizes:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-13%20at%2011.59.15%20PM.png?token=AANopG9sN2iDJtMQJoKe687bv96T7wqiks5WyVPlwA%3D%3D)
+![](media/Screen%20Shot%202016-02-13%20at%2011.59.15%20PM.png?token=AANopG9sN2iDJtMQJoKe687bv96T7wqiks5WyVPlwA%3D%3D)
 
 Notice how the navigation bar gets smaller as phone size increases, but the labels, patch image, and spacing appear to stay the same.
 
@@ -352,13 +352,13 @@ Notice how the navigation bar gets smaller as phone size increases, but the labe
 
 This layout strategy also handles rotation:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/rotation.gif?token=AANopD4DvTV_yxhyj3j0jO3vWwVevgweks5Wy5v9wA%3D%3D)
+![](media/rotation.gif?token=AANopD4DvTV_yxhyj3j0jO3vWwVevgweks5Wy5v9wA%3D%3D)
 
 ## Architecture
 
 Here's the key used in the diagrams below:
 
-![key](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/key.png?token=AANopPY17G4EW82wU518v9FMR3j7kcz_ks5Wy9bhwA%3D%3D)
+![key](media/key.png?token=AANopPY17G4EW82wU518v9FMR3j7kcz_ks5Wy9bhwA%3D%3D)
 
 ### Subscription services all the way down
 
@@ -378,19 +378,19 @@ The main benefits I hoped to achieve with this approach were:
 
 Consider a simple network request:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-16%20at%201.18.12%20AM.png?token=AANopE_wxtayZ5GRO84xG6qpahUqwQgqks5WzAoIwA%3D%3D)
+![](media/Screen%20Shot%202016-02-16%20at%201.18.12%20AM.png?token=AANopE_wxtayZ5GRO84xG6qpahUqwQgqks5WzAoIwA%3D%3D)
 
 Cache can be used to prevent a second (duplicate) network request if the calls are sequenced:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-16%20at%201.18.19%20AM.png?token=AANopBS1VJAvbRBQjnOgzLliUyy40Qjqks5WzAoKwA%3D%3D)
+![](media/Screen%20Shot%202016-02-16%20at%201.18.19%20AM.png?token=AANopBS1VJAvbRBQjnOgzLliUyy40Qjqks5WzAoKwA%3D%3D)
 
 However, cache doesn't help if the calls are overlapping.  A duplicate request will get sent:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-16%20at%201.18.32%20AM.png?token=AANopMnfxouAkBMTEHDKPG6K9_IVQEddks5WzAoMwA%3D%3D)
+![](media/Screen%20Shot%202016-02-16%20at%201.18.32%20AM.png?token=AANopMnfxouAkBMTEHDKPG6K9_IVQEddks5WzAoMwA%3D%3D)
 
 One of the responsibilities of a subscription service is to "corral" similar requests, such that only one network request is made for N subscribers:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/Screen%20Shot%202016-02-16%20at%201.18.39%20AM.png?token=AANopJtKzhidPdzrbbU81Indrfy7M_0Aks5WzAoNwA%3D%3D)
+![](media/Screen%20Shot%202016-02-16%20at%201.18.39%20AM.png?token=AANopJtKzhidPdzrbbU81Indrfy7M_0Aks5WzAoNwA%3D%3D)
 
 ### Services Repository
 
@@ -398,7 +398,7 @@ In order for the request corralling to work, a central object must "own" all of 
 
 This is the ownership diagram for the `ServiceRepository`:
 
-![service repo ownership](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/service_repo_own.png?token=AANopJR6601JCn2Tao2USQzTM3q5vOBwks5Wy9bjwA%3D%3D)
+![service repo ownership](media/service_repo_own.png?token=AANopJR6601JCn2Tao2USQzTM3q5vOBwks5Wy9bjwA%3D%3D)
 
 *(Note: there are still some problems in the area of service ownership and unsubscribing)*
 
@@ -406,7 +406,7 @@ This is the ownership diagram for the `ServiceRepository`:
 
 Here is the ownership diagram for BadgeDetailViewController:
 
-![detailvc ownership](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/detail_vc_own.png?token=AANopOil0stzwyjkTgoBzTlpoel4Yvvhks5Wy9bfwA%3D%3D)
+![detailvc ownership](media/detail_vc_own.png?token=AANopOil0stzwyjkTgoBzTlpoel4Yvvhks5Wy9bfwA%3D%3D)
 
 The BadgeDetailView uses three data models:
 * DataModel: content (title text, description text, image)
@@ -415,75 +415,75 @@ The BadgeDetailView uses three data models:
 
 The LayoutModel and StyleModel are only applied once (upon viewDidLoad()):
 
-![applyLayoutModel()](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/apply_layout.png?token=AANopOxyT5a07XuYzu-HiMEcNRbGvctZks5Wy9bLwA%3D%3D)
+![applyLayoutModel()](media/apply_layout.png?token=AANopOxyT5a07XuYzu-HiMEcNRbGvctZks5Wy9bLwA%3D%3D)
 
-![applyStyleModel()](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/apply_style.png?token=AANopM-LxOO7lEhcAEgB_4TElS6IkHJCks5Wy9bNwA%3D%3D)
+![applyStyleModel()](media/apply_style.png?token=AANopM-LxOO7lEhcAEgB_4TElS6IkHJCks5Wy9bNwA%3D%3D)
 
 The DataModel is handled differently: the BadgeDetailViewController subscribes to an object which provides a sequence of DataModels which may change over time:
 
-![subscribe to data model service](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/apply_data.png?token=AANopGsKhq_TDDtAoEOKOCFOb2HrMXGZks5Wy9bHwA%3D%3D)
+![subscribe to data model service](media/apply_data.png?token=AANopGsKhq_TDDtAoEOKOCFOb2HrMXGZks5Wy9bHwA%3D%3D)
 
 This is because the data starts in an partial state (title, description), and is later completed when the patch image is fetched from the network:
 
-![detail data over time](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/detail_time.png?token=AANopG-Pd6Wk1ZcqvMdMeZq95-IEQkirks5Wy9bRwA%3D%3D)
+![detail data over time](media/detail_time.png?token=AANopG-Pd6Wk1ZcqvMdMeZq95-IEQkirks5Wy9bRwA%3D%3D)
 
 Here is the full logic flow involved in fetching the image for `BadgeDetailViewController`:
 
-![detail logic flow](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/detail_to_api_simple.png?token=AANopArMjoEGJRE8Vuo17LM1SghDJPd_ks5Wy_CXwA%3D%3D)
+![detail logic flow](media/detail_to_api_simple.png?token=AANopArMjoEGJRE8Vuo17LM1SghDJPd_ks5Wy_CXwA%3D%3D)
 
 ### Master screen architecture
 
 Here is the ownership diagram for BadgeTableViewController:
 
-![tablevc ownership](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/table_own.png?token=AANopGh9xGsI3OvjDYMuAFbOmOP2P5Ltks5Wy9bswA%3D%3D)
+![tablevc ownership](media/table_own.png?token=AANopGh9xGsI3OvjDYMuAFbOmOP2P5Ltks5Wy9bswA%3D%3D)
 
 The subscription-based unidirectional flow of data in the Detail screen worked out well.  It would be great if we could take a similar approach here, by subscribing to a steam of UITableViewDataSources (a new one for each additional image which arrives from the network):
 
-![data source stream](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/datasource_time.png?token=AANopOOGxXTYHYpd-L1bUGaPWIjTdKtgks5Wy9bPwA%3D%3D)
+![data source stream](media/datasource_time.png?token=AANopOOGxXTYHYpd-L1bUGaPWIjTdKtgks5Wy9bPwA%3D%3D)
 
 However, frequently assigning new data sources to a UITableView (equivalent to calling `reloadData()`) tends to cause glitches in the UX (scrolling, etc), **so the above approach isn't practical**.
 
 Let's take a look at how the data is changing over time.  Once we have the initial `/badges` JSON data, we have all of the titles and descriptions.  The images then get filled in over time as the user scrolls down the page:
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/tv_data_time.png?token=AANopCqixDlEA-Cmj06y0fpS7OJRENXGks5Wy9btwA%3D%3D)
+![](media/tv_data_time.png?token=AANopCqixDlEA-Cmj06y0fpS7OJRENXGks5Wy9btwA%3D%3D)
 
 First, `BadgesTableViewController` needs a data source, which it receives by subscribing to `DataSourceService`.  `DataSourceService` fetches the JSON (by subscribing to a `ResourceService` pointed at `/badges`) and prodces an initial `DataSource`:
 
-![table bootstrapping](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/subscribe_datasource.png?token=AANopHMaPHzTXU0d31nEFSuekuGCxx4tks5Wy9bqwA%3D%3D)
+![table bootstrapping](media/subscribe_datasource.png?token=AANopHMaPHzTXU0d31nEFSuekuGCxx4tks5Wy9bqwA%3D%3D)
 
 Once the `BadgeTableViewController` has a `DataSource`, its only responsibility is to handle touches (launching `BadgeDetailViewControllers`).
 
 `DataSource` subscribes to `CellDataModelSetService`, which immediately provides an initial data source which only contains `PartialDataModels` (just titles and descriptions):
 
-![initial data source](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/subscribe_cell_initial.png?token=AANopHZ1o24jrH7EHqrhV6mADcmykCckks5Wy9blwA%3D%3D)
+![initial data source](media/subscribe_cell_initial.png?token=AANopHZ1o24jrH7EHqrhV6mADcmykCckks5Wy9blwA%3D%3D)
 
 As the user scrolls around the table view, each `willDisplayCell()` causes the `DataSource` to call `shouldFetchImageAtIndexPath()` on `CellDataModelSetService`, which then subscribes to an `ImageService`.  When the image comes in from the network, an updated set of cell data models is created and returned to DataSource, along with a list of which NSIndexPaths were changed in the new set of models (currently this is always just one NSIndexPath).  The `DataSource` updates its set of data models and calls `reloadRowsAtIndexPaths()` on the table view:
 
-![nth data source update](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/subscribe_cell_nth.png?token=AANopDOK15hCQ_Z4ETEy6rnSNvUrh_swks5Wy9bnwA%3D%3D)
+![nth data source update](media/subscribe_cell_nth.png?token=AANopDOK15hCQ_Z4ETEy6rnSNvUrh_swks5Wy9bnwA%3D%3D)
 
 ### Recovering from failed requests
 
 Because all of views in the app are driven by "subscription"-based data, it is relatively easy to have the entire app fill in missing pieces by retrying failed requests, either when the app resumes from background, or when the networking becomes available again (by pulling in [Reachability.swift](https://github.com/ashleymills/Reachability.swift)).
 
-![](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/reachability.gif?token=AANopApW97KmLdQjBOOqvI3e9HqJlygpks5Wy5HjwA%3D%3D)
+![](media/reachability.gif?token=AANopApW97KmLdQjBOOqvI3e9HqJlygpks5Wy5HjwA%3D%3D)
 
 This is the responsibility of only one object: `ResourceService`.  Keeping this code out of the view controllers prevents MassiveViewController.
 
 Let's take a look at how this works.  Let's revisit the example of `BadgeDetailViewController`, but let's assume the API returns a 500:
 
-![API returns a 500](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/detail_to_api_500.png?token=AANopJl01I-010m4pPYbfDivCyvHpmsZks5Wy_CZwA%3D%3D)
+![API returns a 500](media/detail_to_api_500.png?token=AANopJl01I-010m4pPYbfDivCyvHpmsZks5Wy_CZwA%3D%3D)
 
 Recovery from this state is not the responsibility of the view controller.  Instead, the service is notified that the network has become available (or in this case, that the app has resumed from background) and retries any failed requests:
 
-![retry simple](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/detail_to_api_recover.png?token=AANopJEYRlcS1Jm7oS_9w13mpYDxEjT1ks5Wy_CVwA%3D%3D)
+![retry simple](media/detail_to_api_recover.png?token=AANopJEYRlcS1Jm7oS_9w13mpYDxEjT1ks5Wy_CVwA%3D%3D)
 
 Now consider the possibility that a user navigated to a detail screen while offline.  In that case, the table view screen and the detail screen would both be subscribed to the same `ImageService`:
 
-![both subscribed](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/multi_to_api_500.png?token=AANopOSY45OAOJxy0VrAnr3KlXjLcjxHks5Wy_CbwA%3D%3D)
+![both subscribed](media/multi_to_api_500.png?token=AANopOSY45OAOJxy0VrAnr3KlXjLcjxHks5Wy_CbwA%3D%3D)
 
 Here's the beauty of not having the view controllers implement this functionality.  The more subscribers there are, the more recovery functionality we have reaped "for free":
 
-![multiple recover](https://raw.githubusercontent.com/cellularmitosis/KhanBadges/master/media/multi_to_api_recover.png?token=AANopJEEw-6g0jrFSBWwJkCv3rdP9LA6ks5Wy_CdwA%3D%3D)
+![multiple recover](media/multi_to_api_recover.png?token=AANopJEEw-6g0jrFSBWwJkCv3rdP9LA6ks5Wy_CdwA%3D%3D)
 
 ### Stumbling blocks
 
